@@ -4,7 +4,7 @@ const router = express.Router();
 
 //GET /test
 router.get("/", (req, res, next) => {
-  res.send({test: "test"}) 
+  res.send({randomNumber: Math.random()}) 
 })
 
 export default router;
