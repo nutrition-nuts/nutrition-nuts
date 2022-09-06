@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(
   cors({
-    origin: ['http://localhost:8080', 'https://store.apps.feh.osu.edu'],
+    origin: ['http://localhost:8080', 'http://localhost:3000'],
     methods: ['OPTIONS', 'GET', 'POST', 'PUT', 'DELETE'],
     maxAge: 86400,
     allowedHeaders: ['content-type', 'authorization', 'accept'],
