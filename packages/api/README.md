@@ -10,6 +10,6 @@ An express api to run locally on your machine
 ## Running the server
 
 There are a few ways to do this, but I like to pop open two terminals in the api package, then:
-- run `npm build:watch` in one of them to watch for changes to the Typescript files to re-compile on the fly
-- run `npm start:watch` to start the server and listen for requests 
+- run `npm run build:watch` in one of them to watch for changes to the Typescript files to re-compile on the fly
+- run `npm run start:watch` to start the server and listen for requests 
 - head to localhost:7001/test in the browser or make a request (on like postman or something) to verify it is running
