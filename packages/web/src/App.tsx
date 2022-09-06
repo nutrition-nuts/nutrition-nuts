@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 import { getTest } from "./requests/test";
+import NavBar from "./components/navbar";
+
+
 
 function App() {
   const [message, setMessage] = useState("")
@@ -14,6 +17,9 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Nutrition Ninja</h1>
+      <NavBar />
+
       <header className="App-header">
         <button onClick={testRequest}>Fetch from API</button>
         <div>Response: {message}</div>
