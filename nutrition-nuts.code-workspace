@@ -5,6 +5,9 @@
 	},
 	{
 		"path": "packages/api"
+	},
+	{
+		"path": "packages/elastic-search"
 	}
 ],
   "settings": {}
