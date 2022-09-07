@@ -25,3 +25,7 @@ button {
     padding: 10px;
     font-size: 1.1rem;
 }
+
+.workout-content img {
+    width: 80%;
+}

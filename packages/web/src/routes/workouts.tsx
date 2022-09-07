@@ -11,8 +11,12 @@ function App() {
 
     const testRequest = async () => {
         const res = await getWorkout();
-
-        setMessage(JSON.stringify(res.data) ?? "bad request")
+        if(res.status === 200) {
+            setMessage("<h3>" + res.data.name + "</h3><img src='" + res.data.image + "'/><p>" + res.data.description + "</p>")
+        }
+        else {
+            setMessage("bad request")
+        }
     };
 
 
@@ -37,7 +41,7 @@ function App() {
                 </div>
                 <div className="workout-item">
                     <h2>Workout Plan</h2>
-                    <div>Response: {message}</div>
+                    <div className="workout-content" dangerouslySetInnerHTML={{__html: message}}></div>
                 </div>
             </div>
         </div>
