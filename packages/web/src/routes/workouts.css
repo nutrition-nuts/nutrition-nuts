@@ -28,4 +28,9 @@ button {
 
 .workout-content img {
     width: 80%;
+    border-radius: 20px;
+}
+
+.workout-item h3 {
+    color: #506f8c;
 }
