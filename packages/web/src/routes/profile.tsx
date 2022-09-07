@@ -4,6 +4,9 @@ import NavBar from "../components/navbar";
 import './profile.css'
 
 export default function Profile() {
+
+  
+
   return (
     <main style={{ padding: "1rem 0" }}>
       <NavBar />
@@ -36,12 +39,18 @@ export default function Profile() {
 
         <div className="profile-item">
           <label htmlFor="profile-allergies">Allergies: </label>
-          <input type="text" name="profile-allergies" />
+          <select name="profile-allergies"> 
+            <option value="na">N/A</option>
+            <option value="peanuts">Peanuts</option>
+          </select>
         </div>
 
         <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
-          <input type="text" name="profile-dr" />
+          <select name="profile-dr"> 
+            <option value="na">N/A</option>
+            <option value="dairy-free">Dairy Free</option>
+          </select>
         </div>
 
         <div className="profile-item">
