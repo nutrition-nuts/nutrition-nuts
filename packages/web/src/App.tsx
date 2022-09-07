@@ -17,7 +17,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Nutrition Ninja</h1>
       <NavBar />
 
       <header className="App-header">

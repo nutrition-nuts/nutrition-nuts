@@ -1,0 +1,27 @@
+.workout-container {
+    display: grid;
+    padding: 0 10% 0 10%;
+    grid-template-columns: 50% 50%;
+}
+.workout-item {
+    margin: 0.5rem;
+    background: #7ea1a8;
+    border: 3px solid #506f8c;
+    color: white;
+    padding: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+input[type=text], button {
+    border-radius: 5px;
+    background: #6b9294;
+    border: 2px solid #506f8c;
+    color: white;
+    padding: 5px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1.1rem;
+}
