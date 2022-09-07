@@ -40,3 +40,8 @@
 body {
   background: #282c34;
 }
+
+a {
+  text-decoration: none;
+  color: #506f8c;
+}
