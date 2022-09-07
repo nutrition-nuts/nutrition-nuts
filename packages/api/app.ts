@@ -10,6 +10,7 @@ dotenv.config();
 
 import testRouter from './routes/test';
 import workoutRouter from './routes/workouts';
+import recipeRouter from './routes/recipes';
 
 const app = express();
 
@@ -30,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //register endpoint route controllers
 app.use('/test', testRouter);
 app.use('/workouts', workoutRouter);
-
+app.use('/recipes', recipeRouter);
 // 404 handling
 app.use(errors.unknownEndpoint);
 // error handling
