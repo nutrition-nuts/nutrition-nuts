@@ -35,7 +35,7 @@ function App() {
                     <input type="text" name="workout-group" />
                     <br />
                     <label htmlFor="workout-equipment">Equipment: </label>
-                    <input type="text" name="workout-equipment" />
+                    <input type="checkbox" name="workout-equipment" />
                     <br /><br />
                     <button onClick={testRequest}>Find me a workout!</button>
                 </div>
