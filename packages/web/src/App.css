@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,4 +44,10 @@ body {
 a {
   text-decoration: none;
   color: #506f8c;
+}
+
+.message {
+  padding-top: 1rem;
+  padding-left: 20%;
+  padding-right: 20%;
 }

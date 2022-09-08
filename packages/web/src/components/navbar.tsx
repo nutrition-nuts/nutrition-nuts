@@ -7,12 +7,14 @@ export default function NavBar() {
             paddingBottom: "1rem",
             background: "white"
         }}>
-            <h1 style={{
-                marginTop: "0",
-                paddingTop: "20px"
-            }}>Nutrition Ninja</h1>
+            <Link to="/">
+                <h1 style={{
+                    marginTop: "0",
+                    paddingTop: "20px",
+                    color: "black"
+                }}>Nutrition Nuts</h1>
+            </Link>
             <nav>
-                <Link to="/">Home</Link> |{" "}
                 <Link to="/profile">Profile</Link> |{" "}
                 <Link to="/nutrition">Nutrition</Link> |{" "}
                 <Link to="/workouts">Workouts</Link>

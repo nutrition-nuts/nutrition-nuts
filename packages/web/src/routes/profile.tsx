@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../components/navbar";
-
+import "../App.css";
 import './profile.css'
 
 export default function Profile() {
@@ -8,7 +8,7 @@ export default function Profile() {
   
 
   return (
-    <main style={{ padding: "1rem 0" }}>
+    <div className="App">
       <NavBar />
       <div className="profile-container">
         <div className="profile-item">
@@ -58,6 +58,6 @@ export default function Profile() {
         </div>
 
       </div>
-    </main>
+    </div>
   );
 }
