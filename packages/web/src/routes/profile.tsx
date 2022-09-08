@@ -5,9 +5,7 @@ import './profile.css'
 
 export default function Profile() {
 
-  
-
-  return (
+return (
     <div className="App">
       <NavBar />
       <div className="profile-container">
@@ -48,8 +46,13 @@ export default function Profile() {
         <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
           <select name="profile-dr"> 
-            <option value="na">N/A</option>
+            <option value="select">Select</option>
             <option value="dairy-free">Dairy Free</option>
+            <option value="keto">Keto</option>
+            <option value="vegan">Vegan</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="pescatarian">Pescatarian</option>
+            <option value="low-carb">Low Carb</option>
           </select>
         </div>
 
