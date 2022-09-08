@@ -29,7 +29,6 @@ return (
           <label htmlFor="profile-weight">Weight: </label>
           <input type="text" name="profile-weight" />
         </div>
-
         <div className="profile-item">
           <label htmlFor="profile-calories/day">Calories/Day: </label>
           <input type="text" name="profile-calories/day" />
@@ -40,6 +39,10 @@ return (
           <select name="profile-allergies"> 
             <option value="na">N/A</option>
             <option value="peanuts">Peanuts</option>
+            <option value="tree-nuts">Tree Nuts</option>
+            <option value="eggs">Eggs</option>
+            <option value="fish">Fish</option>
+            <option value="soy-beans">Soy Beans</option>
           </select>
         </div>
 
@@ -53,6 +56,7 @@ return (
             <option value="vegetarian">Vegetarian</option>
             <option value="pescatarian">Pescatarian</option>
             <option value="low-carb">Low Carb</option>
+            <option value="gluten-free">Gluten Free</option>
           </select>
         </div>
 
