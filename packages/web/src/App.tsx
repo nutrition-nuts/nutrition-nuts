@@ -12,7 +12,7 @@ function App() {
     const res = await getTest();
 
     //super hacky. ideally the backend will do this nonsense and send us a format we expect. just for the test endpoint
-    setMessage(JSON.stringify(res.data.data[0]) ?? "bad request")
+    setMessage(JSON.stringify(res?.data?.data[0]) ?? "bad request. Make sure server is running!")
   };
 
 

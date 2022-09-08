@@ -1,5 +1,10 @@
 import {get} from './requests'
+import { DailyRecipes } from '../models/recipeModels';
+
+
 
 export const getRecipe = async () => {
-  return await get('/recipes');
+    const res = await get('/recipes');
+    const dailyRecipes: DailyRecipes = JSON.parse(JSON.stringify(res.data));
+    return dailyRecipes;
 }
