@@ -2,13 +2,12 @@ import express from "express";
 
 const router = express.Router();
 
-//GET /test
+//GET /recipes
 router.get("/", (req, res, next) => {
     res.send({
-        "request":"recipes for the day",
         "breakfast": 
         {
-            "name":"Egg and Cheese",
+            "name":"Eggs and Cheese",
             "ingredients": [
               "2 eggs",
               "shredded cheese"
