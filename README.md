@@ -1,6 +1,5 @@
 # nutrition-nuts
 
-eeeeee
 see READMEs in api and web for setup help
 
 fwiw I like to use four terminal tabs when I do dev on this kinda stuff. Two for the backend (building and serving), one for the frontend, and one to have a free terminal for like git and stuff. kinda clumsy and there is prob a better way but it works for me

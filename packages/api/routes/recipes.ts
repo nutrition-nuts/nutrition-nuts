@@ -5,34 +5,35 @@ const router = express.Router();
 
 //GET /recipes
 router.get("/", async (req, res, next) => {
+  const { query } = req.query;
+
   //TODO: delete this. just an example of how to hit the elasticsearch from code
-  console.log(
-    await elasticSearchClient
+  let hit = await elasticSearchClient
+    .search({
+      index: "recipes",
+      query: {
+        query_string: {
+          query: String(query) ?? "petite",
+        },
+      },
+    })
+    .then((value) => value.hits.hits[0] ?? "");
+
+    //default case, give at least something back
+    if (!hit) {
+      hit = await elasticSearchClient
       .search({
         index: "recipes",
         query: {
           query_string: {
-            query: "petite",
+            query: "Vegetable Fried Rice",
           },
         },
       })
-      .then((value) => value.hits.hits[0] ?? "")
-  );
+      .then((value) => value.hits.hits[0] ?? ""); 
+    }
 
-  res.send({
-    breakfast: {
-      name: "Eggs and Cheese",
-      ingredients: ["2 eggs", "shredded cheese"],
-    },
-    lunch: {
-      name: "Chicken Sandwich",
-      ingredients: ["one chicken breast", "Burger Bun"],
-    },
-    dinner: {
-      name: "Pasta Salad",
-      ingredients: ["Orzo Pasta", "Assortment of veggies", "shredded parmesan"],
-    },
-  });
+  res.send(hit);
 });
 
 export default router;
