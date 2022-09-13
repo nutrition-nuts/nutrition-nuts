@@ -1,22 +1,19 @@
 import { useState } from "react";
 import "../App.css";
-import "./workouts.css";
+import "./nutrition.css";
 import { getWorkout } from "../requests/workout";
 import NavBar from "../components/navbar";
+import Workout from "../components/workout"
+import {DailyRecipes, RecipeModel} from "../models/recipeModels";
+import {getRecipe} from "../requests/recipe";
+import {WorkoutModel} from "../models/workoutModels";
 
 
-
-function App() {
-    const [message, setMessage] = useState("")
-
-    const testRequest = async () => {
+export default function Workouts() {
+    const [workout, setWorkout] = useState<WorkoutModel>();
+    const workoutRequest = async () => {
         const res = await getWorkout();
-        if(res.status === 200) {
-            setMessage("<h3>" + res.data.name + "</h3><img src='" + res.data.image + "'/><p>" + res.data.description + "</p>")
-        }
-        else {
-            setMessage("bad request")
-        }
+        setWorkout(res);
     };
 
 
@@ -24,8 +21,8 @@ function App() {
         <div className="App">
             <NavBar />
 
-            <div className="workout-container">
-                <div className="workout-item">
+            <div className="recipe-container">
+                <div className="recipe-item">
                     <h2>Workout Info</h2>
 
                     <label htmlFor="workout-type">Workout Type: </label>
@@ -37,15 +34,13 @@ function App() {
                     <label htmlFor="workout-equipment">Equipment: </label>
                     <input type="checkbox" name="workout-equipment" />
                     <br /><br />
-                    <button onClick={testRequest}>Find me a workout!</button>
+                    <button onClick={workoutRequest}>Find me a workout!</button>
                 </div>
-                <div className="workout-item">
+                <div className="recipe-item">
                     <h2>Workout Plan</h2>
-                    <div className="workout-content" dangerouslySetInnerHTML={{__html: message}}></div>
+                    <Workout workout={workout}></Workout>
                 </div>
             </div>
         </div>
     );
 }
-
-export default App;
