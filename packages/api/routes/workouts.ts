@@ -2,9 +2,9 @@ import express from "express";
 import fetchWorkouts from "../utils/fetchWorkouts.js";
 const router = express.Router();
 
-//GET /test
-router.get("/Triceps", (req, res, next) => {
-  const workoutData = fetchWorkouts("Triceps");
+//GET /workouts/:bodyTarget
+router.get("/:bodyTarget", (req, res, next) => {
+  const workoutData = fetchWorkouts(req.params.bodyTarget);
   console.log(workoutData);
   res.send({
     name: workoutData[0].name,
