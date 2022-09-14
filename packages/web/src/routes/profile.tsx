@@ -1,11 +1,10 @@
-import React from "react";
-import NavBar from "../components/navbar";
-import "../App.css";
+import React from 'react'
+import NavBar from '../components/navbar'
+import '../App.css'
 import './profile.css'
 
-export default function Profile() {
-
-return (
+export default function Profile () {
+  return (
     <div className="App">
       <NavBar />
       <div className="profile-container">
@@ -36,7 +35,7 @@ return (
 
         <div className="profile-item">
           <label htmlFor="profile-allergies">Allergies: </label>
-          <select name="profile-allergies"> 
+          <select name="profile-allergies">
             <option value="na">N/A</option>
             <option value="peanuts">Peanuts</option>
             <option value="tree-nuts">Tree Nuts</option>
@@ -48,7 +47,7 @@ return (
 
         <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
-          <select name="profile-dr"> 
+          <select name="profile-dr">
             <option value="select">Select</option>
             <option value="dairy-free">Dairy Free</option>
             <option value="keto">Keto</option>
@@ -66,5 +65,5 @@ return (
 
       </div>
     </div>
-  );
+  )
 }

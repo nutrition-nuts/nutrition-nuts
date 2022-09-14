@@ -1,5 +1,5 @@
-import {get} from './requests'
+import { get } from './requests'
 
 export const getTest = async () => {
-  return await get('/test');
+  return await get('/test')
 }

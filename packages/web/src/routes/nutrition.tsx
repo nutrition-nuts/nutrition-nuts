@@ -1,18 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import NavBar from "../components/navbar";
-import { getRecipe } from "../requests/recipe";
-import "../App.css";
-import "./nutrition.css";
-import { DailyRecipes } from "../models/recipeModels";
-import Recipe from "../components/recipe";
+import React, { useState } from 'react'
 
-export default function Nutrition() {
-  const [dailyRecipes, setDailyRecipes] = useState<DailyRecipes>();
+import NavBar from '../components/navbar'
+import { getRecipe } from '../requests/recipe'
+import '../App.css'
+import './nutrition.css'
+import { DailyRecipes } from '../models/recipeModels'
+import Recipe from '../components/recipe'
+
+export default function Nutrition () {
+  const [dailyRecipes, setDailyRecipes] = useState<DailyRecipes>()
   const recipeRequest = async () => {
-    const res = await getRecipe();
-    setDailyRecipes(res);
-  };
+    const res = await getRecipe()
+    setDailyRecipes(res)
+  }
 
   return (
     <div className="App">
@@ -47,9 +47,9 @@ export default function Nutrition() {
           <Recipe
             mealName="Dinner"
             recipe={dailyRecipes?.dinner}
-          ></Recipe> 
+          ></Recipe>
         </div>
       </div>
     </div>
-  );
+  )
 }

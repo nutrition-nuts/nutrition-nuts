@@ -1,10 +1,10 @@
-export type RecipeModel = {
-  name: string;
-  ingredients: string[];
+export interface RecipeModel {
+  name: string
+  ingredients: string[]
 }
 
-export type DailyRecipes = {
-  breakfast: RecipeModel;
-  lunch: RecipeModel;
-  dinner: RecipeModel;
+export interface DailyRecipes {
+  breakfast: RecipeModel
+  lunch: RecipeModel
+  dinner: RecipeModel
 }

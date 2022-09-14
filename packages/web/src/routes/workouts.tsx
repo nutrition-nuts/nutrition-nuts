@@ -1,26 +1,22 @@
-import { useState } from "react";
-import "../App.css";
-import "./workouts.css";
-import { getWorkout } from "../requests/workout";
-import NavBar from "../components/navbar";
+import { useState } from 'react'
+import '../App.css'
+import './workouts.css'
+import { getWorkout } from '../requests/workout'
+import NavBar from '../components/navbar'
 
+function App () {
+  const [message, setMessage] = useState('')
 
+  const testRequest = async () => {
+    const res = await getWorkout()
+    if (res.status === 200) {
+      setMessage('<h3>' + res.data.name + "</h3><img src='" + res.data.image + "'/><p>" + res.data.description + '</p>')
+    } else {
+      setMessage('bad request')
+    }
+  }
 
-function App() {
-    const [message, setMessage] = useState("")
-
-    const testRequest = async () => {
-        const res = await getWorkout();
-        if(res.status === 200) {
-            setMessage("<h3>" + res.data.name + "</h3><img src='" + res.data.image + "'/><p>" + res.data.description + "</p>")
-        }
-        else {
-            setMessage("bad request")
-        }
-    };
-
-
-    return (
+  return (
         <div className="App">
             <NavBar />
 
@@ -41,11 +37,11 @@ function App() {
                 </div>
                 <div className="workout-item">
                     <h2>Workout Plan</h2>
-                    <div className="workout-content" dangerouslySetInnerHTML={{__html: message}}></div>
+                    <div className="workout-content" dangerouslySetInnerHTML={{ __html: message }}></div>
                 </div>
             </div>
         </div>
-    );
+  )
 }
 
-export default App;
+export default App
