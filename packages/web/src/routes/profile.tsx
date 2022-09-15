@@ -9,7 +9,7 @@ import { reduceEachLeadingCommentRange } from "typescript";
 
 
 export default function Profile() {
-const [allergies, setAllergies] = useState(["None", "Peanuts", "Tree Nuts", "Fish", "Eggs", "Soy Bean"]); 
+const [allergies, setAllergies] = useState(["None", "Peanuts", "Tree Nuts", "Fish", "Eggs", "Soybeans", "Wheat", "Sesame", "Shellfish"]); 
 
 return (
     <div className="App">
