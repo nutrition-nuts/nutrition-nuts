@@ -1,17 +1,14 @@
-import React from "react";
-import NavBar from "../components/navbar";
-import "../App.css";
+import React, { useState } from 'react'
+import NavBar from '../components/navbar'
+import '../App.css'
 import './profile.css'
-import { useState } from "react";
-import { Multiselect } from "multiselect-react-dropdown";
-import { getOverlayDirection } from "react-bootstrap/esm/helpers";
-import { reduceEachLeadingCommentRange } from "typescript";
 
+import { Multiselect } from 'multiselect-react-dropdown'
 
-export default function Profile() {
-const [allergies, setAllergies] = useState(["None", "Peanuts", "Tree Nuts", "Fish", "Eggs", "Soybeans", "Wheat", "Sesame", "Shellfish"]); 
+export default function Profile () {
+  const [allergies] = useState(['None', 'Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soybeans', 'Wheat', 'Sesame', 'Shellfish'])
 
-return (
+  return (
     <div className="App">
       <NavBar />
       <div className="profile-container">
@@ -45,13 +42,13 @@ return (
         <Multiselect
         isObject={false}
         onRemove={(event) => {
-          console.log(event);
+          console.log(event)
         }}
         onSelect={(event) => {
-          console.log(event);
+          console.log(event)
         }}
         options={allergies}
-        selectedValues={["None"]}
+        selectedValues={['None']}
         style={{
           chips: {
             background: '#506f8c'
@@ -65,7 +62,7 @@ return (
 
         <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
-          <select name="profile-dr"> 
+          <select name="profile-dr">
             <option value="select">Select</option>
             <option value="dairy-free">Dairy Free</option>
             <option value="keto">Keto</option>
@@ -83,5 +80,5 @@ return (
 
       </div>
     </div>
-  );
+  )
 }

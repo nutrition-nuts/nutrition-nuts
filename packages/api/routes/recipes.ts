@@ -1,39 +1,39 @@
-import express from "express";
-import elasticSearchClient from "../elastic/elastic-client";
+import express from 'express'
+import elasticSearchClient from '../elastic/elastic-client'
 
-const router = express.Router();
+const router = express.Router()
 
-//GET /recipes
-router.get("/", async (req, res, next) => {
-  const { query } = req.query;
+// GET /recipes
+router.get('/', async (req, res, next) => {
+  const { query } = req.query
 
-  //TODO: delete this. just an example of how to hit the elasticsearch from code
+  // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
-      index: "recipes",
+      index: 'recipes',
       query: {
         query_string: {
-          query: String(query) ?? "petite",
-        },
-      },
+          query: String(query) ?? 'petite'
+        }
+      }
     })
-    .then((value) => value.hits.hits.map(hit => hit._source) ?? []);
+    .then((value) => value.hits.hits.map(hit => hit._source) ?? [])
 
-    //default case, give at least something back
-    if (!hits.length) {
-      hits = await elasticSearchClient
+  // default case, give at least something back
+  if (hits.length === 0) {
+    hits = await elasticSearchClient
       .search({
-        index: "recipes",
+        index: 'recipes',
         query: {
           query_string: {
-            query: "vegetable",
-          },
-        },
+            query: 'vegetable'
+          }
+        }
       })
-      .then((value) => value.hits.hits.map(hit => hit._source) ?? []); 
-    }
+      .then((value) => value.hits.hits.map(hit => hit._source) ?? [])
+  }
 
-  res.send(hits);
-});
+  res.send(hits)
+})
 
-export default router;
+export default router

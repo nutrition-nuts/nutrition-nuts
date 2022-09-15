@@ -1,19 +1,19 @@
-import { WorkoutModel } from "../models/workoutModels";
+import { WorkoutModel } from '../models/workoutModels'
 
-type Props = {
-  workout?: WorkoutModel;
-};
+interface Props {
+  workout?: WorkoutModel
+}
 
-export default function Workout(props: Props) {
+export default function Workout (props: Props) {
   return (
     <>
-      {props.workout && (
+      {(props.workout != null) && (
         <div className="recipe-content">
           <h3>{props.workout.name}</h3>
-          {/*<img src={props.workout.image} />*/}
+          {/* <img src={props.workout.image} /> */}
           <p>{props.workout.description}</p>
         </div>
       )}
     </>
-  );
+  )
 }

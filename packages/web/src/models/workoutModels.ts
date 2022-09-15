@@ -1,5 +1,5 @@
-export type WorkoutModel = {
-  name: string;
-  //image: string;
-  description: string;
+export interface WorkoutModel {
+  name: string
+  // image: string;
+  description: string
 }
