@@ -1,10 +1,15 @@
 export type RecipeModel = {
-  name: string;
+  title: string;
+  description: string;
   ingredients: string[];
-}
-
-export type DailyRecipes = {
-  breakfast: RecipeModel;
-  lunch: RecipeModel;
-  dinner: RecipeModel;
+  directions: string[];
+  prep_time_min?: string;
+  cook_time_min?: string;
+  servings?: number;
+  tags?: string[];
+  author?: {
+    name: string;
+    url: string
+  };
+  source_url?: string;
 }
