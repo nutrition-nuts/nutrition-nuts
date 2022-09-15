@@ -1,5 +1,5 @@
 import { get } from './requests'
 
-export const getWorkout = async () => {
-  return await get('/workouts')
+export const getWorkout = async (muscleGroup: string) => {
+  return await get(`/workouts/${muscleGroup}`)
 }
