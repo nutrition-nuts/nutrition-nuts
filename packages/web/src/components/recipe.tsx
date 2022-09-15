@@ -11,7 +11,7 @@ export default function Recipe(props: Props) {
       {props.recipe && (
         <>
           <hr/>
-          <h3>{props.mealName}: {props.recipe.name}</h3>
+          <h3>{props.mealName}: {props.recipe.title}</h3>
           <h4>Ingredients:</h4>
           <ul>
             {props.recipe.ingredients.map((ingredient) => {

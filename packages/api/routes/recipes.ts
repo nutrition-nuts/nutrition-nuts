@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
         },
       },
     })
-    .then((value) => value.hits.hits[0] ?? "");
+    .then((value) => value.hits.hits.map(hit => hit._source) ?? []);
 
     //default case, give at least something back
     if (!hit) {
@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
           },
         },
       })
-      .then((value) => value.hits.hits[0] ?? ""); 
+      .then((value) => value.hits.hits.map(hit => hit._source) ?? []); 
     }
 
   res.send(hit);
