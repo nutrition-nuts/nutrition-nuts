@@ -1,21 +1,21 @@
-import React from "react";
-import { useState } from "react";
-import NavBar from "../components/navbar";
-import { getRecipes } from "../requests/recipe";
-import "../App.css";
-import "./nutrition.css";
-import { RecipeModel } from "../models/recipeModels";
-import Recipe from "../components/recipe";
-import { getInputFieldValue } from "../utils/genericUtils";
+import React, { useState } from 'react'
 
-export default function Nutrition() {
-  const [recipes, setRecipes] = useState<RecipeModel[]>();
-  const [breakfastInput, setBreakfastInput] = useState("");
+import NavBar from '../components/navbar'
+import { getRecipes } from '../requests/recipe'
+import '../App.css'
+import './nutrition.css'
+import { RecipeModel } from '../models/recipeModels'
+import Recipe from '../components/recipe'
+import { getInputFieldValue } from '../utils/genericUtils'
+
+export default function Nutrition () {
+  const [recipes, setRecipes] = useState<RecipeModel[]>()
+  const [breakfastInput, setBreakfastInput] = useState('')
 
   const makeGetRecipeRequest = async (query: string) => {
-    const res = await getRecipes(query);
-    setRecipes(res);
-  };
+    const res = await getRecipes(query)
+    setRecipes(res)
+  }
 
   return (
     <div className="App">
@@ -35,7 +35,7 @@ export default function Nutrition() {
           <input type="text" name="recipe-dinner" />
           <br />
           <br />
-          <button onClick={() => makeGetRecipeRequest(breakfastInput)}>Find me recipes!</button>
+          <button onClick={async () => await makeGetRecipeRequest(breakfastInput)}>Find me recipes!</button>
         </div>
         <div className="recipe-item">
           <h2>Meal Plan for the day</h2>
@@ -50,7 +50,7 @@ export default function Nutrition() {
           <Recipe
             mealName="Dinner"
             recipe={recipes?.[0]}
-          ></Recipe> 
+          ></Recipe>
         </div>
       </div>
     </div>
