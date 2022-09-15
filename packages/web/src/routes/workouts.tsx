@@ -5,12 +5,15 @@ import { getWorkout } from "../requests/workout";
 import NavBar from "../components/navbar";
 import Workout from "../components/workout"
 import {WorkoutModel} from "../models/workoutModels";
+import {getInputFieldValue} from "../utils/genericUtils";
 
 
 export default function Workouts() {
     const [workout, setWorkout] = useState<WorkoutModel>();
-    const workoutRequest = async () => {
-        const res = await getWorkout("Triceps");
+    const [muscleInput, setMuscleInput] = useState("");
+
+    const workoutRequest = async (query: string) => {
+        const res = await getWorkout(query);
         setWorkout(res);
     };
 
@@ -27,12 +30,12 @@ export default function Workouts() {
                     <input type="text" name="workout-type" />
                     <br />
                     <label htmlFor="workout-group">Muscle Group: </label>
-                    <input type="text" name="workout-group" />
+                    <input type="text" name="workout-group" onChange={e => setMuscleInput(getInputFieldValue(e))}/>
                     <br />
                     <label htmlFor="workout-equipment">Equipment: </label>
                     <input type="checkbox" name="workout-equipment" />
                     <br /><br />
-                    <button onClick={workoutRequest}>Find me a workout!</button>
+                    <button onClick={() => workoutRequest(muscleInput)}>Find me a workout!</button>
                 </div>
                 <div className="recipe-item">
                     <h2>Workout Plan</h2>
