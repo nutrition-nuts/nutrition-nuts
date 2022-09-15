@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   const { query } = req.query;
 
   //TODO: delete this. just an example of how to hit the elasticsearch from code
-  let hit = await elasticSearchClient
+  let hits = await elasticSearchClient
     .search({
       index: "recipes",
       query: {
@@ -20,20 +20,20 @@ router.get("/", async (req, res, next) => {
     .then((value) => value.hits.hits.map(hit => hit._source) ?? []);
 
     //default case, give at least something back
-    if (!hit) {
-      hit = await elasticSearchClient
+    if (!hits.length) {
+      hits = await elasticSearchClient
       .search({
         index: "recipes",
         query: {
           query_string: {
-            query: "Vegetable Fried Rice",
+            query: "vegetable",
           },
         },
       })
       .then((value) => value.hits.hits.map(hit => hit._source) ?? []); 
     }
 
-  res.send(hit);
+  res.send(hits);
 });
 
 export default router;

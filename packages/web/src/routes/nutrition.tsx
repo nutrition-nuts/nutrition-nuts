@@ -6,9 +6,11 @@ import "../App.css";
 import "./nutrition.css";
 import { RecipeModel } from "../models/recipeModels";
 import Recipe from "../components/recipe";
+import { getInputFieldValue } from "../utils/genericUtils";
 
 export default function Nutrition() {
   const [recipes, setRecipes] = useState<RecipeModel[]>();
+  const [breakfastInput, setBreakfastInput] = useState("");
 
   const makeGetRecipeRequest = async (query: string) => {
     const res = await getRecipes(query);
@@ -24,16 +26,16 @@ export default function Nutrition() {
           <h2>What are you feeling for...</h2>
 
           <label htmlFor="recipe-breakfast">Breakfast: </label>
-          <input type="text" name="recipe-breakfast" />
+          <input type="text" name="recipe-breakfast" onChange={e => setBreakfastInput(getInputFieldValue(e))} />
           <br />
           <label htmlFor="recipe-lunch">Lunch: </label>
-          <input type="text" name="recipe-lunch" />
+          <input type="text" name="recipe-lunch"/>
           <br />
           <label htmlFor="recipe-dinner">Dinner: </label>
           <input type="text" name="recipe-dinner" />
           <br />
           <br />
-          <button onClick={() => makeGetRecipeRequest("petite")}>Find me recipes!</button>
+          <button onClick={() => makeGetRecipeRequest(breakfastInput)}>Find me recipes!</button>
         </div>
         <div className="recipe-item">
           <h2>Meal Plan for the day</h2>
