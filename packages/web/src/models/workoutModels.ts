@@ -1,5 +1,5 @@
 export type WorkoutModel = {
   name: string;
-  image: string;
+  //image: string;
   description: string;
 }

@@ -10,7 +10,7 @@ export default function Workout(props: Props) {
       {props.workout && (
         <div className="recipe-content">
           <h3>{props.workout.name}</h3>
-          <img src={props.workout.image} />
+          {/*<img src={props.workout.image} />*/}
           <p>{props.workout.description}</p>
         </div>
       )}
