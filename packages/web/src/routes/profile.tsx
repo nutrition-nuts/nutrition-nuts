@@ -2,9 +2,16 @@ import React from 'react'
 import NavBar from '../components/navbar'
 import '../App.css'
 import './profile.css'
+import { useState } from "react";
+import { Multiselect } from "multiselect-react-dropdown";
+import { getOverlayDirection } from "react-bootstrap/esm/helpers";
+import { reduceEachLeadingCommentRange } from "typescript";
 
-export default function Profile () {
-  return (
+
+export default function Profile() {
+const [allergies, setAllergies] = useState(["None", "Peanuts", "Tree Nuts", "Fish", "Eggs", "Soybeans", "Wheat", "Sesame", "Shellfish"]); 
+
+return (
     <div className="App">
       <NavBar />
       <div className="profile-container">
@@ -34,15 +41,26 @@ export default function Profile () {
         </div>
 
         <div className="profile-item">
-          <label htmlFor="profile-allergies">Allergies: </label>
-          <select name="profile-allergies">
-            <option value="na">N/A</option>
-            <option value="peanuts">Peanuts</option>
-            <option value="tree-nuts">Tree Nuts</option>
-            <option value="eggs">Eggs</option>
-            <option value="fish">Fish</option>
-            <option value="soy-beans">Soy Beans</option>
-          </select>
+        <label htmlFor="profile-allergies">Food Allergies: </label>
+        <Multiselect
+        isObject={false}
+        onRemove={(event) => {
+          console.log(event);
+        }}
+        onSelect={(event) => {
+          console.log(event);
+        }}
+        options={allergies}
+        selectedValues={["None"]}
+        style={{
+          chips: {
+            background: '#506f8c'
+          },
+          multiselectContainer: {
+            color: 'black'
+          }
+        }}
+      />
         </div>
 
         <div className="profile-item">
