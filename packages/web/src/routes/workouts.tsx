@@ -4,15 +4,13 @@ import "./nutrition.css";
 import { getWorkout } from "../requests/workout";
 import NavBar from "../components/navbar";
 import Workout from "../components/workout"
-import {DailyRecipes, RecipeModel} from "../models/recipeModels";
-import {getRecipe} from "../requests/recipe";
 import {WorkoutModel} from "../models/workoutModels";
 
 
 export default function Workouts() {
     const [workout, setWorkout] = useState<WorkoutModel>();
     const workoutRequest = async () => {
-        const res = await getWorkout();
+        const res = await getWorkout("Triceps");
         setWorkout(res);
     };
 
