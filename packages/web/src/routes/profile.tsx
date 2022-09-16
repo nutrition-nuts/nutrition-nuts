@@ -10,6 +10,7 @@ import { reduceEachLeadingCommentRange } from "typescript";
 
 export default function Profile() {
 const [allergies, setAllergies] = useState(["None", "Peanuts", "Tree Nuts", "Fish", "Eggs", "Soybeans", "Wheat", "Sesame", "Shellfish"]); 
+const [selects, setSelects] = useState(String);
 
 return (
     <div className="App">
@@ -41,31 +42,8 @@ return (
         </div>
 
         <div className="profile-item">
-        <label htmlFor="profile-allergies">Food Allergies: </label>
-        <Multiselect
-        isObject={false}
-        onRemove={(event) => {
-          console.log(event);
-        }}
-        onSelect={(event) => {
-          console.log(event);
-        }}
-        options={allergies}
-        selectedValues={["None"]}
-        style={{
-          chips: {
-            background: '#506f8c'
-          },
-          multiselectContainer: {
-            color: 'black'
-          }
-        }}
-      />
-        </div>
-
-        <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
-          <select name="profile-dr"> 
+          <select value={selects} onChange={e=>setSelects(e.target.value)}> 
             <option value="select">Select</option>
             <option value="dairy-free">Dairy Free</option>
             <option value="keto">Keto</option>
@@ -75,6 +53,28 @@ return (
             <option value="low-carb">Low Carb</option>
             <option value="gluten-free">Gluten Free</option>
           </select>
+        </div>
+
+        <div className="profile-item">
+          <label htmlFor="profile-allergies">Food Allergies: </label>
+            <Multiselect
+            isObject={false}
+            onRemove={(event) => {
+              console.log(event);
+            }}
+            onSelect={(event) => {
+              console.log(event);
+            }}
+            options={allergies}
+            style={{
+              chips: {
+                background: '#506f8c'
+              },
+              multiselectContainer: {
+                color: 'black'
+              }
+            }}
+        />
         </div>
 
         <div className="profile-item">
