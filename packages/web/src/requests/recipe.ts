@@ -1,10 +1,8 @@
-import {get} from './requests'
-import { DailyRecipes } from '../models/recipeModels';
+import { get } from './requests'
+import { RecipeModel } from '../models/recipeModels'
 
-
-
-export const getRecipe = async () => {
-    const res = await get('/recipes');
-    const dailyRecipes: DailyRecipes = JSON.parse(JSON.stringify(res.data));
-    return dailyRecipes;
+export const getRecipes = async (query: string) => {
+  const res = await get('/recipes', { query })
+  const recipes: RecipeModel[] = JSON.parse(JSON.stringify(res.data))
+  return recipes
 }

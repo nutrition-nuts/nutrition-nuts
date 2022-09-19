@@ -1,12 +1,11 @@
-import React from "react";
-import NavBar from "../components/navbar";
-import "../App.css";
+import React from 'react'
+import NavBar from '../components/navbar'
+import '../App.css'
 import './profile.css'
 import { useState, useEffect, Component } from "react";
 import { Multiselect } from "multiselect-react-dropdown";
 import { getOverlayDirection } from "react-bootstrap/esm/helpers";
 import { reduceEachLeadingCommentRange } from "typescript";
-
 
 export default function Profile() {
 const [allergies] = useState(["None", "Peanuts", "Tree Nuts", "Fish", "Eggs", "Soybeans", "Wheat", "Sesame", "Shellfish"]); 
@@ -29,8 +28,10 @@ function saveProfile(){
   }
   localStorage.setItem('profileInfo', JSON.stringify(profileInfo))
 }
+export default function Profile () {
+  const [allergies] = useState(['None', 'Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soybeans', 'Wheat', 'Sesame', 'Shellfish'])
 
-return (
+  return (
     <div className="App">
       <NavBar />
 
@@ -64,6 +65,7 @@ return (
         <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
           <select value={selects} onChange={e=>setSelects(e.target.value)}> 
+          <select name="profile-dr">
             <option value="select">Select</option>
             <option value="dairy-free">Dairy Free</option>
             <option value="keto">Keto</option>
@@ -104,5 +106,6 @@ return (
       </div>
     
     </div>
-  );
+  )
+}
 }

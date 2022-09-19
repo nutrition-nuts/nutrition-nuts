@@ -1,51 +1,52 @@
-import { useState } from "react";
-import "../App.css";
-import "./workouts.css";
-import { getWorkout } from "../requests/workout";
-import NavBar from "../components/navbar";
+import { useState } from 'react'
+import '../App.css'
+import './nutrition.css'
+import { getWorkout } from '../requests/workout'
+import NavBar from '../components/navbar'
+import Workout from '../components/workout'
+import { WorkoutModel } from '../models/workoutModels'
+import { getInputFieldValue } from '../utils/genericUtils'
 
+export default function Workouts () {
+  const [workout, setWorkout] = useState<WorkoutModel>()
+  const [muscleInput, setMuscleInput] = useState('')
 
+  const workoutRequest = async (query: string) => {
+    const res = await getWorkout(query)
+    setWorkout(res)
+  }
 
-function App() {
-    const [message, setMessage] = useState("")
+  return (
+    <div className="App">
+      <NavBar />
 
-    const testRequest = async () => {
-        const res = await getWorkout();
-        if(res.status === 200) {
-            setMessage("<h3>" + res.data.name + "</h3><img src='" + res.data.image + "'/><p>" + res.data.description + "</p>")
-        }
-        else {
-            setMessage("bad request")
-        }
-    };
+      <div className="recipe-container">
+        <div className="recipe-item">
+          <h2>Workout Info</h2>
 
-
-    return (
-        <div className="App">
-            <NavBar />
-
-            <div className="workout-container">
-                <div className="workout-item">
-                    <h2>Workout Info</h2>
-
-                    <label htmlFor="workout-type">Workout Type: </label>
-                    <input type="text" name="workout-type" />
-                    <br />
-                    <label htmlFor="workout-group">Muscle Group: </label>
-                    <input type="text" name="workout-group" />
-                    <br />
-                    <label htmlFor="workout-equipment">Equipment: </label>
-                    <input type="checkbox" name="workout-equipment" />
-                    <br /><br />
-                    <button onClick={testRequest}>Find me a workout!</button>
-                </div>
-                <div className="workout-item">
-                    <h2>Workout Plan</h2>
-                    <div className="workout-content" dangerouslySetInnerHTML={{__html: message}}></div>
-                </div>
-            </div>
+          <label htmlFor="workout-type">Workout Type: </label>
+          <input type="text" name="workout-type" />
+          <br />
+          <label htmlFor="workout-group">Muscle Group: </label>
+          <input
+            type="text"
+            name="workout-group"
+            onChange={(e) => setMuscleInput(getInputFieldValue(e))}
+          />
+          <br />
+          <label htmlFor="workout-equipment">Equipment: </label>
+          <input type="checkbox" name="workout-equipment" />
+          <br />
+          <br />
+          <button onClick={async () => await workoutRequest(muscleInput)}>
+            Find me a workout!
+          </button>
         </div>
-    );
+        <div className="recipe-item">
+          <h2>Workout Plan</h2>
+          <Workout workout={workout}></Workout>
+        </div>
+      </div>
+    </div>
+  )
 }
-
-export default App;
