@@ -28,8 +28,6 @@ function saveProfile(){
   }
   localStorage.setItem('profileInfo', JSON.stringify(profileInfo))
 }
-export default function Profile () {
-  const [allergies] = useState(['None', 'Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soybeans', 'Wheat', 'Sesame', 'Shellfish'])
 
   return (
     <div className="App">
@@ -60,12 +58,35 @@ export default function Profile () {
         <div className="profile-item">
           <label htmlFor="profile-calories/day">Calories/Day: </label>
           <input type="text" name="profile-calories/day" value={calories} onChange={(e) =>{setCalories(e.target.value)}}/>
+          <input type="text" name="profile-calories/day" />
+        </div>
+
+        <div className="profile-item">
+        <label htmlFor="profile-allergies">Food Allergies: </label>
+        <Multiselect
+        isObject={false}
+        onRemove={(event) => {
+          console.log(event)
+        }}
+        onSelect={(event) => {
+          console.log(event)
+        }}
+        options={allergies}
+        selectedValues={['None']}
+        style={{
+          chips: {
+            background: '#506f8c'
+          },
+          multiselectContainer: {
+            color: 'black'
+          }
+        }}
+      />
         </div>
 
         <div className="profile-item">
           <label htmlFor="profile-dr">Dietary Restrictions: </label>
           <select value={selects} onChange={e=>setSelects(e.target.value)}> 
-          <select name="profile-dr">
             <option value="select">Select</option>
             <option value="dairy-free">Dairy Free</option>
             <option value="keto">Keto</option>
@@ -107,5 +128,4 @@ export default function Profile () {
     
     </div>
   )
-}
 }
