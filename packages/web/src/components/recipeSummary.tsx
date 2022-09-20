@@ -22,6 +22,8 @@ export default function RecipeSummary(props: Props) {
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
+    overflow: 'scroll',
+    height: '80%',
     boxShadow: 24,
     p: 4
   }
@@ -48,11 +50,23 @@ export default function RecipeSummary(props: Props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            {props.recipe?.title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            {props.recipe?.description}
           </Typography>
+          <h4>Ingredients:</h4>
+          <ul>
+            {props.recipe?.ingredients.map((ingredient) => {
+              return <li key={ingredient}>{ingredient}</li>
+            })}
+          </ul>
+          <h4>Directions:</h4>
+          <ul>
+            {props.recipe?.directions.map((direction) => {
+              return <li key={direction}>{direction}</li>
+            })}
+          </ul>
         </Box>
       </Modal>
     </>
