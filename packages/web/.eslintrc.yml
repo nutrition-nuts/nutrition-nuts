@@ -20,5 +20,6 @@ rules: {
       "checksVoidReturn": false
     }],
     "@typescript-eslint/triple-slash-reference": "warn",
-    "@typescript-eslint/consistent-type-assertions": "warn"
+    "@typescript-eslint/consistent-type-assertions": "warn",
+    "@typescript-eslint/space-before-function-paren": ["warn", "never"],
 }

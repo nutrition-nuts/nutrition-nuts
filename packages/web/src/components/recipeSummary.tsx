@@ -5,13 +5,15 @@ interface Props {
   recipe?: RecipeModel
 }
 
-export default function RecipeSummary (props: Props) {
+export default function RecipeSummary(props: Props) {
   return (
     <>
-      {(props.recipe != null) && (
+      {props.recipe != null && (
         <>
-          <hr/>
-          <h3>{props.mealName}: {props.recipe.title}</h3>
+          <hr />
+          <h3>
+            {props.mealName}: {props.recipe.title}
+          </h3>
           <div>{props.recipe.description}</div>
         </>
       )}
