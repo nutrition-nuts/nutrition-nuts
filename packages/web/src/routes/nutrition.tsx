@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
+import Button from '@mui/material/Button'
 import NavBar from '../components/navbar'
 import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
-import Recipe from '../components/recipe'
+import RecipeSummary from '../components/recipeSummary'
 import { getInputFieldValue } from '../utils/genericUtils'
 
 export default function Nutrition () {
@@ -35,22 +36,22 @@ export default function Nutrition () {
           <input type="text" name="recipe-dinner" />
           <br />
           <br />
-          <button onClick={async () => await makeGetRecipeRequest(breakfastInput)}>Find me recipes!</button>
+          <Button variant="contained" onClick={async () => await makeGetRecipeRequest(breakfastInput)}>Find me recipes!</Button>
         </div>
         <div className="recipe-item">
           <h2>Meal Plan for the day</h2>
-          <Recipe
+          <RecipeSummary
             mealName="Breakfast"
             recipe={recipes?.[0]}
-          ></Recipe>
-          <Recipe
+          ></RecipeSummary>
+          <RecipeSummary
             mealName="Lunch"
             recipe={recipes?.[0]}
-          ></Recipe>
-          <Recipe
+          ></RecipeSummary>
+          <RecipeSummary
             mealName="Dinner"
             recipe={recipes?.[0]}
-          ></Recipe>
+          ></RecipeSummary>
         </div>
       </div>
     </div>
