@@ -1,0 +1,16 @@
+{
+  "id": 227,
+  "uuid": "53ca25b3-61d9-4f72-bfdb-492b83484ff5",
+  "name": "Arnold Shoulder Press",
+  "exercise_base": 20,
+  "description": "Very common shoulder exercise. As shown here",
+  "creation_date": "2014-03-09",
+  "category": 13,
+  "muscles": [],
+  "muscles_secondary": [],
+  "equipment": [3],
+  "language": 2,
+  "license": 1,
+  "license_author": "trzr23",
+  "variations": [227, 329, 229, 190, 119, 123, 152, 155]
+}
