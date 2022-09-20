@@ -35,6 +35,14 @@ button {
     font-size: 2rem;
 }
 
+button:active {
+  background: #506f8c;
+  -webkit-box-shadow: inset 0px 0px 5px #506f8c;
+     -moz-box-shadow: inset 0px 0px 5px #506f8c;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+
 .profile-content img {
     width: 80%;
     border-radius: 20px;
