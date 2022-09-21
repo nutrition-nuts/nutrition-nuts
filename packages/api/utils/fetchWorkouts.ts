@@ -1,12 +1,11 @@
-import workoutData from '../data/excercises/exerciseslist.json'
 import elasticSearchClient from '../elastic/elastic-client'
 export default async function fetchWorkouts(keyword: string) {
   let hits = await elasticSearchClient
     .search({
       index: 'workouts',
       query: {
-        match: { name: keyword },
-      },
+        match: { name: keyword }
+      }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
@@ -16,8 +15,8 @@ export default async function fetchWorkouts(keyword: string) {
       .search({
         index: 'workouts',
         query: {
-          match: { name: 'shoulder' },
-        },
+          match: { name: 'shoulder' }
+        }
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
