@@ -11,7 +11,7 @@ export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>()
   const [muscleInput, setMuscleInput] = useState('')
 
-  const workoutRequest = async (query: string) => {
+  const workoutRequest = async(query: string) => {
     const res = await getWorkout(query)
     setWorkouts(res)
   }
@@ -38,7 +38,7 @@ export default function Workouts() {
           <input type='checkbox' name='workout-equipment' />
           <br />
           <br />
-          <button onClick={async () => await workoutRequest(muscleInput)}>
+          <button onClick={async() => await workoutRequest(muscleInput)}>
             Find me a workout!
           </button>
         </div>

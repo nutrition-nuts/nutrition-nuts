@@ -7,7 +7,7 @@ export interface StandardResponse {
   success: boolean
 }
 
-const standardResponse = async (reqPromise: Promise<Response>) => {
+const standardResponse = async(reqPromise: Promise<Response>) => {
   try {
     const req = await reqPromise
 
@@ -44,7 +44,7 @@ const standardResponse = async (reqPromise: Promise<Response>) => {
   }
 }
 
-export const get = async (
+export const get = async(
   path: string,
   queryParams?: Record<string, string>
 ) => {
@@ -59,7 +59,7 @@ export const get = async (
   )
 }
 
-export const post = async (path: string, data: any) =>
+export const post = async(path: string, data: any) =>
   await standardResponse(
     fetch(`${baseURL}${path}`, {
       method: 'POST',
@@ -72,7 +72,7 @@ export const post = async (path: string, data: any) =>
     })
   )
 
-export const put = async (path: string, data: any) =>
+export const put = async(path: string, data: any) =>
   await standardResponse(
     fetch(`${baseURL}${path}`, {
       method: 'PUT',
@@ -85,7 +85,7 @@ export const put = async (path: string, data: any) =>
     })
   )
 
-export const del = async (path: string, data?: any) =>
+export const del = async(path: string, data?: any) =>
   await standardResponse(
     fetch(`${baseURL}${path}`, {
       method: 'DELETE',
