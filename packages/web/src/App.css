@@ -46,6 +46,11 @@ a {
   color: #506f8c;
 }
 
+.header-link:hover {
+  color: white;
+  cursor: pointer; 
+}
+
 .message {
   padding-top: 1rem;
   padding-left: 20%;

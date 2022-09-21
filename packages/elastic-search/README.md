@@ -12,7 +12,7 @@
 ### Data
 
 1. Make sure you have python3 installed
-2. Run `pip install -r requirements.txt`
+2. Run `python3 -m pip install -r requirements.txt`
 3. Run `python3 index_elastic_search.py`
 
 ## details
