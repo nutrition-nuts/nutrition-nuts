@@ -17,11 +17,9 @@ export default function RecipeSummary(props: Props) {
       {props.recipe != null && (
         <>
           <hr />
-          <a href="#" onClick={handleOpen}>
-            <h3>
-              {props.mealName}: {props.recipe.title}
-            </h3>
-          </a>
+          <h3 onClick={handleOpen} className="header-link">
+            {props.mealName}: {props.recipe.title}
+          </h3>
           <div>{props.recipe.description}</div>
           <RecipeModal
             open={open}
