@@ -7,37 +7,8 @@ const router = express.Router()
 router.get('/:bodyTarget', async (req, res, next) => {
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let query = req.params.bodyTarget
-  let hits = await elasticSearchClient
-    .search({
-      index: 'workouts',
-      query: {
-        query_string: {
-          query: String(query) ?? 'press',
-        },
-      },
-    })
-    .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
-
-  // default case, give at least something back
-  if (hits.length === 0) {
-    hits = await elasticSearchClient
-      .search({
-        index: 'workouts',
-        query: {
-          query_string: {
-            query: 'bell',
-          },
-        },
-      })
-      .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
-  }
-
+  let hits = await fetchWorkouts(query)
   res.send(hits)
-
-  // res.send({
-  //   name: hits[0].name,
-  //   description: workoutData[0].description,
-  // })
 })
 
 export default router
