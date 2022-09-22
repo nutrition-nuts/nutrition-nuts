@@ -1,50 +1,51 @@
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 import NavBar from '../components/navbar'
 import '../App.css'
 import './profile.css'
 
-
 class Form extends Component {
-    state = {
-        name: "",
-        age: "",
-        height: "",
-        weight:"",
-        calories:"",
-        dr: "",
-        allergies: "",
-        saveProfile: false,
-        showForm: true
-    };
+  state = {
+    name: '',
+    age: '',
+    height: '',
+    weight: '',
+    calories: '',
+    dr: '',
+    allergies: '',
+    saveProfile: false,
+    showForm: true
+  }
 
-    handleChange = (event: { target: { name: any; value: any; }; }) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-    handleSubmit = (event: { preventDefault: () => void; }) => { 
-      event.preventDefault();
-      localStorage.setItem('name', JSON.stringify(this.state.name));
-      localStorage.setItem('age', JSON.stringify(this.state.age));
-      localStorage.setItem('height', JSON.stringify(this.state.height)); 
-      localStorage.setItem('weight', JSON.stringify(this.state.weight));
-      localStorage.setItem('calories', JSON.stringify(this.state.calories)); 
-      localStorage.setItem('dr', JSON.stringify(this.state.dr));
-      localStorage.setItem('allergies', JSON.stringify(this.state.allergies));
-        this.setState({
-            name: `${this.state.name}`,
-            age: `${this.state.age}`,
-            height: `${this.state.height}`,
-            weight: `${this.state.weight}`,
-            calories: `${this.state.calories}`,
-            dr: `${this.state.dr}`,
-            allergies: `${this.state.allergies}`,
-            saveProfile: true,
-            showForm: false
-        });
-    }
-    render() {
-        return (
+  handleChange = (event: { target: { name: any, value: any } }) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault()
+    localStorage.setItem('name', JSON.stringify(this.state.name))
+    localStorage.setItem('age', JSON.stringify(this.state.age))
+    localStorage.setItem('height', JSON.stringify(this.state.height))
+    localStorage.setItem('weight', JSON.stringify(this.state.weight))
+    localStorage.setItem('calories', JSON.stringify(this.state.calories))
+    localStorage.setItem('dr', JSON.stringify(this.state.dr))
+    localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
+    this.setState({
+      name: `${this.state.name}`,
+      age: `${this.state.age}`,
+      height: `${this.state.height}`,
+      weight: `${this.state.weight}`,
+      calories: `${this.state.calories}`,
+      dr: `${this.state.dr}`,
+      allergies: `${this.state.allergies}`,
+      saveProfile: true,
+      showForm: false
+    })
+  }
+
+  render() {
+    return (
             <div className="App">
             <NavBar />
             <div className="profile-container">
@@ -55,19 +56,19 @@ class Form extends Component {
                       <div className="profile-item">
                         <h2>Profile Info</h2>
                         <label htmlFor="name">Name: </label>
-                        <input type="text" name="name" 
+                        <input type="text" name="name"
                           value={this.state.name} onChange={this.handleChange}/>
                       </div>
-                        
+
                       <div className="profile-item">
                         <label htmlFor="age">Age: </label>
-                        <input type="text" name="age" 
+                        <input type="text" name="age"
                           value={this.state.age} onChange={this.handleChange}/>
                       </div>
 
                       <div className="profile-item">
                         <label htmlFor="height">Height: </label>
-                        <input type="text" name="height" 
+                        <input type="text" name="height"
                           value={this.state.height} onChange={this.handleChange} />
 
                       </div>
@@ -79,7 +80,7 @@ class Form extends Component {
 
                       <div className="profile-item">
                         <label htmlFor="calories">Calories/Day: </label>
-                        <input type="text" name="calories" 
+                        <input type="text" name="calories"
                         value={this.state.calories} onChange={this.handleChange}/>
                       </div>
 
@@ -112,7 +113,7 @@ class Form extends Component {
                             <option value="shellfish">Shellfish</option>
                         </select>
                     </div>
-                    
+
                     <div className="profile-item">
                       <button type="submit">Save</button>
                     </div>
@@ -150,18 +151,16 @@ class Form extends Component {
             </section>
             </div>
             </div>
-        )
-    }
+    )
+  }
 }
-
 
 class Profile extends Component {
-    render() {
-        return  <React.Fragment>
+  render() {
+    return <React.Fragment>
             <Form />
         </React.Fragment>
-    }
-  
+  }
 }
 
-export default Profile;
+export default Profile
