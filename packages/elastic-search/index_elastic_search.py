@@ -10,7 +10,7 @@ indices = listdir(DATA_DIR)
 
 for index in indices:
     print(f"------ Index {index} ------")
-    elastic_index_url = join(BASE_URL, index)
+    elastic_index_url = BASE_URL + "/" + index
 
     delete_req = requests.delete(elastic_index_url)
     print(f"DELETE INDEX {index}: {delete_req.text}")
@@ -27,7 +27,7 @@ for index in indices:
         json = file.read()
 
         # throw the document to elasticsearch
-        doc_post_req = requests.post(join(elastic_index_url, "_doc"), json, headers={
+        doc_post_req = requests.post(f"{elastic_index_url}/_doc", json, headers={
                                      "Content-Type": "application/json"})
         message = f"✅ {doc_post_req.status_code}" if doc_post_req.status_code == 201 else f"❌ {doc_post_req.text}"
         print(f"POST DOCUMENT {document}: {message}")
