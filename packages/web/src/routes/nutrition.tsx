@@ -9,11 +9,11 @@ import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/recipeSummary'
 import { getInputFieldValue } from '../utils/genericUtils'
 
-export default function Nutrition () {
+export default function Nutrition() {
   const [recipes, setRecipes] = useState<RecipeModel[]>()
   const [breakfastInput, setBreakfastInput] = useState('')
 
-  const makeGetRecipeRequest = async (query: string) => {
+  const makeGetRecipeRequest = async(query: string) => {
     const res = await getRecipes(query)
     setRecipes(res)
   }
@@ -36,7 +36,7 @@ export default function Nutrition () {
           <input type="text" name="recipe-dinner" />
           <br />
           <br />
-          <Button variant="contained" onClick={async () => await makeGetRecipeRequest(breakfastInput)}>Find me recipes!</Button>
+          <Button variant="contained" onClick={async() => await makeGetRecipeRequest(breakfastInput)}>Find me recipes!</Button>
         </div>
         <div className="recipe-item">
           <h2>Meal Plan for the day</h2>

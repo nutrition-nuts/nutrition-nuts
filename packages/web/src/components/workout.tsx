@@ -4,7 +4,7 @@ interface Props {
   workout?: WorkoutModel
 }
 
-export default function Workout (props: Props) {
+export default function Workout(props: Props) {
   return (
     <>
       {(props.workout != null) && (

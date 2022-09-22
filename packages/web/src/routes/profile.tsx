@@ -6,7 +6,7 @@ import { Multiselect } from 'multiselect-react-dropdown'
 // import { getOverlayDirection } from 'react-bootstrap/esm/helpers'
 // import { reduceEachLeadingCommentRange } from 'typescript'
 
-export default function Profile () {
+export default function Profile() {
   const [allergies] = useState(['None', 'Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soybeans', 'Wheat', 'Sesame', 'Shellfish'])
   const [selects, setSelects] = useState(String)
   const [name, setName] = useState('')
@@ -15,7 +15,7 @@ export default function Profile () {
   const [weight, setWeight] = useState('')
   const [calories, setCalories] = useState('')
 
-  function saveProfile () {
+  function saveProfile() {
     const profileInfo = {
       name,
       age,
