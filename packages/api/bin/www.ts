@@ -27,7 +27,7 @@ server.on('listening', onListening)
 /**
   * Event listener for HTTP server "error" event.
   */
-function onError (error: Error & { syscall?: string, code?: string }) {
+function onError(error: Error & { syscall?: string, code?: string }) {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -52,7 +52,7 @@ function onError (error: Error & { syscall?: string, code?: string }) {
 /**
   * Event listener for HTTP server "listening" event.
   */
-function onListening () {
+function onListening() {
   const addr = server.address()
   const bind =
      typeof addr === 'string' ? 'pipe ' + addr : 'port ' + (addr?.port ?? '?')
