@@ -2,11 +2,12 @@ import express from 'express'
 import fetchWorkouts from '../utils/fetchWorkouts.js'
 const router = express.Router()
 
-// GET /workouts/:bodyTarget
-router.get('/:bodyTarget', async (req, res, next) => {
+// GET /workouts
+router.get('/', async(req, res, next) => {
+  const { query } = req.query
+
   // TODO: delete this. just an example of how to hit the elasticsearch from code
-  const query = req.params.bodyTarget
-  const hits = await fetchWorkouts(query)
+  const hits = await fetchWorkouts(String(query))
   res.send(hits)
 })
 
