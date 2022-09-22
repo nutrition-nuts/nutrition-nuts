@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Component } from 'react'
 
 import Button from '@mui/material/Button'
 import NavBar from '../components/navbar'
