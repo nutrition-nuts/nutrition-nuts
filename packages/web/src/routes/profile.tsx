@@ -128,7 +128,7 @@ class Form extends Component {
                         <label htmlFor="name">Name: {this.state.name} </label>
                     </div>
                     <div className="profile-item">
-                        <label htmlFor="height">Height: {this.state.name} </label>
+                        <label htmlFor="height">Height: {this.state.height} </label>
                     </div>
                     <div className="profile-item">
                         <label htmlFor="weight">Weight: {this.state.weight} </label>
