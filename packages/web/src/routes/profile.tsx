@@ -141,6 +141,9 @@ class Form extends Component {
                     <div className="profile-item">
                         <label htmlFor="allergies">Allergies: {this.state.allergies} </label>
                     </div>
+                    <div className="profile-item">
+                      <button type="submit">Edit</button>
+                    </div>
                     </article>
                     )}
                 </article>
