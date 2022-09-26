@@ -4,7 +4,7 @@ export default async function fetchWorkouts(keyword: string) {
     .search({
       index: 'workouts',
       query: {
-        match: { name: keyword }
+        query_string: { query: keyword }
       }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
@@ -15,7 +15,7 @@ export default async function fetchWorkouts(keyword: string) {
       .search({
         index: 'workouts',
         query: {
-          match: { name: 'shoulder' }
+          match: { name: 's' }
         }
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])

@@ -1,5 +1,10 @@
 export interface WorkoutModel {
   name: string
-  // image: string;
-  description: string
+  force: string
+  level: string
+  mechanic: string
+  primaryMuscles: string[]
+  secondaryMuscles: string[]
+  instructions: string[]
+  category: string
 }
