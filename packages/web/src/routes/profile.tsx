@@ -42,6 +42,7 @@ class Form extends Component {
       saveProfile: true,
       showForm: false
     })
+    this.forceUpdate()
   }
 
   render() {

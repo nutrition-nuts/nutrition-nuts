@@ -14,8 +14,25 @@ router.get('/', async (req, res, next) => {
       query: {
         query_string: {
           query: String(query) ?? 'veggie'
+        },
+        bool: {
+          filter: {
+
+          }
         }
-      }
+      },
+      // filter: {
+      //   all: [
+      //     {
+      //       tags: localStorage.dr
+      //     }
+      //   ],
+      //   none: [
+      //     {
+      //       ingredients: localStorage.allergies
+      //     }
+      //   ]
+      // }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
