@@ -48,11 +48,18 @@ a {
 
 .header-link:hover {
   color: white;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .message {
   padding-top: 1rem;
   padding-left: 20%;
   padding-right: 20%;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

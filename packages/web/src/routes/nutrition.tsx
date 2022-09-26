@@ -10,7 +10,10 @@ import RecipeSummary from '../components/recipeSummary'
 import { getInputFieldValue } from '../utils/genericUtils'
 
 export default function Nutrition() {
-  const [recipes, setRecipes] = useState<RecipeModel[]>()
+  const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
+  const [lunchResults, setLunchResults] = useState<RecipeModel[]>([])
+  const [dinnerResults, setDinnerResults] = useState<RecipeModel[]>([])
+
   const [breakfastInput, setBreakfastInput] = useState('')
   const [lunchInput, setLunchInput] = useState('')
   const [dinnerInput, setDinnerInput] = useState('')
@@ -21,10 +24,11 @@ export default function Nutrition() {
 
   const onFindRecipesButtonClick = async () => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
+    setBreakfastResults(breakfast)
     const lunch = await makeGetRecipeRequest(lunchInput)
+    setLunchResults(lunch)
     const dinner = await makeGetRecipeRequest(dinnerInput)
-
-    setRecipes([breakfast[0], lunch[0], dinner[0]])
+    setDinnerResults(dinner)
   }
 
   return (
@@ -68,12 +72,15 @@ export default function Nutrition() {
           <h2>Meal Plan for the day</h2>
           <RecipeSummary
             mealName="Breakfast"
-            recipe={recipes?.[0]}
+            recipes={breakfastResults}
           ></RecipeSummary>
-          <RecipeSummary mealName="Lunch" recipe={recipes?.[1]}></RecipeSummary>
+          <RecipeSummary
+            mealName="Lunch"
+            recipes={lunchResults}
+          ></RecipeSummary>
           <RecipeSummary
             mealName="Dinner"
-            recipe={recipes?.[2]}
+            recipes={dinnerResults}
           ></RecipeSummary>
         </div>
       </div>
