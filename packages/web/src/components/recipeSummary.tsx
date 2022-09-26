@@ -1,30 +1,50 @@
 import { RecipeModel } from '../models/recipeModels'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import RecipeModal from './recipeModal'
+import Pagination from '@mui/material/Pagination'
+import '../App.css'
 
 interface Props {
   mealName: string
-  recipe?: RecipeModel
+  recipes: RecipeModel[]
 }
 
 export default function RecipeSummary(props: Props) {
   const [open, setOpen] = useState(false)
+  const [page, setPage] = useState(1)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value)
+  }
+
+  useEffect(() => setPage(1), [props.recipes.length])
+
   return (
     <>
-      {props.recipe != null && (
+      {props.recipes.length !== 0 && props.recipes.length >= page && (
         <>
           <hr />
           <h3 onClick={handleOpen} className="header-link">
-            {props.mealName}: {props.recipe.title}
+            {props.mealName}: {props.recipes[page - 1].title}
           </h3>
-          <div>{props.recipe.description}</div>
+          <div>{props.recipes[page - 1].description}</div>
+          <Pagination
+            count={props.recipes.length}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+            className="center"
+            style={{ marginTop: '1rem' }}
+          />
           <RecipeModal
             open={open}
             handleClose={handleClose}
-            recipe={props.recipe}
+            recipe={props.recipes[page - 1]}
           ></RecipeModal>
         </>
       )}
