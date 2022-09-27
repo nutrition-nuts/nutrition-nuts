@@ -44,6 +44,16 @@ class Form extends Component {
     })
   }
 
+  componentDidMount(): void {
+    if (
+      localStorage.getItem('name') !== null &&
+      localStorage.getItem('name') !== ''
+    ) {
+      this.setState({ saveProfile: true, showForm: false })
+      console.log(this.state)
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -153,7 +163,9 @@ class Form extends Component {
                 <article>
                   <div className="profile-item">
                     <h2>Profile Info</h2>
-                    <label htmlFor="name">Name: {this.state.name} </label>
+                    <label htmlFor="name">
+                      Name: {localStorage.getItem('name')}{' '}
+                    </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="height">Height: {this.state.name} </label>
