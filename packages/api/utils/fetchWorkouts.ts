@@ -1,10 +1,10 @@
 import elasticSearchClient from '../elastic/elastic-client'
-export default async function fetchWorkouts(keyword: string) {
+export default async function fetchWorkouts(type: string, group: string, equip: string) {
   let hits = await elasticSearchClient
     .search({
       index: 'workouts',
       query: {
-        query_string: { query: keyword }
+        query_string: { query: group }
       }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
