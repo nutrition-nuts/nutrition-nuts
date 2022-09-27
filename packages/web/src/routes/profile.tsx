@@ -13,7 +13,8 @@ class Form extends Component {
     dr: '',
     allergies: '',
     saveProfile: false,
-    showForm: true
+    showForm: true,
+    count: 0
   }
 
   handleChange = (event: { target: { name: any, value: any } }) => {
@@ -31,6 +32,7 @@ class Form extends Component {
     localStorage.setItem('calories', JSON.stringify(this.state.calories))
     localStorage.setItem('dr', JSON.stringify(this.state.dr))
     localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
+    localStorage.setItem('count', JSON.stringify(this.state.count))
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
@@ -40,8 +42,17 @@ class Form extends Component {
       dr: `${this.state.dr}`,
       allergies: `${this.state.allergies}`,
       saveProfile: true,
-      showForm: false
+      showForm: false,
+      count: `${this.state.count}`
     })
+  
+  }
+  increaseCount = () => {
+    return this.setState({...this.state, count: this.state.count + 1});
+  }
+
+  decreaseCount = () => {
+    return this.setState({...this.state, count: this.state.count - 1});
   }
 
   render() {
@@ -115,7 +126,7 @@ class Form extends Component {
                     </div>
 
                     <div className="profile-item">
-                      <button type="submit">Save</button>
+                      <button type="submit" onClick={this.increaseCount}>Save</button>
                     </div>
                     </form>
                 )}
@@ -143,7 +154,7 @@ class Form extends Component {
                         <label htmlFor="allergies">Allergies: {this.state.allergies} </label>
                     </div>
                     <div className="profile-item">
-                      <button type="submit">Edit</button>
+                      <button type="submit" onClick={this.decreaseCount}>Edit</button>
                     </div>
                     </article>
                     )}
@@ -157,9 +168,9 @@ class Form extends Component {
 
 class Profile extends Component {
   render() {
-    return <React.Fragment>
+    return (<React.Fragment>
             <Form />
-        </React.Fragment>
+        </React.Fragment>)
   }
 }
 
