@@ -12,18 +12,16 @@ export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>()
   const [workoutType, setWorkoutType] = useState('')
   const [muscleInput, setMuscleInput] = useState('')
-  const [equipment, setEquipment] = useState('')
+  const [equipment, setEquipment] = useState('off')
 
-  const makeGetWorkoutRequest = async (query: string) => {
-    return await getWorkout(query)
+  const makeGetWorkoutRequest = async (type: string, group: string, equip: string) => {
+    return await getWorkout(type, group, equip)
   }
 
   const onFindWorkoutsButtonClick = async () => {
-    const type = await makeGetWorkoutRequest(workoutType)
-    const group = await makeGetWorkoutRequest(muscleInput)
-    const equip = await makeGetWorkoutRequest(equipment)
+    const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
 
-    setWorkouts([type[0], group[0], equip[0]])
+    setWorkouts([res[0]])
   }
 
   return (

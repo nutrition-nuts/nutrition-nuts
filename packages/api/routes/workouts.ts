@@ -4,10 +4,10 @@ const router = express.Router()
 
 // GET /workouts
 router.get('/', async(req, res, next) => {
-  const { query } = req.query
+  const { type, group, equip } = req.query
 
   // TODO: delete this. just an example of how to hit the elasticsearch from code
-  const hits = await fetchWorkouts(String(query))
+  const hits = await fetchWorkouts(String(type), String(group), String(equip))
   res.send(hits)
 })
 
