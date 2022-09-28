@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
+import Footer from '../components/footer'
 import '../App.css'
 import './profile.css'
 
@@ -17,7 +18,7 @@ class Form extends Component {
     count: 0
   }
 
-  handleChange = (event: { target: { name: any; value: any } }) => {
+  handleChange = (event: { target: { name: any, value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -46,6 +47,7 @@ class Form extends Component {
       count: `${this.state.count}`
     })
   }
+
   increaseCount = () => {
     return this.setState({ ...this.state, count: this.state.count + 1 })
   }
@@ -194,6 +196,7 @@ class Form extends Component {
             </article>
           </section>
         </div>
+        <Footer />
       </div>
     )
   }

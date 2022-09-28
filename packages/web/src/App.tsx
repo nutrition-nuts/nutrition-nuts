@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import { getTest } from './requests/test'
-import NavBar from './components/navbar'
+import Footer from './components/footer'
+import MiniDrawer from './components/sidebar'
 
 function App() {
   const [message, setMessage] = useState('')
@@ -15,13 +16,15 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <MiniDrawer />
 
       <header className="App-header">
         <h2>Home page that might have cool stuff on it eventually</h2>
         <button onClick={testRequest}>Fetch from backend API</button>
         <div className="message">{message}</div>
       </header>
+
+      <Footer />
     </div>
   )
 }

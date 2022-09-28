@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Button from '@mui/material/Button'
 import NavBar from '../components/navbar'
+import Footer from '../components/footer'
 import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
@@ -18,11 +19,11 @@ export default function Nutrition() {
   const [lunchInput, setLunchInput] = useState('')
   const [dinnerInput, setDinnerInput] = useState('')
 
-  const makeGetRecipeRequest = async (query: string) => {
+  const makeGetRecipeRequest = async(query: string) => {
     return await getRecipes(query)
   }
 
-  const onFindRecipesButtonClick = async () => {
+  const onFindRecipesButtonClick = async() => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
     setBreakfastResults(breakfast)
     const lunch = await makeGetRecipeRequest(lunchInput)
@@ -63,7 +64,7 @@ export default function Nutrition() {
           <br />
           <Button
             variant="contained"
-            onClick={async () => await onFindRecipesButtonClick()}
+            onClick={async() => await onFindRecipesButtonClick()}
           >
             Find me recipes!
           </Button>
@@ -84,6 +85,7 @@ export default function Nutrition() {
           ></RecipeSummary>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
