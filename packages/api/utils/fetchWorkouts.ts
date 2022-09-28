@@ -10,8 +10,21 @@ export default async function fetchWorkouts(
     .search({
       index: 'workouts',
       query: {
-        term: {
-          primaryMuscles: group
+        bool: {
+          must: [
+            {
+              query_string: {
+                query: group
+              }
+            }
+          ],
+          filter: [
+            {
+              match: {
+                equipment: filterEquip
+              }
+            }
+          ]
         }
       }
     })

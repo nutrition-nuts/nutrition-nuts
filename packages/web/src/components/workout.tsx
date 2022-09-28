@@ -26,29 +26,34 @@ export default function Workout(props: Props) {
   return (
     <>
       {props.workouts.length !== 0 && props.workouts.length >= page && (
-          <>
-            <div className="recipe-content">
-              <h3 onClick={handleOpen} className="header-link">
-                {props.workouts[page - 1].name}
-              </h3>
-              <p className={'caps'}>Type: {props.workouts[page - 1].category}</p>
-              <p className={'caps'}>Level: {props.workouts[page - 1].level}</p>
-              <p className={'caps'}>Primary Muscles: {props.workouts[page - 1].primaryMuscles[0]}</p>
-            </div>
-            <Pagination
-                count={props.workouts.length}
-                page={page}
-                onChange={handleChangePage}
-                color="primary"
-                className="center"
-                style={{ marginTop: '1rem' }}
-            />
-            <WorkoutModal
-                open={open}
-                handleClose={handleClose}
-                workout={props.workouts[page - 1]}
-            ></WorkoutModal>
-          </>
+        <>
+          <div className="recipe-content">
+            <h3 onClick={handleOpen} className="header-link">
+              {props.workouts[page - 1].name}
+            </h3>
+            <p className={'caps'}>Type: {props.workouts[page - 1].category}</p>
+            <p className={'caps'}>
+              Equip?: {props.workouts[page - 1].equipment}
+            </p>
+            <p className={'caps'}>Level: {props.workouts[page - 1].level}</p>
+            <p className={'caps'}>
+              Primary Muscles: {props.workouts[page - 1].primaryMuscles[0]}
+            </p>
+          </div>
+          <Pagination
+            count={props.workouts.length}
+            page={page}
+            onChange={handleChangePage}
+            color="primary"
+            className="center"
+            style={{ marginTop: '1rem' }}
+          />
+          <WorkoutModal
+            open={open}
+            handleClose={handleClose}
+            workout={props.workouts[page - 1]}
+          ></WorkoutModal>
+        </>
       )}
     </>
   )
