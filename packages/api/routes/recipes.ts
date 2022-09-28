@@ -3,10 +3,8 @@ import elasticSearchClient from '../elastic/elastic-client'
 
 const router = express.Router()
 
-// POST /recipes
-router.post('/', async (req, res, next) => {
-  const {query} = req.query
-  const {allergies} = req.allergies
+// GET /recipes
+router.get('/', async (req, res, next) => {
 
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
@@ -17,12 +15,12 @@ router.post('/', async (req, res, next) => {
           must: [
         {
           query_string: {
-            query: String(query)
+            query: String(req.query.query)
               }
             }
           ],
           must_not: [
-            { wildcard: { ingredients: allergies } }
+            { wildcard: { ingredients: String (req.query.allergies) } }
           ]
         }
       }
