@@ -4,7 +4,7 @@ export default async function fetchWorkouts(
   group: string,
   equip: string
 ) {
-  let filterEquip = equip === 'off' ? 'body only' : ''
+  const filterEquip = equip === 'off' ? 'body only' : ''
   console.log(filterEquip)
   let hits = await elasticSearchClient
     .search({
