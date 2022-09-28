@@ -14,11 +14,11 @@ export default function Workouts() {
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
 
-  const makeGetWorkoutRequest = async (type: string, group: string, equip: string) => {
+  const makeGetWorkoutRequest = async(type: string, group: string, equip: string) => {
     return await getWorkout(type, group, equip)
   }
 
-  const onFindWorkoutsButtonClick = async () => {
+  const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
 
     setWorkouts(res)
@@ -47,7 +47,7 @@ export default function Workouts() {
           <input type='checkbox' name='workout-equipment' onChange={(e) => setEquipment(e.target.checked ? 'on' : 'off')}/>
           <br />
           <br />
-          <Button variant="contained" onClick={async () => await onFindWorkoutsButtonClick()}>
+          <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
             Find me a workout!
           </Button>
         </div>
