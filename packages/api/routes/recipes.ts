@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { application } from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
 
 const router = express.Router()
@@ -11,28 +11,20 @@ router.get('/', async(req, res, next) => {
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
-      query: {
-        query_string: {
-          query: String(query) ?? 'veggie'
-        },
+      query:{
         bool: {
-          filter: {
-
-          }
+          must: [
+        {
+          query_string: {
+            query: String(query)
+              }
+            }
+          ],
+          must_not: [
+            { wildcard: { ingredients: allergies } }
+          ]
         }
-      },
-      // filter: {
-      //   all: [
-      //     {
-      //       tags: localStorage.dr
-      //     }
-      //   ],
-      //   none: [
-      //     {
-      //       ingredients: localStorage.allergies
-      //     }
-      //   ]
-      // }
+      }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
