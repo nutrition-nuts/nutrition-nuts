@@ -42,3 +42,15 @@ button:active {
 .recipe-item h3 {
     color: #506f8c;
 }
+
+.recipe-content {
+    text-align: center;
+}
+
+.recipe-item h4 {
+    color: #617c93;
+}
+
+.caps {
+    text-transform: capitalize;
+}
