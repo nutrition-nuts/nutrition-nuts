@@ -153,9 +153,7 @@ class Form extends Component {
                   </div>
 
                   <div className="profile-item">
-                    <button type="submit" onClick={this.increaseCount}>
-                      Save
-                    </button>
+                    <button type="submit">Save</button>
                   </div>
                 </form>
               )}
@@ -168,7 +166,7 @@ class Form extends Component {
                     <label htmlFor="name">Name: {this.state.name} </label>
                   </div>
                   <div className="profile-item">
-                    <label htmlFor="height">Height: {this.state.height} </label>
+                    <label htmlFor="height">Height: {this.state.name} </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="weight">Weight: {this.state.weight} </label>
@@ -189,9 +187,7 @@ class Form extends Component {
                     </label>
                   </div>
                   <div className="profile-item">
-                    <button type="submit" onClick={this.decreaseCount}>
-                      Edit
-                    </button>
+                    <button type="submit">Edit</button>
                   </div>
                 </article>
               )}
