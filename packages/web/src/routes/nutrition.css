@@ -47,17 +47,10 @@ button:active {
     text-align: center;
 }
 
-.recipe-content ul{
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    text-transform: capitalize;
-}
-
-.recipe-content li {
-    text-align: left;
-}
-
 .recipe-item h4 {
     color: #617c93;
+}
+
+.caps {
+    text-transform: capitalize;
 }
