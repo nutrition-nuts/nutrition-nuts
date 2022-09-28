@@ -1,38 +1,31 @@
-import express from 'express'
+import express, { application } from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
 
 const router = express.Router()
 
-// GET /recipes
-router.get('/', async (req, res, next) => {
-  const { query } = req.query
+// POST /recipes
+router.post('/', async (req, res, next) => {
+  const {query} = req.query
+  const {allergies} = req.allergies
 
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
-      query: {
-        query_string: {
-          query: String(query) ?? 'veggie'
-        },
+      query:{
         bool: {
-          filter: {
-
-          }
+          must: [
+        {
+          query_string: {
+            query: String(query)
+              }
+            }
+          ],
+          must_not: [
+            { wildcard: { ingredients: allergies } }
+          ]
         }
-      },
-      // filter: {
-      //   all: [
-      //     {
-      //       tags: localStorage.dr
-      //     }
-      //   ],
-      //   none: [
-      //     {
-      //       ingredients: localStorage.allergies
-      //     }
-      //   ]
-      // }
+      }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
