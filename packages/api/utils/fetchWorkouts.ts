@@ -14,9 +14,7 @@ export default async function fetchWorkouts(type: string, group: string, equip: 
     hits = await elasticSearchClient
       .search({
         index: 'workouts',
-        query: {
-          match: { name: 's' }
-        }
+        size: 10
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }

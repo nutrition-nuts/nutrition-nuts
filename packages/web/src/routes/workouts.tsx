@@ -9,7 +9,7 @@ import { getInputFieldValue } from '../utils/genericUtils'
 import Button from '@mui/material/Button'
 
 export default function Workouts() {
-  const [workouts, setWorkouts] = useState<WorkoutModel[]>()
+  const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
   const [workoutType, setWorkoutType] = useState('')
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
@@ -21,7 +21,8 @@ export default function Workouts() {
   const onFindWorkoutsButtonClick = async () => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
 
-    setWorkouts([res[0]])
+    setWorkouts(res)
+    console.log(res)
   }
 
   return (
@@ -52,7 +53,7 @@ export default function Workouts() {
         </div>
         <div className="recipe-item">
           <h2>Workout Plan</h2>
-          <Workout workout={workouts?.[0]}></Workout>
+          <Workout workouts={workouts}></Workout>
         </div>
       </div>
     </div>
