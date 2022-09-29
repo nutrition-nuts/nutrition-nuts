@@ -1,4 +1,4 @@
-import { get, post } from './requests'
+import { get } from './requests'
 import { RecipeModel } from '../models/recipeModels'
 
 export const getRecipes = async(query: string, allergies: string) => {
