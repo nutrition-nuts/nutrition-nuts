@@ -22,11 +22,11 @@ class Form extends Component {
 
   handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault()
-    localStorage.setItem('name', JSON.stringify(this.state.name))
-    localStorage.setItem('age', JSON.stringify(this.state.age))
-    localStorage.setItem('calories', JSON.stringify(this.state.calories))
-    localStorage.setItem('dr', JSON.stringify(this.state.dr))
-    localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
+    localStorage.setItem('name', this.state.name)
+    localStorage.setItem('age', this.state.age)
+    localStorage.setItem('calories', this.state.calories)
+    localStorage.setItem('dr', this.state.dr)
+    localStorage.setItem('allergies', this.state.allergies)
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
