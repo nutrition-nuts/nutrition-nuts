@@ -5,15 +5,22 @@ const router = express.Router()
 
 // GET /recipes
 router.get('/', async(req, res, next) => {
-  const { query } = req.query
-
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
       query: {
-        query_string: {
-          query: String(query) ?? 'veggie'
+        bool: {
+          must: [
+            {
+              query_string: {
+                query: String(req.query.query)
+              }
+            }
+          ],
+          must_not: [
+            { match: { ingredients: (String(req.query.allergies)) } }
+          ]
         }
       }
     })
