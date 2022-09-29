@@ -7,8 +7,6 @@ class Form extends Component {
   state = {
     name: '',
     age: '',
-    height: '',
-    weight: '',
     calories: '',
     dr: '',
     allergies: '',
@@ -26,23 +24,28 @@ class Form extends Component {
     event.preventDefault()
     localStorage.setItem('name', JSON.stringify(this.state.name))
     localStorage.setItem('age', JSON.stringify(this.state.age))
-    localStorage.setItem('height', JSON.stringify(this.state.height))
-    localStorage.setItem('weight', JSON.stringify(this.state.weight))
     localStorage.setItem('calories', JSON.stringify(this.state.calories))
     localStorage.setItem('dr', JSON.stringify(this.state.dr))
     localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
-      height: `${this.state.height}`,
-      weight: `${this.state.weight}`,
       calories: `${this.state.calories}`,
       dr: `${this.state.dr}`,
       allergies: `${this.state.allergies}`,
-      saveProfile: true,
       showForm: false
     })
     this.forceUpdate()
+  }
+
+  componentDidMount(): void {
+    if (
+      localStorage.getItem('name') !== null &&
+      localStorage.getItem('name') !== ''
+    ) {
+      this.setState({ showForm: false })
+      console.log(this.state)
+    }
   }
 
   render() {
@@ -71,26 +74,6 @@ class Form extends Component {
                       type="text"
                       name="age"
                       value={this.state.age}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-
-                  <div className="profile-item">
-                    <label htmlFor="height">Height: </label>
-                    <input
-                      type="text"
-                      name="height"
-                      value={this.state.height}
-                      onChange={this.handleChange}
-                    />
-                  </div>
-
-                  <div className="profile-item">
-                    <label htmlFor="weight">Weight: </label>
-                    <input
-                      type="text"
-                      name="weight"
-                      value={this.state.weight}
                       onChange={this.handleChange}
                     />
                   </div>
@@ -131,7 +114,6 @@ class Form extends Component {
                       onChange={this.handleChange}
                     >
                       <option value="select">Select</option>
-                      <option value="none">None</option>
                       <option value="peanuts">Peanuts</option>
                       <option value="tree-nuts">Tree Nuts</option>
                       <option value="fish">Fish</option>
@@ -150,35 +132,42 @@ class Form extends Component {
               )}
             </article>
             <article>
-              {this.state.saveProfile && (
+              {!this.state.showForm && (
                 <article>
                   <div className="profile-item">
                     <h2>Profile Info</h2>
-                    <label htmlFor="name">Name: {this.state.name} </label>
+                    <label htmlFor="name">
+                      Name: {localStorage.getItem('name')}{' '}
+                    </label>
                   </div>
                   <div className="profile-item">
-                    <label htmlFor="height">Height: {this.state.name} </label>
+                    <label htmlFor="age">
+                      Age: {localStorage.getItem('age')}{' '}
+                    </label>
                   </div>
-                  <div className="profile-item">
-                    <label htmlFor="weight">Weight: {this.state.weight} </label>
-                  </div>
+
                   <div className="profile-item">
                     <label htmlFor="calories">
-                      Calories/Day: {this.state.calories}
+                      Calories/Day: {localStorage.getItem('calories')}{' '}
                     </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="dr">
-                      Dietary Restrictions: {this.state.dr}{' '}
+                      Dietary Restrictions: {localStorage.getItem('dr')}{' '}
                     </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="allergies">
-                      Allergies: {this.state.allergies}{' '}
+                      Allergies: {localStorage.getItem('allergies')}{' '}
                     </label>
                   </div>
                   <div className="profile-item">
-                    <button type="submit">Edit</button>
+                    <button
+                      type="submit"
+                      onClick={() => this.setState({ showForm: true })}
+                    >
+                      Edit
+                    </button>
                   </div>
                 </article>
               )}
