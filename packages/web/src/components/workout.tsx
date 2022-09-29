@@ -33,7 +33,7 @@ export default function Workout(props: Props) {
             </h3>
             <p className={'caps'}>Type: {props.workouts[page - 1].category}</p>
             <p className={'caps'}>
-              Equip?: {props.workouts[page - 1].equipment}
+              Equipment Needed: {props.workouts[page - 1].equipment}
             </p>
             <p className={'caps'}>Level: {props.workouts[page - 1].level}</p>
             <p className={'caps'}>
