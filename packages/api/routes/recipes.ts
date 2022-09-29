@@ -19,7 +19,7 @@ router.get('/', async(req, res, next) => {
             }
           ],
           must_not: [
-            { wildcard: { ingredients: ('~' + String(req.query.allergies)) } }
+            { match: { ingredients: (String(req.query.allergies)) } }
           ]
         }
       }
