@@ -5,11 +5,11 @@ import './profile.css'
 
 class Form extends Component {
   state = {
-    name: '',
-    age: '',
-    calories: '',
-    dr: '',
-    allergies: '',
+    name: localStorage.getItem('name') ?? '',
+    age: localStorage.getItem('age') ?? '',
+    calories: localStorage.getItem('calories') ?? '',
+    dr: localStorage.getItem('dr') ?? '',
+    allergies: localStorage.getItem('allergies') ?? '',
     saveProfile: false,
     showForm: true
   }
@@ -44,7 +44,7 @@ class Form extends Component {
       localStorage.getItem('name') !== ''
     ) {
       this.setState({ showForm: false })
-      console.log(this.state)
+      // console.log(this.state)
     }
   }
 
@@ -118,7 +118,7 @@ class Form extends Component {
                       <option value="tree-nuts">Tree Nuts</option>
                       <option value="fish">Fish</option>
                       <option value="egg">Eggs</option>
-                      <option value="soybeans">Soybeans</option>
+                      <option value="soy">Soybeans</option>
                       <option value="wheat">Wheat</option>
                       <option value="sesame">Sesame</option>
                       <option value="shellfish">Shellfish</option>
