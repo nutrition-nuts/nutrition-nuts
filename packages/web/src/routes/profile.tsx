@@ -16,7 +16,7 @@ class Form extends Component {
     showForm: true
   }
 
-  handleChange = (event: { target: { name: any; value: any } }) => {
+  handleChange = (event: { target: { name: any, value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value
     })
