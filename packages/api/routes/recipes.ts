@@ -31,7 +31,14 @@ router.get('/', async(req, res, next) => {
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
-        size: 10
+        size: 10,
+        query: {
+          bool: {
+            must_not: [
+              { match: { ingredients: (String(req.query.allergies)) } }
+            ]
+          }
+        }
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
