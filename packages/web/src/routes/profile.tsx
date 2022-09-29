@@ -117,7 +117,7 @@ class Form extends Component {
                       <option value="peanuts">Peanuts</option>
                       <option value="tree-nuts">Tree Nuts</option>
                       <option value="fish">Fish</option>
-                      <option value="eggs">Eggs</option>
+                      <option value="egg">Eggs</option>
                       <option value="soybeans">Soybeans</option>
                       <option value="wheat">Wheat</option>
                       <option value="sesame">Sesame</option>
