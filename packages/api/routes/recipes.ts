@@ -1,4 +1,4 @@
-import express, { application } from 'express'
+import express from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
 
 const router = express.Router()
