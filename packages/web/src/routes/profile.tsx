@@ -24,13 +24,13 @@ class Form extends Component {
 
   handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault()
-    localStorage.setItem('name', JSON.stringify(this.state.name))
-    localStorage.setItem('age', JSON.stringify(this.state.age))
-    localStorage.setItem('height', JSON.stringify(this.state.height))
-    localStorage.setItem('weight', JSON.stringify(this.state.weight))
-    localStorage.setItem('calories', JSON.stringify(this.state.calories))
-    localStorage.setItem('dr', JSON.stringify(this.state.dr))
-    localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
+    localStorage.setItem('name', this.state.name)
+    localStorage.setItem('age', this.state.age)
+    localStorage.setItem('height', this.state.height)
+    localStorage.setItem('weight', this.state.weight)
+    localStorage.setItem('calories', this.state.calories)
+    localStorage.setItem('dr', this.state.dr)
+    localStorage.setItem('allergies', this.state.allergies)
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
@@ -157,7 +157,7 @@ class Form extends Component {
                     <label htmlFor="name">Name: {this.state.name} </label>
                   </div>
                   <div className="profile-item">
-                    <label htmlFor="height">Height: {this.state.name} </label>
+                    <label htmlFor="height">Height: {this.state.height} </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="weight">Weight: {this.state.weight} </label>
