@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar'
-import Footer from '../components/footer'
+import Sidebar from '../components/sidebar'
 import '../App.css'
 import './profile.css'
 
@@ -59,6 +59,7 @@ class Form extends Component {
   render() {
     return (
       <div className="App">
+        <Sidebar />
         <NavBar />
         <div className="profile-container">
           <section>
@@ -196,7 +197,6 @@ class Form extends Component {
             </article>
           </section>
         </div>
-        <Footer />
       </div>
     )
   }

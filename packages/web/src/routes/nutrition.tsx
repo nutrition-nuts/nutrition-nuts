@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import Button from '@mui/material/Button'
 import NavBar from '../components/navbar'
-import Footer from '../components/footer'
 import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
@@ -85,7 +84,6 @@ export default function Nutrition() {
           ></RecipeSummary>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

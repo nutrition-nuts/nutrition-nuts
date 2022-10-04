@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { getTest } from './requests/test'
 import Footer from './components/footer'
-import MiniDrawer from './components/sidebar'
+import Sidebar from './components/sidebar'
 
 function App() {
   const [message, setMessage] = useState('')
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <MiniDrawer />
+      <Sidebar />
 
       <header className="App-header">
         <h2>Home page that might have cool stuff on it eventually</h2>

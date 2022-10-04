@@ -3,7 +3,6 @@ import '../App.css'
 import './nutrition.css'
 import { getWorkout } from '../requests/workout'
 import NavBar from '../components/navbar'
-import Footer from '../components/footer'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
 import { getInputFieldValue } from '../utils/genericUtils'
@@ -57,7 +56,6 @@ export default function Workouts() {
           <Workout workout={workouts?.[0]}></Workout>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

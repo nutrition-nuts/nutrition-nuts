@@ -25,6 +25,7 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open'
 })<AppBarProps>(({ theme, open }) => ({
+  backgroundColor: '#6b9294',
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
@@ -48,7 +49,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end'
 }))
 
-export default function PersistentDrawerLeft() {
+export default function Sidebar() {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
 
@@ -64,12 +65,15 @@ export default function PersistentDrawerLeft() {
     let link: string = '/'
     switch (index) {
       case 0:
-        link = '/profile'
+        link = '/'
         break
       case 1:
-        link = '/nutrition'
+        link = '/profile'
         break
       case 2:
+        link = '/nutrition'
+        break
+      case 3:
         link = '/workouts'
         break
     }
@@ -78,7 +82,7 @@ export default function PersistentDrawerLeft() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" open={open}>
+      <AppBar position="sticky" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -90,7 +94,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Nutrion Nuts
+            <a href="/" color="white">Nutrion Nuts</a>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -114,7 +118,7 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Profile', 'Nutrition', 'Workouts'].map((text, index) => (
+          {['Home', 'Profile', 'Nutrition', 'Workouts'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton href={linkPages(index)} LinkComponent={Link}>
                 <ListItemText primary={text} />
