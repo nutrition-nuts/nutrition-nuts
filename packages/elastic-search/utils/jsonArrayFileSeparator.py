@@ -1,14 +1,15 @@
 from os import listdir
 from os.path import isfile, join
 import json
-exerciseFile = open('./exercises.json')
-exersiseData = json.load(exerciseFile)
+file = open('./recipe-data-test.json')
+data = json.load(file)
 x = 0
-for i in exersiseData['exercises']:
+for i in data:
     json_obj = json.dumps(i, indent=4)
-    file_name = f"./data/workouts/{x}.json"
+    title = i["name"].replace(" ", "-").lower()
+    file_name = f"./data/recipes/{title}.json"
     with open(file_name, "w") as outfile:
         outfile.write(json_obj)
     x += 1
 
-exerciseFile.close()
+file.close()

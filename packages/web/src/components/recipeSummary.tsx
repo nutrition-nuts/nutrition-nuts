@@ -30,9 +30,9 @@ export default function RecipeSummary(props: Props) {
         <>
           <hr />
           <h3 onClick={handleOpen} className="header-link">
-            {props.mealName}: {props.recipes[page - 1].title}
+            {props.mealName}: {props.recipes[page - 1].name}
           </h3>
-          <div>{props.recipes[page - 1].description}</div>
+          <div>{props.recipes[page - 1].summary}</div>
           <Pagination
             count={props.recipes.length}
             page={page}
