@@ -22,7 +22,7 @@ export default function RecipeSummary(props: Props) {
     setPage(value)
   }
 
-  useEffect(() => setPage(1), [props.recipes.length])
+  useEffect(() => setPage(1), [props.recipes])
 
   return (
     <>
