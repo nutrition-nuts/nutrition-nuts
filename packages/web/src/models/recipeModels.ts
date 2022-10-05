@@ -1,10 +1,11 @@
 export interface RecipeModel {
-  title: string
-  description: string
+  name: string
+  url: string
+  summary: string
   ingredients: string[]
   directions: string[]
-  prep_time_min?: string
-  cook_time_min?: string
+  prep?: string
+  cook?: string
   servings?: number
   tags?: string[]
   author?: {
