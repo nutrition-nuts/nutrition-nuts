@@ -6,7 +6,7 @@ import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
-import RecipeSummary from '../components/recipeSummary'
+import RecipeSummary from '../components/nutrition/recipeSummary'
 import { getInputFieldValue } from '../utils/genericUtils'
 
 export default function Nutrition() {

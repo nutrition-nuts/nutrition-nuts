@@ -1,8 +1,8 @@
-import { RecipeModel } from '../models/recipeModels'
+import { RecipeModel } from '../../models/recipeModels'
 import { useEffect, useState } from 'react'
 import RecipeModal from './recipeModal'
 import Pagination from '@mui/material/Pagination'
-import '../App.css'
+import '../../App.css'
 
 interface Props {
   mealName: string

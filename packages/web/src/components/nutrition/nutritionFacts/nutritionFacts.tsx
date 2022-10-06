@@ -1,4 +1,4 @@
-import { RecipeModel } from '../models/recipeModels'
+import { RecipeModel } from '../../../models/recipeModels'
 import './nutritionFacts.css'
 
 interface Props {
