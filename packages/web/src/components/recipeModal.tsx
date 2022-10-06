@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import { RecipeModel } from '../models/recipeModels'
+import NutritionFacts from './nutritionFacts'
 
 interface Props {
   open: boolean
@@ -15,12 +16,10 @@ export default function RecipeModal(props: Props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: '90%',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     overflow: 'scroll',
     height: '80%',
-    boxShadow: 24,
     p: 4
   }
 
@@ -50,6 +49,8 @@ export default function RecipeModal(props: Props) {
             return <li key={direction}>{direction}</li>
           })}
         </ul>
+
+        <NutritionFacts recipe={props.recipe} />
       </Box>
     </Modal>
   )
