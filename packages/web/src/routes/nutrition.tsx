@@ -19,11 +19,12 @@ export default function Nutrition() {
   const [dinnerInput, setDinnerInput] = useState('')
 
   const makeGetRecipeRequest = async (query: string) => {
-    return await getRecipes(query, (localStorage.getItem('allergies') ?? ''))
+    return await getRecipes(query, localStorage.getItem('allergies') ?? '')
   }
 
-  const onFindRecipesButtonClick = async() => {
+  const onFindRecipesButtonClick = async () => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
+    console.log(breakfast)
     setBreakfastResults(breakfast)
     const lunch = await makeGetRecipeRequest(lunchInput)
     setLunchResults(lunch)
@@ -63,7 +64,7 @@ export default function Nutrition() {
           <br />
           <Button
             variant="contained"
-            onClick={async() => await onFindRecipesButtonClick()}
+            onClick={async () => await onFindRecipesButtonClick()}
           >
             Find me recipes!
           </Button>
