@@ -40,8 +40,8 @@ export default function WorkoutModal(props: Props) {
         </Typography>
         <iframe src={'https://www.youtube.com/embed/' + props.workout.videoID} title="YouTube video player"
                 frameBorder="0" className="youtubeEmbed"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen></iframe>
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>
         <h4>Instructions:</h4>
         <ol>
           {props.workout.instructions.map((instruction) => {
