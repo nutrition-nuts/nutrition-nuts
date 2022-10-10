@@ -38,7 +38,7 @@ export default function WorkoutModal(props: Props) {
         <Typography id="modal-modal-description" sx={{ mt: 2, textTransform: 'capitalize' }}>
           {props.workout.category} Workout
         </Typography>
-        <iframe src={'https://www.youtube.com/embed/' + props.workout.video?.videoID} title="YouTube video player"
+        <iframe src={'https://www.youtube.com/embed/' + props.workout.videoID} title="YouTube video player"
                 frameBorder="0" className="youtubeEmbed"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen></iframe>

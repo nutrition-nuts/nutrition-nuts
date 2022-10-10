@@ -2,7 +2,6 @@ import { useState } from 'react'
 import '../App.css'
 import './nutrition.css'
 import { getWorkout } from '../requests/workout'
-import { getVideo } from '../requests/youtubeSearch'
 import NavBar from '../components/navbar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
@@ -19,17 +18,9 @@ export default function Workouts() {
     return await getWorkout(type, group, equip)
   }
 
-  const makeGetVideoRequest = async(q: string) => {
-    return await getVideo(q, 'AIzaSyCiNPs-gp2BM_4Hxd6KSghqq6Dw-3c_-88')
-  }
-
   const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
-
-    await Promise.all(res.map(async(result) => {
-      result.video = await makeGetVideoRequest(result.name)
-    }))
-
+    console.log(res)
     setWorkouts(res)
   }
 
