@@ -1,5 +1,3 @@
-import { VideoModel } from './videoModel'
-
 export interface WorkoutModel {
   name: string
   force: string
@@ -10,5 +8,5 @@ export interface WorkoutModel {
   secondaryMuscles: string[]
   instructions: string[]
   category: string
-  video?: VideoModel
+  videoID: string
 }

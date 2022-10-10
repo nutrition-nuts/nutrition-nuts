@@ -59,21 +59,6 @@ export const get = async(
   )
 }
 
-export const customGet = async(
-  path: string,
-  queryParams?: Record<string, string>
-) => {
-  const url = (queryParams != null) ? `${path}?${new URLSearchParams(queryParams).toString()}` : `${baseURL}${path}`
-  return await standardResponse(
-    fetch(url, {
-      mode: 'cors',
-      headers: {
-        accept: 'application/json'
-      }
-    })
-  )
-}
-
 export const post = async(path: string, data: any) =>
   await standardResponse(
     fetch(`${baseURL}${path}`, {
