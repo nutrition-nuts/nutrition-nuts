@@ -54,3 +54,8 @@ button:active {
 .caps {
     text-transform: capitalize;
 }
+
+iframe.youtubeEmbed {
+    width: 100%;
+    aspect-ratio: 16/9;
+}

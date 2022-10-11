@@ -18,8 +18,8 @@ export default function Nutrition() {
   const [lunchInput, setLunchInput] = useState('')
   const [dinnerInput, setDinnerInput] = useState('')
 
-  const makeGetRecipeRequest = async (query: string) => {
-    return await getRecipes(query, localStorage.getItem('allergies') ?? '')
+  const makeGetRecipeRequest = async(query: string) => {
+    return await getRecipes(query, (localStorage.getItem('allergies') ?? ''))
   }
 
   const onFindRecipesButtonClick = async () => {

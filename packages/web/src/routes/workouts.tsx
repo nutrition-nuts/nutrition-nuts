@@ -20,9 +20,8 @@ export default function Workouts() {
 
   const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
-
-    setWorkouts(res)
     console.log(res)
+    setWorkouts(res)
   }
 
   return (
