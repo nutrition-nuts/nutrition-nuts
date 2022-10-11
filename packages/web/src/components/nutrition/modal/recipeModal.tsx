@@ -25,7 +25,7 @@ export default function RecipeModal(props: Props) {
     width: '90%',
     bgcolor: 'background.paper',
     overflow: 'scroll',
-    height: '80%',
+    height: '85%',
     p: 4
   }
 
@@ -55,11 +55,7 @@ export default function RecipeModal(props: Props) {
             {props.recipe.name}
           </Typography>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs
-              value={tab}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
+            <Tabs value={tab} onChange={handleChange} aria-label="Tabs">
               <Tab label="Overview" {...a11yProps(0)} />
               <Tab label="Nutrition Details" {...a11yProps(1)} />
               <Tab label="Cook It" {...a11yProps(2)} />
