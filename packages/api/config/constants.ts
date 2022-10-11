@@ -1,4 +1,5 @@
-require('dotenv').config()
+import { config } from 'dotenv'
+config()
 
 export const PORT = 7001
 export const ELASTIC_URL = 'http://localhost:9200'
