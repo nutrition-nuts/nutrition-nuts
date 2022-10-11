@@ -2,7 +2,7 @@ import { useState } from 'react'
 import '../App.css'
 import './nutrition.css'
 import { getWorkout } from '../requests/workout'
-import NavBar from '../components/navbar'
+import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
 import { getInputFieldValue } from '../utils/genericUtils'
@@ -27,7 +27,7 @@ export default function Workouts() {
 
   return (
     <div className="App">
-      <NavBar />
+      <Sidebar />
 
       <div className="recipe-container">
         <div className="recipe-item">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Button from '@mui/material/Button'
-import NavBar from '../components/navbar'
+import Sidebar from '../components/sidebar'
 import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
@@ -33,7 +33,7 @@ export default function Nutrition() {
 
   return (
     <div className="App">
-      <NavBar />
+      <Sidebar />
 
       <div className="recipe-container">
         <div className="recipe-item">

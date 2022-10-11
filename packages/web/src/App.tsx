@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import { getTest } from './requests/test'
-import Footer from './components/footer'
 import Sidebar from './components/sidebar'
 
 function App() {
@@ -23,8 +22,6 @@ function App() {
         <button onClick={testRequest}>Fetch from backend API</button>
         <div className="message">{message}</div>
       </header>
-
-      <Footer />
     </div>
   )
 }
