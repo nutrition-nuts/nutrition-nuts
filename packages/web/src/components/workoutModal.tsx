@@ -35,13 +35,21 @@ export default function WorkoutModal(props: Props) {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           {props.workout.name}
         </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2, textTransform: 'capitalize' }}>
+        <Typography
+          id="modal-modal-description"
+          sx={{ mt: 2, textTransform: 'capitalize' }}
+        >
           {props.workout.category} Workout
         </Typography>
-        <iframe src={'https://www.youtube.com/embed/' + props.workout.videoID} title="YouTube video player"
-                frameBorder="0" className="youtubeEmbed"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
-        </iframe>
+        {props.workout.videoID != null && (
+          <iframe
+            src={'https://www.youtube.com/embed/' + props.workout.videoID}
+            title="YouTube video player"
+            frameBorder="0"
+            className="youtubeEmbed"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        )}
         <h4>Instructions:</h4>
         <ol>
           {props.workout.instructions.map((instruction) => {
@@ -51,13 +59,21 @@ export default function WorkoutModal(props: Props) {
         <h4>Primary Muscles:</h4>
         <ul>
           {props.workout.primaryMuscles.map((muscle) => {
-            return <li style={{ textTransform: 'capitalize' }} key={muscle}>{muscle}</li>
+            return (
+              <li style={{ textTransform: 'capitalize' }} key={muscle}>
+                {muscle}
+              </li>
+            )
           })}
         </ul>
         <h4>Secondary Muscles:</h4>
         <ul>
           {props.workout.secondaryMuscles.map((muscle) => {
-            return <li style={{ textTransform: 'capitalize' }} key={muscle}>{muscle}</li>
+            return (
+              <li style={{ textTransform: 'capitalize' }} key={muscle}>
+                {muscle}
+              </li>
+            )
           })}
         </ul>
       </Box>
