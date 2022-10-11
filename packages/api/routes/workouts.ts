@@ -23,8 +23,10 @@ router.get('/', async (req, res) => {
             YOUTUBE_API_KEY
         )
         const requestJSON = await vidRes.json()
-        const it0 = requestJSON.items[0]
-        result.videoID = it0.id.videoId
+        if(!requestJSON.hasOwnProperty('error')){
+            const it0 = requestJSON.items[0]
+            result.videoID = it0.id.videoId
+        }
       })
     )
   }
