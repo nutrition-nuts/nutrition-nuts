@@ -8,5 +8,5 @@ export interface WorkoutModel {
   secondaryMuscles: string[]
   instructions: string[]
   category: string
-  videoID: string
+  videoID?: string
 }
