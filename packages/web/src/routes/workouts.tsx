@@ -10,7 +10,7 @@ import Button from '@mui/material/Button'
 import { Checkbox } from '@mui/material'
 
 export default function Workouts() {
-  const [workouts, setWorkouts] = useState<WorkoutModel[]>()
+  const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
   const [workoutType, setWorkoutType] = useState('')
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
@@ -21,8 +21,8 @@ export default function Workouts() {
 
   const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
-
-    setWorkouts([res[0]])
+    console.log(res)
+    setWorkouts(res)
   }
 
   return (
@@ -53,7 +53,7 @@ export default function Workouts() {
         </div>
         <div className="recipe-item">
           <h2>Workout Plan</h2>
-          <Workout workout={workouts?.[0]}></Workout>
+          <Workout workouts={workouts}></Workout>
         </div>
       </div>
     </div>

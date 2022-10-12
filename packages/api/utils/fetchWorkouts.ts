@@ -1,10 +1,46 @@
 import elasticSearchClient from '../elastic/elastic-client'
-export default async function fetchWorkouts(type: string, group: string, equip: string) {
+export default async function fetchWorkouts(
+  type: string,
+  group: string,
+  equip: string
+) {
+  const filterEquip =
+    equip === 'off'
+      ? 'body only'
+      : 'barbell dumbell machine other bar cable bands'
+  // console.log(filterEquip)
   let hits = await elasticSearchClient
     .search({
       index: 'workouts',
+      size: 5,
       query: {
-        query_string: { query: group }
+        bool: {
+          should: [
+            {
+              match: {
+                category: {
+                  query: type
+                }
+              }
+            },
+            {
+              match: {
+                primaryMuscles: {
+                  query: group
+                }
+              }
+            }
+          ],
+          filter: [
+            {
+              match: {
+                equipment: {
+                  query: filterEquip
+                }
+              }
+            }
+          ]
+        }
       }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
@@ -14,9 +50,7 @@ export default async function fetchWorkouts(type: string, group: string, equip: 
     hits = await elasticSearchClient
       .search({
         index: 'workouts',
-        query: {
-          match: { name: 's' }
-        }
+        size: 1
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }

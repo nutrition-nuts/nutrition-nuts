@@ -33,10 +33,10 @@ export default function RecipeModal(props: Props) {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          {props.recipe.title}
+          {props.recipe.name}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {props.recipe.description}
+          {props.recipe.summary}
         </Typography>
         <h4>Ingredients:</h4>
         <ul>

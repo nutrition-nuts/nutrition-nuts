@@ -4,16 +4,23 @@ import elasticSearchClient from '../elastic/elastic-client'
 const router = express.Router()
 
 // GET /recipes
-router.get('/', async (req, res, next) => {
-  const { query } = req.query
-
+router.get('/', async(req, res, next) => {
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
       query: {
-        query_string: {
-          query: String(query) ?? 'veggie'
+        bool: {
+          must: [
+            {
+              query_string: {
+                query: String(req.query.query)
+              }
+            }
+          ],
+          must_not: [
+            { match: { ingredients: (String(req.query.allergies)) } }
+          ]
         }
       }
     })
@@ -24,7 +31,14 @@ router.get('/', async (req, res, next) => {
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
-        size: 10
+        size: 10,
+        query: {
+          bool: {
+            must_not: [
+              { match: { ingredients: (String(req.query.allergies)) } }
+            ]
+          }
+        }
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
