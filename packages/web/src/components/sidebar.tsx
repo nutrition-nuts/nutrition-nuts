@@ -94,7 +94,7 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <a href="/" color="white">Nutrion Nuts</a>
+            <a href="/">Nutrion Nuts</a>
           </Typography>
         </Toolbar>
       </AppBar>
