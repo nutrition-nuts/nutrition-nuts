@@ -17,5 +17,6 @@ rules:
     '@typescript-eslint/restrict-plus-operands': 'warn',
     '@typescript-eslint/no-misused-promises':
       ['error', { 'checksVoidReturn': false }],
-    '@typescript-eslint/space-before-function-paren': ['warn', 'never']
+    '@typescript-eslint/space-before-function-paren': ['warn', 'never'],
+    '@typescript-eslint/strict-boolean-expressions': 'warn'
   }
