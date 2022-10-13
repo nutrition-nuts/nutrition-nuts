@@ -7,7 +7,8 @@ import {
   dailyProteinGramRecommendation
 } from '../../../utils/nutritionRecommendations'
 import Card from '@mui/material/Card'
-import { CardContent, Grid } from '@mui/material'
+import { CardContent, Grid, Link } from '@mui/material'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 interface Props {
   recipe: RecipeModel
@@ -17,12 +18,11 @@ export default function RecipeModalOverview(props: Props) {
   return (
     <>
       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-        {props.recipe.summary}
+        {props.recipe.summary} <br /> - {props.recipe.author}
       </Typography>
-      <a href={props.recipe.url}>Link</a>
 
       <div style={{ display: 'inline' }}>
-        <Card>
+        <Card sx={{ marginTop: '2rem' }}>
           <CardContent>
             <Grid container spacing={2}>
               <NutritionPercentageCard
@@ -52,6 +52,20 @@ export default function RecipeModalOverview(props: Props) {
             </Grid>
           </CardContent>
         </Card>
+        <Link href={props.recipe.url} underline="hover" target={'_blank'}>
+          <Card sx={{ marginTop: '2rem', width: 'fit' }}>
+            <CardContent sx={{ color: 'primary' }}>
+              <Grid container>
+                <Grid item xs={8}>
+                  See {props.recipe.name} on AllRecipes!
+                </Grid>
+                <Grid item xs={4} sx={{ textAlign: 'right' }}>
+                  <ArrowForwardIosIcon />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </>
   )
