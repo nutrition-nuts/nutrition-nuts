@@ -2,13 +2,13 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import { RecipeModel } from '../../../models/recipeModels'
-import NutritionFacts from '../nutritionFacts/nutritionFacts'
 import { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import TabPanel from '../../TabPanel'
 import RecipeModalOverview from './recipeModalOverview'
 import RecipeModalDirections from './recipeModalDirections'
+import RecipeModalNutritionDetails from './recipeModalNutritionDetails'
 
 interface Props {
   open: boolean
@@ -65,7 +65,7 @@ export default function RecipeModal(props: Props) {
             <RecipeModalOverview recipe={props.recipe} />
           </TabPanel>
           <TabPanel value={tab} index={1}>
-            <NutritionFacts recipe={props.recipe} />
+            <RecipeModalNutritionDetails recipe={props.recipe} />
           </TabPanel>
           <TabPanel value={tab} index={2}>
             <RecipeModalDirections recipe={props.recipe} />

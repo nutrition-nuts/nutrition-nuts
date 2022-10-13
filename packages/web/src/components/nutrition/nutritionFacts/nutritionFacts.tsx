@@ -1,4 +1,6 @@
 import { RecipeModel } from '../../../models/recipeModels'
+import { Nutrient } from '../../../utils/nutrient'
+import { getPercentageOfDailyRecommendation } from '../../../utils/nutritionRecommendations'
 import './nutritionFacts.css'
 
 interface Props {
@@ -41,14 +43,26 @@ export default function NutritionFacts(props: Props) {
                 {recipe.fat_g}g
               </th>
               <td>
-                <b>22%</b>
+                <b>
+                  {getPercentageOfDailyRecommendation(
+                    Nutrient.FAT,
+                    recipe.fat_g
+                  )}
+                  %
+                </b>
               </td>
             </tr>
             <tr>
               <td className="blank-cell"></td>
               <th>Saturated Fat {recipe.saturated_fat_g}g</th>
               <td>
-                <b>22%</b>
+                <b>
+                  {getPercentageOfDailyRecommendation(
+                    Nutrient.SATURATED_FAT,
+                    recipe.saturated_fat_g
+                  )}
+                  %
+                </b>
               </td>
             </tr>
             <tr>
@@ -57,7 +71,13 @@ export default function NutritionFacts(props: Props) {
                 {recipe.cholesterol_mg} mg
               </th>
               <td>
-                <b>18%</b>
+                <b>
+                  {getPercentageOfDailyRecommendation(
+                    Nutrient.CHOLESTEROL,
+                    recipe.cholesterol_mg
+                  )}
+                  %
+                </b>
               </td>
             </tr>
             <tr>
@@ -66,7 +86,13 @@ export default function NutritionFacts(props: Props) {
                 {recipe.sodium_mg} mg
               </th>
               <td>
-                <b>2%</b>
+                <b>
+                  {getPercentageOfDailyRecommendation(
+                    Nutrient.SODIUM,
+                    recipe.sodium_mg
+                  )}
+                  %
+                </b>
               </td>
             </tr>
             <tr>
@@ -75,14 +101,26 @@ export default function NutritionFacts(props: Props) {
                 {recipe.carbohydrates_g}g
               </th>
               <td>
-                <b>6%</b>
+                <b>
+                  {getPercentageOfDailyRecommendation(
+                    Nutrient.CARBOHYDRATES,
+                    recipe.carbohydrates_g
+                  )}
+                  %
+                </b>
               </td>
             </tr>
             <tr>
               <td className="blank-cell"></td>
               <th>Dietary Fiber {recipe.dietary_fiber_g}g</th>
               <td>
-                <b>4%</b>
+                <b>
+                  {getPercentageOfDailyRecommendation(
+                    Nutrient.DIETARY_FIBER,
+                    recipe.dietary_fiber_g
+                  )}
+                  %
+                </b>
               </td>
             </tr>
             <tr>

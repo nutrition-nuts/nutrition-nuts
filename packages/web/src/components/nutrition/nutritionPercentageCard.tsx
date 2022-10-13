@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent/CardContent'
-import CircularProgressWithLabel from '../CircularProgressWithLabel'
+import CircularProgressWithLabel from '../progress/CircularProgressWithLabel'
 
 interface Props {
   name: string
@@ -11,7 +11,8 @@ interface Props {
 }
 
 export default function NutritionPercentageCard(props: Props) {
-  const calculateProgress = () => (props.progress / props.goal) * 100
+  const calculateProgress = () =>
+    Math.floor((props.progress / props.goal) * 100)
 
   return (
     <Grid item xs={3}>

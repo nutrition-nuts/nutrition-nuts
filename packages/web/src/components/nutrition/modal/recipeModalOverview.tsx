@@ -1,14 +1,11 @@
 import { RecipeModel } from '../../../models/recipeModels'
 import Typography from '@mui/material/Typography'
 import NutritionPercentageCard from '../nutritionPercentageCard'
-import {
-  dailyCalorieRecommendation,
-  dailyCarbGramRecommendation,
-  dailyProteinGramRecommendation
-} from '../../../utils/nutritionRecommendations'
+import { getNutrientDailyRecommendation } from '../../../utils/nutritionRecommendations'
 import Card from '@mui/material/Card'
 import { CardContent, Grid, Link } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { Nutrient } from '../../../utils/nutrient'
 
 interface Props {
   recipe: RecipeModel
@@ -17,36 +14,49 @@ interface Props {
 export default function RecipeModalOverview(props: Props) {
   return (
     <>
-      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-        {props.recipe.summary} <br /> - {props.recipe.author}
-      </Typography>
-
+      <Card sx={{ marginTop: '1rem' }}>
+        <CardContent>
+          <Typography>
+            <Typography
+              sx={{
+                marginBottom: '0.5rem',
+                fontSize: '1.25rem',
+                fontWeight: 'bold'
+              }}
+            >
+              Description
+            </Typography>
+            {props.recipe.summary} <br />
+            <br /> - {props.recipe.author}
+          </Typography>
+        </CardContent>
+      </Card>
       <div style={{ display: 'inline' }}>
         <Card sx={{ marginTop: '2rem' }}>
           <CardContent>
             <Grid container spacing={2}>
               <NutritionPercentageCard
                 name="Calories"
-                goal={dailyCalorieRecommendation()}
+                goal={getNutrientDailyRecommendation(Nutrient.CALORIES)}
                 progress={props.recipe.calories}
                 unit=""
               />
               <NutritionPercentageCard
                 name="Protein"
-                goal={dailyProteinGramRecommendation()}
+                goal={getNutrientDailyRecommendation(Nutrient.PROTEIN)}
                 progress={props.recipe.protein_g}
                 unit="grams"
               />
               <NutritionPercentageCard
                 name="Carbohydrates"
-                goal={dailyCarbGramRecommendation()}
+                goal={getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES)}
                 progress={props.recipe.carbohydrates_g}
                 unit="grams"
               />
               <NutritionPercentageCard
-                name="Protein"
-                goal={dailyProteinGramRecommendation()}
-                progress={props.recipe.protein_g}
+                name="Fat"
+                goal={getNutrientDailyRecommendation(Nutrient.FAT)}
+                progress={props.recipe.fat_g}
                 unit="grams"
               />
             </Grid>
