@@ -16,19 +16,17 @@ export default function RecipeModalOverview(props: Props) {
     <>
       <Card sx={{ marginTop: '1rem' }}>
         <CardContent>
-          <Typography>
-            <Typography
-              sx={{
-                marginBottom: '0.5rem',
-                fontSize: '1.25rem',
-                fontWeight: 'bold'
-              }}
-            >
-              Description
-            </Typography>
-            {props.recipe.summary} <br />
-            <br /> - {props.recipe.author}
+          <Typography
+            sx={{
+              marginBottom: '0.5rem',
+              fontSize: '1.25rem',
+              fontWeight: 'bold'
+            }}
+          >
+            Description
           </Typography>
+          {props.recipe.summary} <br />
+          <br /> - {props.recipe.author}
         </CardContent>
       </Card>
       <div style={{ display: 'inline' }}>
