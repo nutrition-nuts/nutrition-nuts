@@ -30,7 +30,11 @@ export default function NutritionFacts(props: Props) {
                 <b>Calories </b>
                 {recipe.calories}
               </th>
-              <td>Calories from Fat {recipe.calories_from_fat}</td>
+              <td>
+                {recipe.calories_from_fat && (
+                  <>Calories from Fat {recipe.calories_from_fat}</>
+                )}
+              </td>
             </tr>
             <tr className="thick-row">
               <td colSpan={3} className="small-info">
@@ -65,36 +69,40 @@ export default function NutritionFacts(props: Props) {
                 </b>
               </td>
             </tr>
-            <tr>
-              <th colSpan={2}>
-                <b>Cholesterol </b>
-                {recipe.cholesterol_mg} mg
-              </th>
-              <td>
-                <b>
-                  {getPercentageOfDailyRecommendation(
-                    Nutrient.CHOLESTEROL,
-                    recipe.cholesterol_mg
-                  )}
-                  %
-                </b>
-              </td>
-            </tr>
-            <tr>
-              <th colSpan={2}>
-                <b>Sodium </b>
-                {recipe.sodium_mg} mg
-              </th>
-              <td>
-                <b>
-                  {getPercentageOfDailyRecommendation(
-                    Nutrient.SODIUM,
-                    recipe.sodium_mg
-                  )}
-                  %
-                </b>
-              </td>
-            </tr>
+            {recipe.cholesterol_mg != null && (
+              <tr>
+                <th colSpan={2}>
+                  <b>Cholesterol </b>
+                  {recipe.cholesterol_mg} mg
+                </th>
+                <td>
+                  <b>
+                    {getPercentageOfDailyRecommendation(
+                      Nutrient.CHOLESTEROL,
+                      recipe.cholesterol_mg
+                    )}
+                    %
+                  </b>
+                </td>
+              </tr>
+            )}
+            {recipe.sodium_mg != null && (
+              <tr>
+                <th colSpan={2}>
+                  <b>Sodium </b>
+                  {recipe.sodium_mg} mg
+                </th>
+                <td>
+                  <b>
+                    {getPercentageOfDailyRecommendation(
+                      Nutrient.SODIUM,
+                      recipe.sodium_mg
+                    )}
+                    %
+                  </b>
+                </td>
+              </tr>
+            )}
             <tr>
               <th colSpan={2}>
                 <b>Total Carbohydrate </b>
@@ -110,19 +118,21 @@ export default function NutritionFacts(props: Props) {
                 </b>
               </td>
             </tr>
-            <tr>
-              <td className="blank-cell"></td>
-              <th>Dietary Fiber {recipe.dietary_fiber_g}g</th>
-              <td>
-                <b>
-                  {getPercentageOfDailyRecommendation(
-                    Nutrient.DIETARY_FIBER,
-                    recipe.dietary_fiber_g
-                  )}
-                  %
-                </b>
-              </td>
-            </tr>
+            {recipe.dietary_fiber_g != null && (
+              <tr>
+                <td className="blank-cell"></td>
+                <th>Dietary Fiber {recipe.dietary_fiber_g}g</th>
+                <td>
+                  <b>
+                    {getPercentageOfDailyRecommendation(
+                      Nutrient.DIETARY_FIBER,
+                      recipe.dietary_fiber_g
+                    )}
+                    %
+                  </b>
+                </td>
+              </tr>
+            )}
             <tr>
               <td className="blank-cell"></td>
               <th>Sugars {recipe.sugars_g}g</th>
@@ -141,12 +151,18 @@ export default function NutritionFacts(props: Props) {
         <table className="performance-facts__table--grid">
           <tbody>
             <tr>
-              <td colSpan={2}>Vitamin A {recipe.vitamin_a_iu_IU} IU</td>
-              <td>Vitamin C {recipe.vitamin_c_mg}mg</td>
+              {recipe.vitamin_a_iu_IU != null && (
+                <td colSpan={2}>Vitamin A {recipe.vitamin_a_iu_IU} IU</td>
+              )}
+              {recipe.vitamin_c_mg != null && (
+                <td>Vitamin C {recipe.vitamin_c_mg}mg</td>
+              )}
             </tr>
             <tr className="thin-end">
-              <td colSpan={2}>Calcium {recipe.calcium_mg}mg</td>
-              <td>Iron {recipe.iron_mg}mg</td>
+              {recipe.calcium_mg != null && (
+                <td colSpan={2}>Calcium {recipe.calcium_mg}mg</td>
+              )}
+              {recipe.iron_mg != null && <td>Iron {recipe.iron_mg}mg</td>}
             </tr>
           </tbody>
         </table>
