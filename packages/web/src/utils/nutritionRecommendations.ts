@@ -16,7 +16,12 @@ const dailyRecommendations: { [key in Nutrient]: number } = {
   [Nutrient.VITAMIN_A]: 5000,
   [Nutrient.VITAMIN_C]: 90,
   [Nutrient.CALCIUM]: 1000,
-  [Nutrient.IRON]: 18
+  [Nutrient.IRON]: 18,
+  [Nutrient.NIACIN]: 16,
+  [Nutrient.MAGNESIUM]: 420,
+  [Nutrient.FOLATE]: 400,
+  [Nutrient.POTASSIUM]: 4700,
+  [Nutrient.THIAMIN]: 1.2
 }
 
 export const getNutrientDailyRecommendation = (nutrient: Nutrient) =>

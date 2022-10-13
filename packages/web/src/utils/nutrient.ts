@@ -10,7 +10,12 @@ export enum Nutrient {
   VITAMIN_A,
   VITAMIN_C,
   CALCIUM,
-  IRON
+  IRON,
+  NIACIN,
+  MAGNESIUM,
+  FOLATE,
+  POTASSIUM,
+  THIAMIN
 }
 
 export interface NutrientDetails {
@@ -65,6 +70,26 @@ const nutrientAndDetails: { [key in Nutrient]: NutrientDetails } = {
   },
   [Nutrient.IRON]: {
     name: 'Iron',
+    unit: 'mg'
+  },
+  [Nutrient.NIACIN]: {
+    name: 'Niacin (B3)',
+    unit: 'mg'
+  },
+  [Nutrient.MAGNESIUM]: {
+    name: 'Magnesium',
+    unit: 'mg'
+  },
+  [Nutrient.FOLATE]: {
+    name: 'Folate',
+    unit: 'mcg'
+  },
+  [Nutrient.POTASSIUM]: {
+    name: 'Potassium',
+    unit: 'mg'
+  },
+  [Nutrient.THIAMIN]: {
+    name: 'Thiamin (B1)',
     unit: 'mg'
   }
 }

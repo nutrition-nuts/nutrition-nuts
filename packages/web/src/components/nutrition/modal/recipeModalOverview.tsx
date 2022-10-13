@@ -25,7 +25,14 @@ export default function RecipeModalOverview(props: Props) {
           >
             Description
           </Typography>
-          {props.recipe.summary} <br />
+          {props.recipe.summary}
+          {props.recipe.yield != null && (
+            <Typography component={'span'} sx={{ fontWeight: 'bold' }}>
+              {' '}
+              Yields {props.recipe.yield}
+            </Typography>
+          )}
+          <br />
           <br /> - {props.recipe.author}
         </CardContent>
       </Card>
