@@ -6,7 +6,7 @@ import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
-import RecipeSummary from '../components/recipeSummary'
+import RecipeSummary from '../components/nutrition/recipeSummary'
 import { getInputFieldValue } from '../utils/genericUtils'
 
 export default function Nutrition() {
@@ -22,8 +22,9 @@ export default function Nutrition() {
     return await getRecipes(query, (localStorage.getItem('allergies') ?? ''))
   }
 
-  const onFindRecipesButtonClick = async() => {
+  const onFindRecipesButtonClick = async () => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
+    console.log(breakfast)
     setBreakfastResults(breakfast)
     const lunch = await makeGetRecipeRequest(lunchInput)
     setLunchResults(lunch)
@@ -61,7 +62,7 @@ export default function Nutrition() {
           />
           <Button
             variant="contained"
-            onClick={async() => await onFindRecipesButtonClick()}
+            onClick={async () => await onFindRecipesButtonClick()}
           >
             Find me recipes!
           </Button>
