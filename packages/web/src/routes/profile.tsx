@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NavBar from '../components/navbar'
+import Sidebar from '../components/sidebar'
 import '../App.css'
 import './profile.css'
 
@@ -11,7 +11,8 @@ class Form extends Component {
     dr: localStorage.getItem('dr') ?? '',
     allergies: localStorage.getItem('allergies') ?? '',
     saveProfile: false,
-    showForm: true
+    showForm: true,
+    count: 0
   }
 
   handleChange = (event: { target: { name: any, value: any } }) => {
@@ -48,10 +49,18 @@ class Form extends Component {
     }
   }
 
+  increaseCount = () => {
+    return this.setState({ ...this.state, count: this.state.count + 1 })
+  }
+
+  decreaseCount = () => {
+    return this.setState({ ...this.state, count: this.state.count - 1 })
+  }
+
   render() {
     return (
       <div className="App">
-        <NavBar />
+        <Sidebar />
         <div className="profile-container">
           <section>
             <article>

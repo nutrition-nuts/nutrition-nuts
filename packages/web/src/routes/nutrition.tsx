@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
 import Button from '@mui/material/Button'
-import NavBar from '../components/navbar'
+import Sidebar from '../components/sidebar'
 import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
-import RecipeSummary from '../components/recipeSummary'
+import RecipeSummary from '../components/nutrition/recipeSummary'
 import { getInputFieldValue } from '../utils/genericUtils'
 
 export default function Nutrition() {
@@ -18,12 +18,13 @@ export default function Nutrition() {
   const [lunchInput, setLunchInput] = useState('')
   const [dinnerInput, setDinnerInput] = useState('')
 
-  const makeGetRecipeRequest = async (query: string) => {
+  const makeGetRecipeRequest = async(query: string) => {
     return await getRecipes(query, (localStorage.getItem('allergies') ?? ''))
   }
 
-  const onFindRecipesButtonClick = async() => {
+  const onFindRecipesButtonClick = async () => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
+    console.log(breakfast)
     setBreakfastResults(breakfast)
     const lunch = await makeGetRecipeRequest(lunchInput)
     setLunchResults(lunch)
@@ -33,11 +34,11 @@ export default function Nutrition() {
 
   return (
     <div className="App">
-      <NavBar />
+      <Sidebar />
 
       <div className="recipe-container">
-        <div className="recipe-item">
-          <h2>What are you feeling for...</h2>
+        <div className="recipe-search">
+          <h2 id="search-header">Search Meals</h2>
 
           <label htmlFor="recipe-breakfast">Breakfast: </label>
           <input
@@ -45,25 +46,23 @@ export default function Nutrition() {
             name="recipe-breakfast"
             onChange={(e) => setBreakfastInput(getInputFieldValue(e))}
           />
-          <br />
+
           <label htmlFor="recipe-lunch">Lunch: </label>
           <input
             type="text"
             name="recipe-lunch"
             onChange={(e) => setLunchInput(getInputFieldValue(e))}
           />
-          <br />
+
           <label htmlFor="recipe-dinner">Dinner: </label>
           <input
             type="text"
             name="recipe-dinner"
             onChange={(e) => setDinnerInput(getInputFieldValue(e))}
           />
-          <br />
-          <br />
           <Button
             variant="contained"
-            onClick={async() => await onFindRecipesButtonClick()}
+            onClick={async () => await onFindRecipesButtonClick()}
           >
             Find me recipes!
           </Button>
@@ -82,6 +81,7 @@ export default function Nutrition() {
             mealName="Dinner"
             recipes={dinnerResults}
           ></RecipeSummary>
+          <hr />
         </div>
       </div>
     </div>

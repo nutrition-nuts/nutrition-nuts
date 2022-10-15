@@ -1,16 +1,49 @@
 export interface RecipeModel {
   name: string
   url: string
+  category: string
+  author: string
   summary: string
+  rating: number
+  rating_count: number
+  review_count: number
   ingredients: string[]
   directions: string[]
-  prep?: string
-  cook?: string
-  servings?: number
-  tags?: string[]
-  author?: {
-    name: string
-    url: string
-  }
-  source_url?: string
+  prep: string
+  cook: string
+  total: string
+  servings: number
+  yield: string
+  calories: number
+  carbohydrates_g: number
+  sugars_g: number
+  fat_g: number
+  saturated_fat_g: number
+  cholesterol_mg: number
+  protein_g: number
+  dietary_fiber_g: number
+  sodium_mg: number
+  calories_from_fat: number
+  calcium_mg: number
+  iron_mg: number
+  magnesium_mg: number
+  potassium_mg: number
+  zinc_mg: number
+  phosphorus_mg: number
+  vitamin_a_iu_IU: number
+  niacin_equivalents_mg: number
+  vitamin_b6_mg: number
+  vitamin_c_mg: number
+  folate_mcg: number
+  thiamin_mg: number
+  riboflavin_mg: number
+  vitamin_e_iu_IU: number
+  vitamin_k_mcg: number
+  biotin_mcg: number
+  vitamin_b12_mcg: number
+  mono_fat_g: number
+  poly_fat_g: number
+  trans_fatty_acid_g: number
+  omega_3_fatty_acid_g: number
+  omega_6_fatty_acid_g: number
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import { getTest } from './requests/xtest'
-import NavBar from './components/navbar'
+import { getTest } from './requests/test'
+import Sidebar from './components/sidebar'
 
 function App() {
   const [message, setMessage] = useState('')
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <Sidebar />
 
       <header className="App-header">
         <h1>Home page that might have cool stuff on it eventually</h1>

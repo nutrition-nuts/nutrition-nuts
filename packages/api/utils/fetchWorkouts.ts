@@ -8,7 +8,7 @@ export default async function fetchWorkouts(
     equip === 'off'
       ? 'body only'
       : 'barbell dumbell machine other bar cable bands'
-  console.log(filterEquip)
+  // console.log(filterEquip)
   let hits = await elasticSearchClient
     .search({
       index: 'workouts',

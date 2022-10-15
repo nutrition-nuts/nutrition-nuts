@@ -2,11 +2,12 @@ import { useState } from 'react'
 import '../App.css'
 import './nutrition.css'
 import { getWorkout } from '../requests/workout'
-import NavBar from '../components/navbar'
+import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
 import { getInputFieldValue } from '../utils/genericUtils'
 import Button from '@mui/material/Button'
+import { Checkbox } from '@mui/material'
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
@@ -20,14 +21,13 @@ export default function Workouts() {
 
   const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
-
-    setWorkouts(res)
     console.log(res)
+    setWorkouts(res)
   }
 
   return (
     <div className="App">
-      <NavBar />
+      <Sidebar />
 
       <div className="recipe-container">
         <div className="recipe-item">
@@ -44,7 +44,7 @@ export default function Workouts() {
           />
           <br />
           <label htmlFor='workout-equipment'>Equipment: </label>
-          <input type='checkbox' name='workout-equipment' onChange={(e) => setEquipment(e.target.checked ? 'on' : 'off')}/>
+          <Checkbox name='workout-equipment' onChange={(e) => setEquipment(e.target.checked ? 'on' : 'off')}/>
           <br />
           <br />
           <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
