@@ -13,6 +13,9 @@ router.get('/', async (req, res, next) => {
         bool: {
           must: [
             {
+              match: { category: 'main-dish' }
+            },
+            {
               query_string: {
                 query: String(req.query.query)
               }
@@ -31,8 +34,26 @@ router.get('/', async (req, res, next) => {
         index: 'recipes',
         size: 10,
         query: {
-          bool: {
-            must_not: [{ match: { ingredients: String(req.query.allergies) } }]
+          function_score: {
+            boost: 5,
+            functions: [
+              {
+                random_score: {}
+              }
+            ],
+            boost_mode: 'multiply',
+            query: {
+              bool: {
+                must: [
+                  {
+                    match: { category: 'main-dish' }
+                  }
+                ],
+                must_not: [
+                  { match: { ingredients: String(req.query.allergies) } }
+                ]
+              }
+            }
           }
         }
       })
