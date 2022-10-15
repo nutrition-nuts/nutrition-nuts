@@ -6,7 +6,7 @@ import Sidebar from './components/sidebar'
 function App() {
   const [message, setMessage] = useState('')
 
-  const testRequest = async () => {
+  const testRequest = async() => {
     const res = await getTest()
 
     // super hacky. ideally the backend will do this nonsense and send us a format we expect. just for the test endpoint

@@ -22,7 +22,7 @@ export default function Nutrition() {
     return await getRecipes(query, (localStorage.getItem('allergies') ?? ''))
   }
 
-  const onFindRecipesButtonClick = async () => {
+  const onFindRecipesButtonClick = async() => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
     console.log(breakfast)
     setBreakfastResults(breakfast)
@@ -62,7 +62,7 @@ export default function Nutrition() {
           />
           <Button
             variant="contained"
-            onClick={async () => await onFindRecipesButtonClick()}
+            onClick={async() => await onFindRecipesButtonClick()}
           >
             Find me recipes!
           </Button>
