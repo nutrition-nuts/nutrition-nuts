@@ -4,7 +4,7 @@ import elasticSearchClient from '../elastic/elastic-client'
 const router = express.Router()
 
 // GET /recipes
-router.get('/', async(req, res, next) => {
+router.get('/', async (req, res, next) => {
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
@@ -13,14 +13,15 @@ router.get('/', async(req, res, next) => {
         bool: {
           must: [
             {
+              match: { category: 'main-dish' }
+            },
+            {
               query_string: {
                 query: String(req.query.query)
               }
             }
           ],
-          must_not: [
-            { match: { ingredients: (String(req.query.allergies)) } }
-          ]
+          must_not: [{ match: { ingredients: String(req.query.allergies) } }]
         }
       }
     })
@@ -33,10 +34,26 @@ router.get('/', async(req, res, next) => {
         index: 'recipes',
         size: 10,
         query: {
-          bool: {
-            must_not: [
-              { match: { ingredients: (String(req.query.allergies)) } }
-            ]
+          function_score: {
+            boost: 5,
+            functions: [
+              {
+                random_score: {}
+              }
+            ],
+            boost_mode: 'multiply',
+            query: {
+              bool: {
+                must: [
+                  {
+                    match: { category: 'main-dish' }
+                  }
+                ],
+                must_not: [
+                  { match: { ingredients: String(req.query.allergies) } }
+                ]
+              }
+            }
           }
         }
       })
