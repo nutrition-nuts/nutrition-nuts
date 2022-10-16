@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 
 export default function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number; label: string }
+  props: LinearProgressProps & { value: number, label: string }
 ) {
   return (
     <>

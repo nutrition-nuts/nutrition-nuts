@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 export default function CircularProgressWithLabel(
-  props: CircularProgressProps & { value: number; fontSize: string }
+  props: CircularProgressProps & { value: number, fontSize: string }
 ) {
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
