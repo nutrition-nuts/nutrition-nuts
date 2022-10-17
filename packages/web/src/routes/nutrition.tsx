@@ -6,7 +6,7 @@ import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/nutrition/recipeSummary'
-import { FormControl, TextField, Box, Button } from '@mui/material'
+import { FormControl, TextField, Box, Button, styled } from '@mui/material'
 
 export default function Nutrition() {
   const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
@@ -31,6 +31,17 @@ export default function Nutrition() {
     setDinnerResults(dinner)
   }
 
+  const CustomTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: '#506f8c'
+    },
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#506f8c'
+      }
+    }
+  })
+
   return (
     <div className="App">
       <Sidebar />
@@ -42,41 +53,38 @@ export default function Nutrition() {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <FormControl sx={{ m: 1 }}>
-              <TextField
+              <CustomTextField
                   id="recipe-breakfast"
                   value={ breakfastInput }
                   label="Breakfast"
                   variant="outlined"
+                  sx={{ m: 1 }}
                   onChange={(e) => {
                     setBreakfastInput(e.target.value)
                   }}
-              ></TextField>
-            </FormControl>
+              ></CustomTextField>
 
-            <FormControl sx={{ m: 1 }}>
-              <TextField
+              <CustomTextField
                   id="recipe-lunch"
                   value={ lunchInput }
                   label="Lunch"
                   variant="outlined"
+                  sx={{ m: 1 }}
                   onChange={(e) => {
                     setLunchInput(e.target.value)
                   }}
-              ></TextField>
-            </FormControl>
+              ></CustomTextField>
 
-            <FormControl sx={{ m: 1 }}>
-              <TextField
+              <CustomTextField
                   id="recipe-dinner"
                   value={ dinnerInput }
                   label="Dinner"
                   variant="outlined"
+                  sx={{ m: 1 }}
                   onChange={(e) => {
                     setDinnerInput(e.target.value)
                   }}
-              ></TextField>
-            </FormControl>
+              ></CustomTextField>
 
             <FormControl sx={{ m: 1 }}>
               <Button

@@ -5,7 +5,7 @@ import { getWorkout } from '../requests/workout'
 import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Checkbox, FormControlLabel, Box } from '@mui/material'
+import { Button, FormControl, MenuItem, TextField, Checkbox, FormControlLabel, Box, styled } from '@mui/material'
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
@@ -25,6 +25,17 @@ export default function Workouts() {
     setWorkouts(res)
   }
 
+  const CustomTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: '#506f8c'
+    },
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: '#506f8c'
+      }
+    }
+  })
+
   return (
     <div className="App">
       <Sidebar />
@@ -36,36 +47,35 @@ export default function Workouts() {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <FormControl sx={{ m: 1, minWidth: 200 }}>
-              <InputLabel id="workout-type-label">Workout Type</InputLabel>
-              <Select
-                  labelId="workout-type-label"
-                  id="workout-type"
-                  value={workoutType}
-                  label="Workout Type"
-                  onChange={(e) => {
-                    setWorkoutType(e.target.value)
-                  }}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {workoutTypes.map((type) => {
-                  return <MenuItem value={type.toLowerCase()} key={type}>{type}</MenuItem>
-                })}
-              </Select>
-            </FormControl>
-            <FormControl sx={{ m: 1 }}>
-              <TextField
-                  id="muscle-group"
-                  value={muscleInput}
-                  label="Muscle Group"
-                  variant="outlined"
-                  onChange={(e) => {
-                    setMuscleInput(e.target.value)
-                  }}
-              ></TextField>
-            </FormControl>
+            <CustomTextField
+                id="workout-type"
+                label="Workout Type"
+                sx={{ m: 1, minWidth: 200 }}
+                value={workoutType}
+                onChange={(e) => {
+                  setWorkoutType(e.target.value)
+                }}
+                select
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {workoutTypes.map((type) => {
+                return <MenuItem value={type.toLowerCase()} key={type}>{type}</MenuItem>
+              })}
+            </CustomTextField>
+
+            <CustomTextField
+                id="muscle-group"
+                value={muscleInput}
+                label="Muscle Group"
+                variant="outlined"
+                sx={{ m: 1 }}
+                onChange={(e) => {
+                  setMuscleInput(e.target.value)
+                }}
+            ></CustomTextField>
+
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <FormControlLabel
                 control={
@@ -81,6 +91,7 @@ export default function Workouts() {
                 label="Equipment?"
               />
             </FormControl>
+
             <FormControl sx={{ m: 1 }}>
               <Button
                 variant="contained"
