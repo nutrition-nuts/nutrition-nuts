@@ -211,6 +211,31 @@ class Form extends Component {
                       {getNutrientDailyRecommendation(Nutrient.CALORIES)}{' '}
                     </label>
                   </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="protein">
+                      Daily Protein Intake:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.PROTEIN)}
+                      {'g '}
+                    </label>
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="carbs">
+                      Daily Carbohydrate Intake:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES)}
+                      {'g '}
+                    </label>
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="fat">
+                      Daily Fat Intake:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.FAT)}
+                      {'g '}
+                    </label>
+                  </div>
+
                   <div className="profile-item">
                     <label htmlFor="dr">
                       Dietary Restrictions: {localStorage.getItem('dr')}{' '}
