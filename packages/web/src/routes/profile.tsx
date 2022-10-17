@@ -2,12 +2,20 @@ import React, { Component } from 'react'
 import Sidebar from '../components/sidebar'
 import '../App.css'
 import './profile.css'
+import {
+  getNutrientDailyRecommendation,
+  setNutrientDailyRecommendation
+} from '../utils/nutritionRecommendations'
+import { Nutrient } from '../utils/nutrient'
 
 class Form extends Component {
   state = {
     name: localStorage.getItem('name') ?? '',
     age: localStorage.getItem('age') ?? '',
-    calories: localStorage.getItem('calories') ?? '',
+    calories: getNutrientDailyRecommendation(Nutrient.CALORIES).toString(),
+    protein: getNutrientDailyRecommendation(Nutrient.PROTEIN).toString(),
+    carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES).toString(),
+    fat: getNutrientDailyRecommendation(Nutrient.FAT).toString(),
     dr: localStorage.getItem('dr') ?? '',
     allergies: localStorage.getItem('allergies') ?? '',
     saveProfile: false,
@@ -15,7 +23,7 @@ class Form extends Component {
     count: 0
   }
 
-  handleChange = (event: { target: { name: any, value: any } }) => {
+  handleChange = (event: { target: { name: any; value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -25,9 +33,9 @@ class Form extends Component {
     event.preventDefault()
     localStorage.setItem('name', this.state.name)
     localStorage.setItem('age', this.state.age)
-    localStorage.setItem('calories', this.state.calories)
     localStorage.setItem('dr', this.state.dr)
     localStorage.setItem('allergies', this.state.allergies)
+    this.updateMacroGoals()
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
@@ -45,8 +53,14 @@ class Form extends Component {
       localStorage.getItem('name') !== ''
     ) {
       this.setState({ showForm: false })
-      // console.log(this.state)
     }
+  }
+
+  updateMacroGoals = () => {
+    setNutrientDailyRecommendation(Nutrient.CALORIES, +this.state.calories)
+    setNutrientDailyRecommendation(Nutrient.PROTEIN, +this.state.protein)
+    setNutrientDailyRecommendation(Nutrient.CARBOHYDRATES, +this.state.carbs)
+    setNutrientDailyRecommendation(Nutrient.FAT, +this.state.fat)
   }
 
   increaseCount = () => {
@@ -90,9 +104,45 @@ class Form extends Component {
                   <div className="profile-item">
                     <label htmlFor="calories">Calories/Day: </label>
                     <input
-                      type="text"
+                      type="number"
+                      min="1000"
                       name="calories"
                       value={this.state.calories}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="protein">Daily Protein Intake (g): </label>
+                    <input
+                      type="number"
+                      min="0"
+                      name="protein"
+                      value={this.state.protein}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="carbs">
+                      Daily Carbohydrate Intake (g):{' '}
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      name="carbs"
+                      value={this.state.carbs}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="fat">Daily Fat Intake (g): </label>
+                    <input
+                      type="number"
+                      min="0"
+                      name="fat"
+                      value={this.state.fat}
                       onChange={this.handleChange}
                     />
                   </div>
@@ -157,9 +207,35 @@ class Form extends Component {
 
                   <div className="profile-item">
                     <label htmlFor="calories">
-                      Calories/Day: {localStorage.getItem('calories')}{' '}
+                      Calories/Day:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.CALORIES)}{' '}
                     </label>
                   </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="protein">
+                      Daily Protein Intake:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.PROTEIN)}
+                      {'g '}
+                    </label>
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="carbs">
+                      Daily Carbohydrate Intake:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES)}
+                      {'g '}
+                    </label>
+                  </div>
+
+                  <div className="profile-item">
+                    <label htmlFor="fat">
+                      Daily Fat Intake:{' '}
+                      {getNutrientDailyRecommendation(Nutrient.FAT)}
+                      {'g '}
+                    </label>
+                  </div>
+
                   <div className="profile-item">
                     <label htmlFor="dr">
                       Dietary Restrictions: {localStorage.getItem('dr')}{' '}
