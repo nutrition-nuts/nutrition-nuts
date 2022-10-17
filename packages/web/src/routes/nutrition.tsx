@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 
-import Button from '@mui/material/Button'
 import Sidebar from '../components/sidebar'
 import { getRecipes } from '../requests/recipe'
 import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/nutrition/recipeSummary'
-import { getInputFieldValue } from '../utils/genericUtils'
+import { FormControl, TextField, Box, Button } from '@mui/material'
 
 export default function Nutrition() {
   const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
@@ -39,36 +38,58 @@ export default function Nutrition() {
       <div className="recipe-container">
         <div className="recipe-search">
           <h2 id="search-header">Search Meals</h2>
+          <Box display="flex" style={{
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <FormControl sx={{ m: 1 }}>
+              <TextField
+                  id="recipe-breakfast"
+                  value={ breakfastInput }
+                  label="Breakfast"
+                  variant="outlined"
+                  onChange={(e) => {
+                    setBreakfastInput(e.target.value)
+                  }}
+              ></TextField>
+            </FormControl>
 
-          <label htmlFor="recipe-breakfast">Breakfast: </label>
-          <input
-            type="text"
-            name="recipe-breakfast"
-            onChange={(e) => setBreakfastInput(getInputFieldValue(e))}
-          />
+            <FormControl sx={{ m: 1 }}>
+              <TextField
+                  id="recipe-lunch"
+                  value={ lunchInput }
+                  label="Lunch"
+                  variant="outlined"
+                  onChange={(e) => {
+                    setLunchInput(e.target.value)
+                  }}
+              ></TextField>
+            </FormControl>
 
-          <label htmlFor="recipe-lunch">Lunch: </label>
-          <input
-            type="text"
-            name="recipe-lunch"
-            onChange={(e) => setLunchInput(getInputFieldValue(e))}
-          />
+            <FormControl sx={{ m: 1 }}>
+              <TextField
+                  id="recipe-dinner"
+                  value={ dinnerInput }
+                  label="Dinner"
+                  variant="outlined"
+                  onChange={(e) => {
+                    setDinnerInput(e.target.value)
+                  }}
+              ></TextField>
+            </FormControl>
 
-          <label htmlFor="recipe-dinner">Dinner: </label>
-          <input
-            type="text"
-            name="recipe-dinner"
-            onChange={(e) => setDinnerInput(getInputFieldValue(e))}
-          />
-          <Button
-            variant="contained"
-            onClick={async() => await onFindRecipesButtonClick()}
-            style={{
-              background: '#506f8c'
-            }}
-          >
-            Find me recipes!
-          </Button>
+            <FormControl sx={{ m: 1 }}>
+              <Button
+                variant="contained"
+                onClick={async() => await onFindRecipesButtonClick()}
+                style={{
+                  background: '#506f8c'
+                }}
+              >
+                Find me recipes!
+              </Button>
+            </FormControl>
+          </Box>
         </div>
         <div className="recipe-item">
           <h2>Meal Plan for the day</h2>
