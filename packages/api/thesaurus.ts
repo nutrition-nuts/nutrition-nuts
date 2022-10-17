@@ -4,19 +4,19 @@
 // }
 
 interface thesaurus {
-    [key: string]: Array<string>
+  [key: string]: string[]
 }
 const allergyThesaurus: thesaurus = {
-    'Peanuts': [
+  Peanuts: [
     'peanut',
     'peanuts',
     'Arachis oil',
     'peanut oil',
     'Ground nuts',
-    'Mandelonas', 
+    'Mandelonas',
     'Peanut butter'
-    ],
-    'Tree Nuts': [
+  ],
+  'Tree Nuts': [
     'Almond',
     'Beechnut',
     'Black walnut hull extract',
@@ -46,8 +46,8 @@ const allergyThesaurus: thesaurus = {
     'Shea nut',
     'Walnut',
     'Walnut hull extract'
-    ],
-    'Fish': [
+  ],
+  Fish: [
     'Anchovies',
     'Bass',
     'Catfish',
@@ -71,8 +71,8 @@ const allergyThesaurus: thesaurus = {
     'Trout',
     'Tuna',
     'Worcestershire sauce'
-    ],
-    'Eggs': [
+  ],
+  Eggs: [
     'Albumin',
     'albumen',
     'Egg',
@@ -86,8 +86,8 @@ const allergyThesaurus: thesaurus = {
     'mayo',
     'Meringue',
     'meringue powder'
-    ],
-    'Soy': [
+  ],
+  Soy: [
     'Edamame',
     'Miso',
     'Natto',
@@ -102,6 +102,6 @@ const allergyThesaurus: thesaurus = {
     'Tamari',
     'Tempeh',
     'Tofu'
-    ]
-  }
+  ]
+}
 export { thesaurus, allergyThesaurus }

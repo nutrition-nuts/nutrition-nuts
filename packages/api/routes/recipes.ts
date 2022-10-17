@@ -11,18 +11,18 @@ router.get('/', async(req, res, next) => {
   // fr.readAsText(new File([], '../thesaurus.json'))
   // const thesaurus = JSON.parse(String(fr.result))
   const allergies = JSON.parse(String(req.query.allergies))
-  for(let i = 0; i < allergies.length; i++) {
+  for (let i = 0; i < allergies.length; i++) {
     allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
   }
-  let filters = []
-  for(let i = 0; i < allergies.length; i++) {
-    for(let j = 0; j < allergies[i].length; j++) {
-      filters.push({ match: { message: {query: allergies[i][j], fuzziness: 1}}})
+  const filters = []
+  for (let i = 0; i < allergies.length; i++) {
+    for (let j = 0; j < allergies[i].length; j++) {
+      filters.push({ match: { message: { query: allergies[i][j], fuzziness: 1 } } })
     }
-  } 
+  }
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
-    .search({ 
+    .search({
       index: 'recipes',
       query: {
         bool: {
@@ -45,9 +45,9 @@ router.get('/', async(req, res, next) => {
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
-    let found_stuff = (hits.length > 0)
+  const foundStuff = (hits.length > 0)
   // default case, give at least something back
-  if (!found_stuff) {
+  if (!foundStuff) {
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
@@ -79,7 +79,7 @@ router.get('/', async(req, res, next) => {
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
 
-  res.send({hits, found_stuff})
+  res.send({ hits, foundStuff })
 })
 
 export default router
