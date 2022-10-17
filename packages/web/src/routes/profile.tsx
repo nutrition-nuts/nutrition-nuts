@@ -4,9 +4,11 @@ import '../App.css'
 import './profile.css'
 import {
   getNutrientDailyRecommendation,
-  setNutrientDailyRecommendation
+  setNutrientDailyRecommendation,
+  resetDailyRecommendationToDefault
 } from '../utils/nutritionRecommendations'
 import { Nutrient } from '../utils/nutrient'
+import { Button } from '@mui/material'
 
 class Form extends Component {
   state = {
@@ -63,6 +65,10 @@ class Form extends Component {
     setNutrientDailyRecommendation(Nutrient.FAT, +this.state.fat)
   }
 
+  resetMacroToDefault = (nutrient: Nutrient) => {
+    resetDailyRecommendationToDefault(nutrient)
+  }
+
   increaseCount = () => {
     return this.setState({ ...this.state, count: this.state.count + 1 })
   }
@@ -110,6 +116,20 @@ class Form extends Component {
                       value={this.state.calories}
                       onChange={this.handleChange}
                     />
+                    <Button
+                      sx={{ marginLeft: '1rem' }}
+                      variant="contained"
+                      onClick={() => {
+                        this.resetMacroToDefault(Nutrient.CALORIES)
+                        this.setState({
+                          calories: getNutrientDailyRecommendation(
+                            Nutrient.CALORIES
+                          )
+                        })
+                      }}
+                    >
+                      Reset to default
+                    </Button>
                   </div>
 
                   <div className="profile-item">
@@ -121,6 +141,20 @@ class Form extends Component {
                       value={this.state.protein}
                       onChange={this.handleChange}
                     />
+                    <Button
+                      sx={{ marginLeft: '1rem' }}
+                      variant="contained"
+                      onClick={() => {
+                        this.resetMacroToDefault(Nutrient.PROTEIN)
+                        this.setState({
+                          protein: getNutrientDailyRecommendation(
+                            Nutrient.PROTEIN
+                          )
+                        })
+                      }}
+                    >
+                      Reset to default
+                    </Button>
                   </div>
 
                   <div className="profile-item">
@@ -134,6 +168,20 @@ class Form extends Component {
                       value={this.state.carbs}
                       onChange={this.handleChange}
                     />
+                    <Button
+                      sx={{ marginLeft: '1rem' }}
+                      variant="contained"
+                      onClick={() => {
+                        this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
+                        this.setState({
+                          carbs: getNutrientDailyRecommendation(
+                            Nutrient.CARBOHYDRATES
+                          )
+                        })
+                      }}
+                    >
+                      Reset to default
+                    </Button>
                   </div>
 
                   <div className="profile-item">
@@ -145,6 +193,18 @@ class Form extends Component {
                       value={this.state.fat}
                       onChange={this.handleChange}
                     />
+                    <Button
+                      sx={{ marginLeft: '1rem' }}
+                      variant="contained"
+                      onClick={() => {
+                        this.resetMacroToDefault(Nutrient.FAT)
+                        this.setState({
+                          fat: getNutrientDailyRecommendation(Nutrient.FAT)
+                        })
+                      }}
+                    >
+                      Reset to default
+                    </Button>
                   </div>
 
                   <div className="profile-item">

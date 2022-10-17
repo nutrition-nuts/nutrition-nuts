@@ -54,3 +54,7 @@ export const getPercentageOfDailyRecommendation = (
 
   return percentage
 }
+
+export const resetDailyRecommendationToDefault = (nutrient: Nutrient) => {
+  store.removeDailyNutrientGoal(nutrient)
+}
