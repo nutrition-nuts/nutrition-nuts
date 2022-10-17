@@ -30,7 +30,7 @@ export default function Workouts() {
       <Sidebar />
 
       <div className="recipe-container">
-        <div className="recipe-item">
+        <div className="recipe-search">
           <h2 id="search-header">Workout Info</h2>
           <Box display="flex" style={{
             alignItems: 'center',
@@ -66,7 +66,7 @@ export default function Workouts() {
                   }}
               ></TextField>
             </FormControl>
-            <FormControl sx={{ m: 1 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
               <FormControlLabel
                 control={
                   <Checkbox
