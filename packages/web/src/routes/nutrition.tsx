@@ -63,6 +63,9 @@ export default function Nutrition() {
           <Button
             variant="contained"
             onClick={async() => await onFindRecipesButtonClick()}
+            style={{
+              background: '#506f8c'
+            }}
           >
             Find me recipes!
           </Button>

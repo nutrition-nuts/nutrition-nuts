@@ -73,13 +73,22 @@ export default function Workouts() {
                     onChange={(e) => {
                       setEquipment(e.target.checked ? 'on' : 'off')
                     }}
+                    style={{
+                      color: '#506f8c'
+                    }}
                   />
                 }
                 label="Equipment?"
               />
             </FormControl>
             <FormControl sx={{ m: 1 }}>
-              <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
+              <Button
+                variant="contained"
+                onClick={async() => await onFindWorkoutsButtonClick()}
+                style={{
+                  background: '#506f8c'
+                }}
+              >
                 Find me a workout!
               </Button>
             </FormControl>
