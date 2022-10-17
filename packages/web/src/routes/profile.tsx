@@ -25,6 +25,14 @@ class Form extends Component {
     possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy']
   }
 
+  // getAllergiesFromLocalStorage = () => {
+  //   try {
+  //     return (JSON.parse(localStorage.getItem('allergies') ?? ''))
+  //   } catch (error) {
+  //     return ''
+  //   }
+  // }
+
   handleChange = (event: { target: { name: any; value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value

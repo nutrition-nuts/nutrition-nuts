@@ -31,7 +31,7 @@ export default function NutritionFacts(props: Props) {
                 {recipe.calories}
               </th>
               <td>
-                {recipe.calories_from_fat && (
+                {recipe.calories_from_fat != null && (
                   <>Calories from Fat {recipe.calories_from_fat}</>
                 )}
               </td>

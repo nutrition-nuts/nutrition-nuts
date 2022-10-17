@@ -17,11 +17,10 @@ router.get('/', async(req, res, next) => {
   let filters = []
   for(let i = 0; i < allergies.length; i++) {
     for(let j = 0; j < allergies[i].length; j++) {
-      filters.push({ match: { query: allergies[i][j]}})
+      filters.push({ match: { message: {query: allergies[i][j], fuzziness: 1}}})
     }
   } 
   // TODO: delete this. just an example of how to hit the elasticsearch from code
-  // debugger;
   let hits = await elasticSearchClient
     .search({ 
       index: 'recipes',
@@ -46,8 +45,9 @@ router.get('/', async(req, res, next) => {
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
+    let found_stuff = (hits.length > 0)
   // default case, give at least something back
-  if (hits.length === 0) {
+  if (!found_stuff) {
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
@@ -79,7 +79,7 @@ router.get('/', async(req, res, next) => {
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
 
-  res.send(hits)
+  res.send({hits, found_stuff})
 })
 
 export default router

@@ -12,6 +12,7 @@ import '../../App.css'
 interface Props {
   mealName: string
   recipes: RecipeModel[]
+  foundStuff: Boolean
 }
 
 export default function RecipeSummary(props: Props) {
@@ -70,7 +71,7 @@ export default function RecipeSummary(props: Props) {
                   Calories: {props.recipes[page - 1].calories} | Fat:{' '}
                   {props.recipes[page - 1].fat_g}g | Carbs:{' '}
                   {props.recipes[page - 1].carbohydrates_g}g | Protein:{' '}
-                  {props.recipes[page - 1].protein_g}g |
+                  {props.recipes[page - 1].protein_g}g
                 </div>
               </div>
               <Pagination

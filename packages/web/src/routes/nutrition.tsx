@@ -13,6 +13,7 @@ export default function Nutrition() {
   const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
   const [lunchResults, setLunchResults] = useState<RecipeModel[]>([])
   const [dinnerResults, setDinnerResults] = useState<RecipeModel[]>([])
+  const [foundStuff, setFoundStuff] = useState<Boolean>()
 
   const [breakfastInput, setBreakfastInput] = useState('')
   const [lunchInput, setLunchInput] = useState('')
@@ -27,11 +28,14 @@ export default function Nutrition() {
   const onFindRecipesButtonClick = async() => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
     console.log(breakfast)
-    setBreakfastResults(breakfast)
+    setBreakfastResults(breakfast.recipes)
+    setFoundStuff(breakfast.found_stuff)
     const lunch = await makeGetRecipeRequest(lunchInput)
-    setLunchResults(lunch)
+    setLunchResults(lunch.recipes)
+    setFoundStuff(lunch.found_stuff)
     const dinner = await makeGetRecipeRequest(dinnerInput)
-    setDinnerResults(dinner)
+    setDinnerResults(dinner.recipes)
+    setFoundStuff(dinner.found_stuff)
   }
 
   return (
@@ -74,14 +78,17 @@ export default function Nutrition() {
           <RecipeSummary
             mealName="Breakfast"
             recipes={breakfastResults}
+            foundStuff={foundStuff === true}
           ></RecipeSummary>
           <RecipeSummary
             mealName="Lunch"
             recipes={lunchResults}
+            foundStuff={foundStuff === true}
           ></RecipeSummary>
           <RecipeSummary
             mealName="Dinner"
             recipes={dinnerResults}
+            foundStuff={foundStuff === true}
           ></RecipeSummary>
           <hr />
         </div>
