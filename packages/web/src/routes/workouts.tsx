@@ -5,7 +5,8 @@ import { getWorkout } from '../requests/workout'
 import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
-import { Button, FormControl, MenuItem, TextField, Checkbox, FormControlLabel, Box, styled } from '@mui/material'
+import { Button, FormControl, MenuItem, Checkbox, FormControlLabel, Box } from '@mui/material'
+import StyledTextField from '../components/StyledTextField'
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
@@ -25,17 +26,6 @@ export default function Workouts() {
     setWorkouts(res)
   }
 
-  const CustomTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#506f8c'
-    },
-    '& .MuiOutlinedInput-root': {
-      '&.Mui-focused fieldset': {
-        borderColor: '#506f8c'
-      }
-    }
-  })
-
   return (
     <div className="App">
       <Sidebar />
@@ -47,7 +37,7 @@ export default function Workouts() {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <CustomTextField
+            <StyledTextField
                 id="workout-type"
                 label="Workout Type"
                 sx={{ m: 1, minWidth: 200 }}
@@ -63,9 +53,9 @@ export default function Workouts() {
               {workoutTypes.map((type) => {
                 return <MenuItem value={type.toLowerCase()} key={type}>{type}</MenuItem>
               })}
-            </CustomTextField>
+            </StyledTextField>
 
-            <CustomTextField
+            <StyledTextField
                 id="muscle-group"
                 value={muscleInput}
                 label="Muscle Group"
@@ -74,7 +64,7 @@ export default function Workouts() {
                 onChange={(e) => {
                   setMuscleInput(e.target.value)
                 }}
-            ></CustomTextField>
+            ></StyledTextField>
 
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <FormControlLabel

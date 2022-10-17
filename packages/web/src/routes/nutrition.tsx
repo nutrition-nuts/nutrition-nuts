@@ -6,7 +6,8 @@ import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/nutrition/recipeSummary'
-import { FormControl, TextField, Box, Button, styled } from '@mui/material'
+import { FormControl, Box, Button } from '@mui/material'
+import StyledTextField from '../components/StyledTextField'
 
 export default function Nutrition() {
   const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
@@ -31,17 +32,6 @@ export default function Nutrition() {
     setDinnerResults(dinner)
   }
 
-  const CustomTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#506f8c'
-    },
-    '& .MuiOutlinedInput-root': {
-      '&.Mui-focused fieldset': {
-        borderColor: '#506f8c'
-      }
-    }
-  })
-
   return (
     <div className="App">
       <Sidebar />
@@ -53,7 +43,7 @@ export default function Nutrition() {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-              <CustomTextField
+              <StyledTextField
                   id="recipe-breakfast"
                   value={ breakfastInput }
                   label="Breakfast"
@@ -62,9 +52,9 @@ export default function Nutrition() {
                   onChange={(e) => {
                     setBreakfastInput(e.target.value)
                   }}
-              ></CustomTextField>
+              ></StyledTextField>
 
-              <CustomTextField
+              <StyledTextField
                   id="recipe-lunch"
                   value={ lunchInput }
                   label="Lunch"
@@ -73,9 +63,9 @@ export default function Nutrition() {
                   onChange={(e) => {
                     setLunchInput(e.target.value)
                   }}
-              ></CustomTextField>
+              ></StyledTextField>
 
-              <CustomTextField
+              <StyledTextField
                   id="recipe-dinner"
                   value={ dinnerInput }
                   label="Dinner"
@@ -84,7 +74,7 @@ export default function Nutrition() {
                   onChange={(e) => {
                     setDinnerInput(e.target.value)
                   }}
-              ></CustomTextField>
+              ></StyledTextField>
 
             <FormControl sx={{ m: 1 }}>
               <Button
