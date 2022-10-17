@@ -5,7 +5,7 @@ import { getWorkout } from '../requests/workout'
 import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Checkbox, FormControlLabel } from '@mui/material'
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Checkbox, FormControlLabel, Box } from '@mui/material'
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
@@ -31,56 +31,58 @@ export default function Workouts() {
 
       <div className="recipe-container">
         <div className="recipe-item">
-          <h2>Workout Info</h2>
-
-          <FormControl sx={{ m: 1, minWidth: 200 }} style={{ textAlign: 'center' }}>
-            <InputLabel id="workout-type-label">Workout Type</InputLabel>
-            <Select
-                labelId="workout-type-label"
-                id="workout-type"
-                value={workoutType}
-                label="Workout Type"
-                onChange={(e) => {
-                  setWorkoutType(e.target.value)
-                }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {workoutTypes.map((type) => {
-                return <MenuItem value={type} key={type}>{type}</MenuItem>
-              })}
-            </Select>
-            <br />
-            <TextField
-                id="muscle-group"
-                value={muscleInput}
-                label="Muscle Group"
-                variant="outlined"
-                onChange={(e) => {
-                  setMuscleInput(e.target.value)
-                }}
-            ></TextField>
-            <br />
-            <FormControlLabel
-              control={
-                <Checkbox
+          <h2 id="search-header">Workout Info</h2>
+          <Box display="flex" style={{
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <FormControl sx={{ m: 1, minWidth: 200 }}>
+              <InputLabel id="workout-type-label">Workout Type</InputLabel>
+              <Select
+                  labelId="workout-type-label"
+                  id="workout-type"
+                  value={workoutType}
+                  label="Workout Type"
                   onChange={(e) => {
-                    setEquipment(e.target.checked ? 'on' : 'off')
+                    setWorkoutType(e.target.value)
                   }}
-                />
-              }
-              label="Equipment?"
-              style={{
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            />
-            <br />
-            <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
-              Find me a workout!
-            </Button>
-          </FormControl>
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {workoutTypes.map((type) => {
+                  return <MenuItem value={type} key={type}>{type}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+            <FormControl sx={{ m: 1 }}>
+              <TextField
+                  id="muscle-group"
+                  value={muscleInput}
+                  label="Muscle Group"
+                  variant="outlined"
+                  onChange={(e) => {
+                    setMuscleInput(e.target.value)
+                  }}
+              ></TextField>
+            </FormControl>
+            <FormControl sx={{ m: 1 }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={(e) => {
+                      setEquipment(e.target.checked ? 'on' : 'off')
+                    }}
+                  />
+                }
+                label="Equipment?"
+              />
+            </FormControl>
+          </Box>
+          <br />
+          <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
+            Find me a workout!
+          </Button>
         </div>
         <div className="recipe-item">
           <h2>Workout Plan</h2>
