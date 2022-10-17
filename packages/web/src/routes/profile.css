@@ -1,49 +1,50 @@
 .profile-container {
-    display: grid;
-    margin: 0.5rem;
-    padding: 0 0 0 0;
-    border: 3px solid #506f8c;
+  display: grid;
+  margin: 0.5rem;
+  padding: 0 0 0 0;
+  border: 3px solid #506f8c;
 }
 .profile-item {
-    background: #7ea1a8;
-    color: white;
-    padding: 1rem;
-    font-size: 30px;
-    text-align: center;
+  background: #7ea1a8;
+  color: white;
+  padding: 1rem;
+  font-size: 30px;
+  text-align: center;
 }
 
-input[type=text], button {
-    border-radius: 5px;
-    background: #6b9294;
-    border: 2px solid #506f8c;
-    color: white;
-    padding: 5px;
+input,
+button {
+  border-radius: 5px;
+  background: #6b9294;
+  border: 2px solid #506f8c;
+  color: white;
+  padding: 5px;
 }
 
 select {
-    border-radius: 5px;
-    font-size: 18px;
-    background: #6b9294;
-    border: 2px solid #506f8c;
-    color: white;
-    padding: 5px;
-    width: 10%
+  border-radius: 5px;
+  font-size: 18px;
+  background: #6b9294;
+  border: 2px solid #506f8c;
+  color: white;
+  padding: 5px;
+  width: 10%;
 }
 
 button {
-    padding: 10px;
-    font-size: 2rem;
+  padding: 10px;
+  font-size: 2rem;
 }
 
 button:active {
   background: #506f8c;
   -webkit-box-shadow: inset 0px 0px 5px #506f8c;
-     -moz-box-shadow: inset 0px 0px 5px #506f8c;
-          box-shadow: inset 0px 0px 5px #c1c1c1;
-   outline: none;
+  -moz-box-shadow: inset 0px 0px 5px #506f8c;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
 }
 
 .profile-content img {
-    width: 80%;
-    border-radius: 20px;
+  width: 80%;
+  border-radius: 20px;
 }
