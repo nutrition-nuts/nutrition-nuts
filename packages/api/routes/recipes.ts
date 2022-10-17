@@ -1,13 +1,29 @@
 import express from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
+import { allergyThesaurus } from '../thesaurus'
 
 const router = express.Router()
 
 // GET /recipes
-router.get('/', async (req, res, next) => {
+router.get('/', async(req, res, next) => {
+  // debugger;
+  // const fr = new FileReader()
+  // fr.readAsText(new File([], '../thesaurus.json'))
+  // const thesaurus = JSON.parse(String(fr.result))
+  const allergies = JSON.parse(String(req.query.allergies))
+  for(let i = 0; i < allergies.length; i++) {
+    allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
+  }
+  let filters = []
+  for(let i = 0; i < allergies.length; i++) {
+    for(let j = 0; j < allergies[i].length; j++) {
+      filters.push({ match: { query: allergies[i][j]}})
+    }
+  } 
   // TODO: delete this. just an example of how to hit the elasticsearch from code
+  // debugger;
   let hits = await elasticSearchClient
-    .search({
+    .search({ 
       index: 'recipes',
       query: {
         bool: {
@@ -21,7 +37,10 @@ router.get('/', async (req, res, next) => {
               }
             }
           ],
-          must_not: [{ match: { ingredients: String(req.query.allergies) } }]
+          must_not: filters
+          // [
+          //   { match: { ingredients: allergies } }
+          // ]
         }
       }
     })
