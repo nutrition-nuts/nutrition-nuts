@@ -5,14 +5,15 @@ import { getWorkout } from '../requests/workout'
 import NavBar from '../components/navbar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
-import { getInputFieldValue } from '../utils/genericUtils'
-import Button from '@mui/material/Button'
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Checkbox, FormControlLabel } from '@mui/material'
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
   const [workoutType, setWorkoutType] = useState('')
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
+
+  const workoutTypes = ['plyometrics', 'cardio', 'stretching', 'olympic weightlifting', 'strongman', 'strength', 'powerlifting']
 
   const makeGetWorkoutRequest = async(type: string, group: string, equip: string) => {
     return await getWorkout(type, group, equip)
@@ -32,23 +33,54 @@ export default function Workouts() {
         <div className="recipe-item">
           <h2>Workout Info</h2>
 
-          <label htmlFor='workout-type'>Workout Type: </label>
-          <input type='text' name='workout-type' onChange={(e) => setWorkoutType(getInputFieldValue(e))}/>
-          <br />
-          <label htmlFor="workout-group">Muscle Group: </label>
-          <input
-            type="text"
-            name="workout-group"
-            onChange={(e) => setMuscleInput(getInputFieldValue(e))}
-          />
-          <br />
-          <label htmlFor='workout-equipment'>Equipment: </label>
-          <input type='checkbox' name='workout-equipment' onChange={(e) => setEquipment(e.target.checked ? 'on' : 'off')}/>
-          <br />
-          <br />
-          <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
-            Find me a workout!
-          </Button>
+          <FormControl sx={{ m: 1, minWidth: 200 }} style={{ textAlign: 'center' }}>
+            <InputLabel id="workout-type-label">Workout Type</InputLabel>
+            <Select
+                labelId="workout-type-label"
+                id="workout-type"
+                value={workoutType}
+                label="Workout Type"
+                onChange={(e) => {
+                  setWorkoutType(e.target.value)
+                }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {workoutTypes.map((type) => {
+                return <MenuItem value={type} key={type}>{type}</MenuItem>
+              })}
+            </Select>
+            <br />
+            <TextField
+                id="muscle-group"
+                value={muscleInput}
+                label="Muscle Group"
+                variant="outlined"
+                onChange={(e) => {
+                  setMuscleInput(e.target.value)
+                }}
+            ></TextField>
+            <br />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={(e) => {
+                    setEquipment(e.target.checked ? 'on' : 'off')
+                  }}
+                />
+              }
+              label="Equipment?"
+              style={{
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            />
+            <br />
+            <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
+              Find me a workout!
+            </Button>
+          </FormControl>
         </div>
         <div className="recipe-item">
           <h2>Workout Plan</h2>
