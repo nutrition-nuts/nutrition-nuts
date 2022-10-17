@@ -66,16 +66,20 @@ export default function WorkoutModal(props: Props) {
             )
           })}
         </ul>
-        <h4>Secondary Muscles:</h4>
-        <ul>
-          {props.workout.secondaryMuscles.map((muscle) => {
-            return (
-              <li style={{ textTransform: 'capitalize' }} key={muscle}>
-                {muscle}
-              </li>
-            )
-          })}
-        </ul>
+        {props.workout.secondaryMuscles.length !== 0 && (
+          <div>
+            <h4>Secondary Muscles:</h4>
+            <ul>
+              {props.workout.secondaryMuscles.map((muscle) => {
+                return (
+                  <li style={{ textTransform: 'capitalize' }} key={muscle}>
+                    {muscle}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
       </Box>
     </Modal>
   )
