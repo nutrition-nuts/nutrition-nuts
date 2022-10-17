@@ -13,7 +13,7 @@ export default function Workouts() {
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
 
-  const workoutTypes = ['plyometrics', 'cardio', 'stretching', 'olympic weightlifting', 'strongman', 'strength', 'powerlifting']
+  const workoutTypes = ['Strength', 'Stretching', 'Cardio', 'Plyometrics', 'Powerlifting', 'Strongman', 'Olympic Weightlifting']
 
   const makeGetWorkoutRequest = async(type: string, group: string, equip: string) => {
     return await getWorkout(type, group, equip)
@@ -51,7 +51,7 @@ export default function Workouts() {
                   <em>None</em>
                 </MenuItem>
                 {workoutTypes.map((type) => {
-                  return <MenuItem value={type} key={type}>{type}</MenuItem>
+                  return <MenuItem value={type.toLowerCase()} key={type}>{type}</MenuItem>
                 })}
               </Select>
             </FormControl>
@@ -78,11 +78,12 @@ export default function Workouts() {
                 label="Equipment?"
               />
             </FormControl>
+            <FormControl sx={{ m: 1 }}>
+              <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
+                Find me a workout!
+              </Button>
+            </FormControl>
           </Box>
-          <br />
-          <Button variant="contained" onClick={async() => await onFindWorkoutsButtonClick()}>
-            Find me a workout!
-          </Button>
         </div>
         <div className="recipe-item">
           <h2>Workout Plan</h2>
