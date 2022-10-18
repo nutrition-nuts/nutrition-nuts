@@ -7,7 +7,7 @@ import {
   getNutrientDailyRecommendation,
   getPercentageOfDailyRecommendation
 } from '../../utils/nutritionRecommendations'
-import LinearProgressWithLabel from '../progress/LinearProgressWithLabel'
+import LinearProgressWithLabel from '../general/progress/LinearProgressWithLabel'
 
 interface Props {
   nutrient: Nutrient

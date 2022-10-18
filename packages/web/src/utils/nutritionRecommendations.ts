@@ -2,6 +2,7 @@
 // TODO: make this more robust with sex, age, desired calories, weight, etc. elections
 
 import { Nutrient } from './nutrient'
+import store from './store'
 
 // initialize to defaults
 const dailyRecommendations: { [key in Nutrient]: number } = {
@@ -24,8 +25,24 @@ const dailyRecommendations: { [key in Nutrient]: number } = {
   [Nutrient.THIAMIN]: 1.2
 }
 
-export const getNutrientDailyRecommendation = (nutrient: Nutrient) =>
-  dailyRecommendations[nutrient]
+export const getNutrientDailyRecommendation = (nutrient: Nutrient): number => {
+  const storedNutrientOverride = store.getDailyNutrientGoal(nutrient)
+
+  return storedNutrientOverride !== null
+    ? +storedNutrientOverride
+    : dailyRecommendations[nutrient]
+}
+
+export const setNutrientDailyRecommendation = (
+  nutrient: Nutrient,
+  goal: number
+) => {
+  if (goal === dailyRecommendations[nutrient]) {
+    store.removeDailyNutrientGoal(nutrient)
+  } else {
+    store.setDailyNutrientGoal(nutrient, goal)
+  }
+}
 
 export const getPercentageOfDailyRecommendation = (
   nutrient: Nutrient,
@@ -36,4 +53,8 @@ export const getPercentageOfDailyRecommendation = (
   )
 
   return percentage
+}
+
+export const resetDailyRecommendationToDefault = (nutrient: Nutrient) => {
+  store.removeDailyNutrientGoal(nutrient)
 }
