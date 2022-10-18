@@ -27,7 +27,7 @@ export default function Nutrition() {
 
   const onFindRecipesButtonClick = async() => {
     const breakfast = await makeGetRecipeRequest(breakfastInput)
-    console.log(breakfast)
+    // console.log(breakfast)
     setBreakfastResults(breakfast.recipes)
     setFoundStuff(breakfast.found_stuff)
     const lunch = await makeGetRecipeRequest(lunchInput)
