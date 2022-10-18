@@ -1,10 +1,25 @@
 import express from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
+import { allergyThesaurus } from '../thesaurus'
 
 const router = express.Router()
 
 // GET /recipes
-router.get('/', async (req, res, next) => {
+router.get('/', async(req, res, next) => {
+  // debugger;
+  // const fr = new FileReader()
+  // fr.readAsText(new File([], '../thesaurus.json'))
+  // const thesaurus = JSON.parse(String(fr.result))
+  const allergies = JSON.parse(String(req.query.allergies))
+  for (let i = 0; i < allergies.length; i++) {
+    allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
+  }
+  const filters = []
+  for (let i = 0; i < allergies.length; i++) {
+    for (let j = 0; j < allergies[i].length; j++) {
+      filters.push({ match: { message: { query: allergies[i][j], fuzziness: 1 } } })
+    }
+  }
   // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
@@ -21,14 +36,18 @@ router.get('/', async (req, res, next) => {
               }
             }
           ],
-          must_not: [{ match: { ingredients: String(req.query.allergies) } }]
+          must_not: filters
+          // [
+          //   { match: { ingredients: allergies } }
+          // ]
         }
       }
     })
     .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
+  const foundStuff = (hits.length > 0)
   // default case, give at least something back
-  if (hits.length === 0) {
+  if (!foundStuff) {
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
@@ -60,7 +79,7 @@ router.get('/', async (req, res, next) => {
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
 
-  res.send(hits)
+  res.send({ hits, foundStuff })
 })
 
 export default router

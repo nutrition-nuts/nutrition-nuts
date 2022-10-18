@@ -9,6 +9,7 @@ import {
 } from '../utils/nutritionRecommendations'
 import { Nutrient } from '../utils/nutrient'
 import { Button } from '@mui/material'
+import { Multiselect } from 'multiselect-react-dropdown'
 
 class Form extends Component {
   state = {
@@ -19,11 +20,20 @@ class Form extends Component {
     carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES).toString(),
     fat: getNutrientDailyRecommendation(Nutrient.FAT).toString(),
     dr: localStorage.getItem('dr') ?? '',
-    allergies: localStorage.getItem('allergies') ?? '',
+    allergies: JSON.parse(localStorage.getItem('allergies') ?? ''),
     saveProfile: false,
     showForm: true,
-    count: 0
+    count: 0,
+    possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy']
   }
+
+  // getAllergiesFromLocalStorage = () => {
+  //   try {
+  //     return (JSON.parse(localStorage.getItem('allergies') ?? ''))
+  //   } catch (error) {
+  //     return ''
+  //   }
+  // }
 
   handleChange = (event: { target: { name: any; value: any } }) => {
     this.setState({
@@ -36,14 +46,15 @@ class Form extends Component {
     localStorage.setItem('name', this.state.name)
     localStorage.setItem('age', this.state.age)
     localStorage.setItem('dr', this.state.dr)
-    localStorage.setItem('allergies', this.state.allergies)
+    // localStorage.setItem('allergies', this.state.allergies)
     this.updateMacroGoals()
+    localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
       calories: `${this.state.calories}`,
       dr: `${this.state.dr}`,
-      allergies: `${this.state.allergies}`,
+      allergies: this.state.allergies,
       showForm: false
     })
     this.forceUpdate()
@@ -226,8 +237,7 @@ class Form extends Component {
                   </div>
 
                   <div className="profile-item">
-                    <label htmlFor="allergies">Allergies: </label>
-                    <select
+                    {/* <select
                       name="allergies"
                       value={this.state.allergies}
                       onChange={this.handleChange}
@@ -241,7 +251,33 @@ class Form extends Component {
                       <option value="wheat">Wheat</option>
                       <option value="sesame">Sesame</option>
                       <option value="shellfish">Shellfish</option>
-                    </select>
+                    </select> */}
+                    <label htmlFor="allergies">Allergies: </label>
+                    <Multiselect
+                      isObject={false}
+                      onRemove={(event) => {
+                        this.setState({ allergies: event })
+                        // this.state.allergies = event
+                      }}
+                      onSelect={(event) => {
+                        this.setState({ allergies: event })
+                        // this.state.allergies = event
+                      }}
+                      options={this.state.possibleAllergies}
+                      selectedValues={this.state.allergies}
+                      // displayValue='Allergies'
+                      placeholder='None'
+                      hidePlaceholder={true}
+                      closeOnSelect={false}
+                      style={{
+                        chips: {
+                          background: '#506f8c'
+                        },
+                        multiselectContainer: {
+                          color: 'black'
+                        }
+                      }}
+                    />
                   </div>
 
                   <div className="profile-item">
@@ -256,12 +292,12 @@ class Form extends Component {
                   <div className="profile-item">
                     <h2>Profile Info</h2>
                     <label htmlFor="name">
-                      Name: {localStorage.getItem('name')}{' '}
+                      Name: {this.state.name}
                     </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="age">
-                      Age: {localStorage.getItem('age')}{' '}
+                      Age: {this.state.age}
                     </label>
                   </div>
 
@@ -298,12 +334,12 @@ class Form extends Component {
 
                   <div className="profile-item">
                     <label htmlFor="dr">
-                      Dietary Restrictions: {localStorage.getItem('dr')}{' '}
+                      Dietary Restrictions: {this.state.dr}
                     </label>
                   </div>
                   <div className="profile-item">
                     <label htmlFor="allergies">
-                      Allergies: {localStorage.getItem('allergies')}{' '}
+                      Allergies: {this.state.allergies}
                     </label>
                   </div>
                   <div className="profile-item">
@@ -334,4 +370,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export { Profile }
