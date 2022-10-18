@@ -6,10 +6,6 @@ const router = express.Router()
 
 // GET /recipes
 router.get('/', async(req, res, next) => {
-  // debugger;
-  // const fr = new FileReader()
-  // fr.readAsText(new File([], '../thesaurus.json'))
-  // const thesaurus = JSON.parse(String(fr.result))
   const allergies = JSON.parse(String(req.query.allergies))
   for (let i = 0; i < allergies.length; i++) {
     allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
@@ -17,10 +13,9 @@ router.get('/', async(req, res, next) => {
   const filters = []
   for (let i = 0; i < allergies.length; i++) {
     for (let j = 0; j < allergies[i].length; j++) {
-      filters.push({ match: { message: { query: allergies[i][j], fuzziness: 1 } } })
+      filters.push({ match: { ingredients: { query: allergies[i][j], fuzziness: 1 } } })
     }
   }
-  // TODO: delete this. just an example of how to hit the elasticsearch from code
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
@@ -79,7 +74,7 @@ router.get('/', async(req, res, next) => {
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
 
-  res.send({ hits, foundStuff })
+  res.send([hits, foundStuff])
 })
 
 export default router
