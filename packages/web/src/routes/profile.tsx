@@ -20,7 +20,7 @@ class Form extends Component {
     carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES).toString(),
     fat: getNutrientDailyRecommendation(Nutrient.FAT).toString(),
     dr: localStorage.getItem('dr') ?? '',
-    allergies: JSON.parse(localStorage.getItem('allergies') ?? ''),
+    allergies: JSON.parse(localStorage.getItem('allergies') ?? '[]'),
     saveProfile: false,
     showForm: true,
     count: 0,
@@ -128,7 +128,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem' }}
+                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CALORIES)
@@ -153,7 +153,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem' }}
+                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.PROTEIN)
@@ -180,7 +180,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem' }}
+                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
@@ -205,7 +205,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem' }}
+                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.FAT)
@@ -266,7 +266,7 @@ class Form extends Component {
                       options={this.state.possibleAllergies}
                       selectedValues={this.state.allergies}
                       // displayValue='Allergies'
-                      placeholder='None'
+                      placeholder="None"
                       hidePlaceholder={true}
                       closeOnSelect={false}
                       style={{
@@ -291,14 +291,10 @@ class Form extends Component {
                 <article>
                   <div className="profile-item">
                     <h2>Profile Info</h2>
-                    <label htmlFor="name">
-                      Name: {this.state.name}
-                    </label>
+                    <label htmlFor="name">Name: {this.state.name}</label>
                   </div>
                   <div className="profile-item">
-                    <label htmlFor="age">
-                      Age: {this.state.age}
-                    </label>
+                    <label htmlFor="age">Age: {this.state.age}</label>
                   </div>
 
                   <div className="profile-item">
