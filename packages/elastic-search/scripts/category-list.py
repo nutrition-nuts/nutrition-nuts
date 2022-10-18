@@ -7,5 +7,5 @@ for filename in listdir(WORKOUT_DIR):
     fileName = join(WORKOUT_DIR, filename)
     file = open(fileName)
     data = json.load(file)
-    uniqueTypes.add(data['category'])
+    uniqueTypes.add(data['equipment'])
 print(uniqueTypes)
