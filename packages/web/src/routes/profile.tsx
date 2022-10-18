@@ -20,7 +20,7 @@ class Form extends Component {
     carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES).toString(),
     fat: getNutrientDailyRecommendation(Nutrient.FAT).toString(),
     dr: localStorage.getItem('dr') ?? '',
-    allergies: JSON.parse(localStorage.getItem('allergies') ?? ''),
+    allergies: JSON.parse(localStorage.getItem('allergies') ?? '[]'),
     saveProfile: false,
     showForm: true,
     count: 0,
