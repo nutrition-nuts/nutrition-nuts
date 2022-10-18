@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent/CardContent'
-import CircularProgressWithLabel from '../progress/CircularProgressWithLabel'
+import CircularProgressWithLabel from '../general/progress/CircularProgressWithLabel'
 
 interface Props {
   name: string

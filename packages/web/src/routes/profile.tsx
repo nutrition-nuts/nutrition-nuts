@@ -9,7 +9,8 @@ import {
 } from '../utils/nutritionRecommendations'
 import { Nutrient } from '../utils/nutrient'
 import { Button } from '@mui/material'
-import { Multiselect } from 'multiselect-react-dropdown'
+import { MultiSelectCheckMarks } from '../components/general/MultiSelectCheckmarks'
+import { possibleAllergies } from '../utils/allergy'
 
 class Form extends Component {
   state = {
@@ -20,7 +21,9 @@ class Form extends Component {
     carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES).toString(),
     fat: getNutrientDailyRecommendation(Nutrient.FAT).toString(),
     dr: localStorage.getItem('dr') ?? '',
-    allergies: JSON.parse(localStorage.getItem('allergies') ?? '[]'),
+    allergies: JSON.parse(
+      localStorage.getItem('allergies') ?? '[]'
+    ) as string[],
     saveProfile: false,
     showForm: true,
     count: 0,
@@ -86,6 +89,10 @@ class Form extends Component {
 
   decreaseCount = () => {
     return this.setState({ ...this.state, count: this.state.count - 1 })
+  }
+
+  onAllergyMultiSelectChangeCallback = (allergies: string[]) => {
+    this.setState({ allergies })
   }
 
   render() {
@@ -218,7 +225,7 @@ class Form extends Component {
                     </Button>
                   </div>
 
-                  <div className="profile-item">
+                  {/* <div className="profile-item">
                     <label htmlFor="dr">Dietary Restrictions: </label>
                     <select
                       name="dr"
@@ -234,54 +241,26 @@ class Form extends Component {
                       <option value="low-carb">Low Carb</option>
                       <option value="gluten-free">Gluten Free</option>
                     </select>
-                  </div>
+                  </div> */}
 
                   <div className="profile-item">
-                    {/* <select
-                      name="allergies"
-                      value={this.state.allergies}
-                      onChange={this.handleChange}
-                    >
-                      <option value="select">Select</option>
-                      <option value="peanuts">Peanuts</option>
-                      <option value="tree-nuts">Tree Nuts</option>
-                      <option value="fish">Fish</option>
-                      <option value="egg">Eggs</option>
-                      <option value="soy">Soybeans</option>
-                      <option value="wheat">Wheat</option>
-                      <option value="sesame">Sesame</option>
-                      <option value="shellfish">Shellfish</option>
-                    </select> */}
                     <label htmlFor="allergies">Allergies: </label>
-                    <Multiselect
-                      isObject={false}
-                      onRemove={(event) => {
-                        this.setState({ allergies: event })
-                        // this.state.allergies = event
-                      }}
-                      onSelect={(event) => {
-                        this.setState({ allergies: event })
-                        // this.state.allergies = event
-                      }}
-                      options={this.state.possibleAllergies}
-                      selectedValues={this.state.allergies}
-                      // displayValue='Allergies'
-                      placeholder="None"
-                      hidePlaceholder={true}
-                      closeOnSelect={false}
-                      style={{
-                        chips: {
-                          background: '#506f8c'
-                        },
-                        multiselectContainer: {
-                          color: 'black'
-                        }
-                      }}
+                    <MultiSelectCheckMarks
+                      selected={this.state.allergies}
+                      label="Allergies"
+                      options={possibleAllergies}
+                      onChangeCallback={this.onAllergyMultiSelectChangeCallback}
                     />
                   </div>
 
                   <div className="profile-item">
-                    <button type="submit">Save</button>
+                    <Button
+                      variant="contained"
+                      sx={{ background: '#506f8c' }}
+                      type="submit"
+                    >
+                      Save
+                    </Button>
                   </div>
                 </form>
               )}
@@ -335,16 +314,18 @@ class Form extends Component {
                   </div>
                   <div className="profile-item">
                     <label htmlFor="allergies">
-                      Allergies: {this.state.allergies}
+                      Allergies: {this.state.allergies.join(', ')}
                     </label>
                   </div>
                   <div className="profile-item">
-                    <button
+                    <Button
+                      variant="contained"
                       type="submit"
+                      sx={{ background: '#506f8c' }}
                       onClick={() => this.setState({ showForm: true })}
                     >
                       Edit
-                    </button>
+                    </Button>
                   </div>
                 </article>
               )}
