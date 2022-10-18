@@ -48,10 +48,12 @@ const allergyThesaurus: thesaurus = {
     'Walnut hull extract'
   ],
   Fish: [
+    'Fish',
     'Anchovies',
     'Bass',
     'Catfish',
     'Cod',
+    'Crab',
     'Flounder',
     'Grouper',
     'Haddock',
@@ -62,8 +64,10 @@ const allergyThesaurus: thesaurus = {
     'Perch',
     'Pike',
     'Pollock',
+    'Rockfish',
     'Salmon',
     'Scrod',
+    'Shrimp',
     'Sole',
     'Snapper',
     'Swordfish',
