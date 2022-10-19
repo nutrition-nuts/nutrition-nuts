@@ -8,6 +8,9 @@ BASE_URL = "http://localhost:9200"
 # assuming here that all of our indices will have a separate folder within the data dir
 indices = listdir(DATA_DIR)
 
+synonyms = open('./workoutSynonyms.json')
+synonymsJson = synonyms.read()
+
 for index in indices:
     print(f"------ Index {index} ------")
     elastic_index_url = BASE_URL + "/" + index
@@ -15,7 +18,10 @@ for index in indices:
     delete_req = requests.delete(elastic_index_url)
     print(f"DELETE INDEX {index}: {delete_req.text}")
 
-    create_index_req = requests.put(elastic_index_url)
+    if index == 'workouts':
+        create_index_req = requests.put(elastic_index_url, synonymsJson, headers={"Content-Type": "application/json"})
+    else:
+        create_index_req = requests.put(elastic_index_url)
     print(f"CREATE INDEX {index}: {create_index_req.text}")
 
     documents_dir = join(DATA_DIR, index)

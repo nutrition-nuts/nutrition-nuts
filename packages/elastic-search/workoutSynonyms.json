@@ -1,0 +1,36 @@
+{
+  "mappings": {
+    "properties": {
+      "primaryMuscles": {
+        "type": "text",
+        "analyzer": "synonym"
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "synonym": {
+          "ignore_case": "true",
+          "type": "synonym",
+          "synonyms": [
+            "arms => biceps, triceps, quadriceps, forearms",
+            "legs => calves, hamstrings, glutes, adductors, quadriceps",
+            "shoulders => traps",
+            "abs => abdominals",
+            "back => lats"
+          ]
+        }
+      },
+      "analyzer": {
+        "synonym": {
+          "filter": [
+            "lowercase",
+            "synonym"
+          ],
+          "tokenizer": "standard"
+        }
+      }
+    }
+  }
+}
