@@ -53,7 +53,7 @@ export function MultiSelectCheckMarks(props: Props) {
         sx={{
           width: '30%',
           color: 'white',
-          border: '2px solid black'
+          backgroundColor: 'white'
         }}
       >
         {props.options.map((option) => (
