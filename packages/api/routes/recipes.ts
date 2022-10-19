@@ -6,7 +6,7 @@ import { allergyThesaurus } from '../thesaurus'
 const router = express.Router()
 
 // GET /recipes
-router.get('/', async (req, res, next) => {
+router.get('/', async(req, res, next) => {
   const allergies = JSON.parse(String(req.query.allergies))
   for (let i = 0; i < allergies.length; i++) {
     allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]

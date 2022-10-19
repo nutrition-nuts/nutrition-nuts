@@ -4,9 +4,9 @@ import json
 import requests
 import config
 WORKOUT_DIR = "../data/workouts"
-BATCH_LOWER_BOUND = 350
+BATCH_LOWER_BOUND = 550
 BATCH_SIZE = 100
-# current json with id 0 - 349
+# current json with id 0-650
 for filename in listdir(WORKOUT_DIR):
     fileName = join(WORKOUT_DIR, filename)
     fileNumber = filename.split('.')[0]

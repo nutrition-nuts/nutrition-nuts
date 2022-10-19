@@ -7,7 +7,7 @@ export default async function fetchWorkouts(
   const filterEquip =
     equip === 'off'
       ? 'body only'
-      :'barbell cable kettlebells machine exercise ball dumbbell e-z curl bar other foam roll bands medicine ball'
+      : 'barbell cable kettlebells machine exercise ball dumbbell e-z curl bar other foam roll bands medicine ball'
   // console.log(filterEquip)
   let hits = await elasticSearchClient
     .search({
