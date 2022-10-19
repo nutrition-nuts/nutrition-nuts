@@ -46,9 +46,9 @@ export default function RecipeSummary(props: Props) {
               aria-controls="panel1a-content"
               id="panel1a-header"
               sx={{
-                backgroundColor: '#7ea1a8',
+                backgroundColor: '#1b1b1b',
                 border: 2,
-                borderColor: '#506f8c'
+                borderColor: 'black'
               }}
             >
               <Typography sx={{ color: 'white', fontSize: '1.5rem' }}>
@@ -58,9 +58,10 @@ export default function RecipeSummary(props: Props) {
 
             <AccordionDetails
               sx={{
-                backgroundColor: '#7ea1a8',
+                backgroundColor: '#1b1b1b',
                 border: 2,
-                borderColor: '#506f8c'
+                borderColor: 'black',
+                color: 'white'
               }}
             >
               <h3 onClick={handleOpen} className="header-link">

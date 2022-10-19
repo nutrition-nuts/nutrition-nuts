@@ -40,7 +40,7 @@ export default function Workouts() {
             <StyledTextField
                 id="workout-type"
                 label="Workout Type"
-                sx={{ m: 1, minWidth: 200 }}
+                sx={{ m: 1, minWidth: 200, backgroundColor: 'white' }}
                 value={workoutType}
                 onChange={(e) => {
                   setWorkoutType(e.target.value)
@@ -60,7 +60,7 @@ export default function Workouts() {
                 value={muscleInput}
                 label="Muscle Group"
                 variant="outlined"
-                sx={{ m: 1 }}
+                sx={{ m: 1, backgroundColor: 'white' }}
                 onChange={(e) => {
                   setMuscleInput(e.target.value)
                 }}
@@ -87,7 +87,7 @@ export default function Workouts() {
                 variant="contained"
                 onClick={async() => await onFindWorkoutsButtonClick()}
                 style={{
-                  background: '#506f8c'
+                  background: 'black'
                 }}
               >
                 Find me a workout!

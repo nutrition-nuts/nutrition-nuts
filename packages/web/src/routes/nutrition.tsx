@@ -54,7 +54,7 @@ export default function Nutrition() {
                   value={ breakfastInput }
                   label="Breakfast"
                   variant="outlined"
-                  sx={{ m: 1 }}
+                  sx={{ m: 1, backgroundColor: 'white' }}
                   onChange={(e) => {
                     setBreakfastInput(e.target.value)
                   }}
@@ -65,7 +65,7 @@ export default function Nutrition() {
                   value={ lunchInput }
                   label="Lunch"
                   variant="outlined"
-                  sx={{ m: 1 }}
+                  sx={{ m: 1, backgroundColor: 'white' }}
                   onChange={(e) => {
                     setLunchInput(e.target.value)
                   }}
@@ -76,7 +76,7 @@ export default function Nutrition() {
                   value={ dinnerInput }
                   label="Dinner"
                   variant="outlined"
-                  sx={{ m: 1 }}
+                  sx={{ m: 1, backgroundColor: 'white' }}
                   onChange={(e) => {
                     setDinnerInput(e.target.value)
                   }}
@@ -87,7 +87,7 @@ export default function Nutrition() {
                 variant="contained"
                 onClick={async() => await onFindRecipesButtonClick()}
                 style={{
-                  background: '#506f8c'
+                  background: 'black'
                 }}
               >
                 Find me recipes!
