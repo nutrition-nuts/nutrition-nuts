@@ -7,6 +7,14 @@ const router = express.Router()
 
 // GET /recipes
 router.get('/', async (req, res, next) => {
+  console.log(req.query)
+
+  if (req.query.page && !Number(req.query.page)) {
+    return res.status(400).send()
+  }
+  const page = Number(req.query.page ?? 0)
+  console.log(page)
+
   const allergies = JSON.parse(String(req.query.allergies))
   for (let i = 0; i < allergies.length; i++) {
     allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
@@ -22,6 +30,7 @@ router.get('/', async (req, res, next) => {
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
+      from: page * 10,
       query: {
         bool: {
           must: [
