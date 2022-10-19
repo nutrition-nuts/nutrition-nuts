@@ -47,6 +47,11 @@ export default function Workout(props: Props) {
             color="primary"
             className="center"
             style={{ marginTop: '1rem' }}
+            sx={{
+              '& .MuiPaginationItem-root': {
+                color: 'white'
+              }
+            }}
           />
           <WorkoutModal
             open={open}

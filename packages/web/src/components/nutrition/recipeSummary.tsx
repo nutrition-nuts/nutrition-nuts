@@ -82,6 +82,11 @@ export default function RecipeSummary(props: Props) {
                 color="primary"
                 className="center"
                 style={{ marginTop: '1rem' }}
+                sx={{
+                  '& .MuiPaginationItem-root': {
+                    color: 'white'
+                  }
+                }}
               />
               <RecipeModal
                 open={open}
