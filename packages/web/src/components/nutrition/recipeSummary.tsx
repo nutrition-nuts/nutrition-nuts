@@ -8,11 +8,15 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import '../../App.css'
+import { Button, Grid } from '@mui/material'
+import { Meal } from '../../utils/meal'
 
 interface Props {
-  mealName: string
+  meal: Meal
   recipes: RecipeModel[]
   foundStuff: Boolean
+  getMoreRecipesCallback: (page: number, meal: Meal) => void
+  getAllRecipesButtonLastClicked: number
 }
 
 export default function RecipeSummary(props: Props) {
@@ -21,6 +25,7 @@ export default function RecipeSummary(props: Props) {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const [expand, setExpand] = useState(true)
+  const [requestPage, setRequestPage] = useState(1)
 
   const toggleAccordion = () => {
     setExpand((prev) => !prev)
@@ -33,7 +38,17 @@ export default function RecipeSummary(props: Props) {
     setPage(value)
   }
 
+  useEffect(() => setRequestPage(1), [props.getAllRecipesButtonLastClicked])
+
   useEffect(() => setPage(1), [props.recipes])
+
+  const handleMoreRecipesButtonClicked = () => {
+    props.getMoreRecipesCallback(requestPage + 1, props.meal)
+    setRequestPage(requestPage + 1)
+  }
+
+  const mealName =
+    Meal[props.meal].charAt(0) + Meal[props.meal].slice(1).toLowerCase()
 
   return (
     <>
@@ -52,7 +67,7 @@ export default function RecipeSummary(props: Props) {
               }}
             >
               <Typography sx={{ color: 'white', fontSize: '1.5rem' }}>
-                {props.mealName}
+                {mealName}
               </Typography>
             </AccordionSummary>
 
@@ -64,7 +79,7 @@ export default function RecipeSummary(props: Props) {
               }}
             >
               <h3 onClick={handleOpen} className="header-link">
-                {props.mealName}: {props.recipes[page - 1].name}
+                {mealName}: {props.recipes[page - 1].name}
               </h3>
               <div>
                 <div>
@@ -74,14 +89,29 @@ export default function RecipeSummary(props: Props) {
                   {props.recipes[page - 1].protein_g}g
                 </div>
               </div>
-              <Pagination
-                count={props.recipes.length}
-                page={page}
-                onChange={handleChangePage}
-                color="primary"
-                className="center"
-                style={{ marginTop: '1rem' }}
-              />
+              <Grid
+                container
+                style={{ textAlign: 'center', marginTop: '1rem' }}
+                justifyContent="center"
+              >
+                <Grid item>
+                  <Pagination
+                    count={props.recipes.length}
+                    page={page}
+                    onChange={handleChangePage}
+                    color="primary"
+                    className="center"
+                  />
+                </Grid>
+                {props.foundStuff && (
+                  <Grid item>
+                    <Button onClick={handleMoreRecipesButtonClicked}>
+                      More Recipes
+                    </Button>
+                  </Grid>
+                )}
+              </Grid>
+
               <RecipeModal
                 open={open}
                 handleClose={handleClose}

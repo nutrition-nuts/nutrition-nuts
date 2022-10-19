@@ -5,8 +5,18 @@ import { allergyThesaurus } from '../thesaurus'
 
 const router = express.Router()
 
+const PAGE_SIZE = 5
+
 // GET /recipes
 router.get('/', async (req, res, next) => {
+  if (
+    req.query.page &&
+    (!Number(req.query.page) || Number(req.query.page) < 1)
+  ) {
+    return res.status(400).send()
+  }
+  const page = Number(req.query.page ?? 0)
+
   const allergies = JSON.parse(String(req.query.allergies))
   for (let i = 0; i < allergies.length; i++) {
     allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
@@ -22,6 +32,8 @@ router.get('/', async (req, res, next) => {
   let hits = await elasticSearchClient
     .search({
       index: 'recipes',
+      from: (page - 1) * PAGE_SIZE,
+      size: PAGE_SIZE,
       query: {
         bool: {
           must: [
@@ -52,7 +64,7 @@ router.get('/', async (req, res, next) => {
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
-        size: 10,
+        size: PAGE_SIZE,
         query: {
           function_score: {
             boost: 5,
