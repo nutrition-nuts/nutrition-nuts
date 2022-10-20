@@ -100,7 +100,6 @@ export default function Sidebar() {
       </AppBar>
       <Drawer
         sx={{
-          width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
