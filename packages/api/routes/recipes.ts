@@ -8,7 +8,7 @@ const router = express.Router()
 const PAGE_SIZE = 5
 
 // GET /recipes
-router.get('/', async (req, res, next) => {
+router.get('/', async(req, res, next) => {
   if (
     req.query.page &&
     (!Number(req.query.page) || Number(req.query.page) < 1)

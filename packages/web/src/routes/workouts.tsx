@@ -9,7 +9,7 @@ import { Button, FormControl, MenuItem, Checkbox, FormControlLabel, Box } from '
 import StyledTextField from '../components/StyledTextField'
 
 export default function Workouts() {
-  const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
+  const [workouts, setWorkouts] = useState<WorkoutModel[][]>([])
   const [workoutType, setWorkoutType] = useState('')
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
