@@ -34,7 +34,8 @@ router.get('/', async(req, res, next) => {
     Convention for foundStuff and hasMorePages is
     00 -> no results, query defaults to random stuff
     01 -> nothing was typed, query defaults to random stuff
-
+    10 -> results found, nothing more to display
+    11 -> results found, more to display
   */
   try {
     hits = await elasticSearchClient
@@ -77,7 +78,6 @@ router.get('/', async(req, res, next) => {
 
   // default case, give at least something back
   if (!foundStuff) {
-    debugger;
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
