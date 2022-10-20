@@ -41,9 +41,9 @@ export default function WorkoutModal(props: Props) {
         >
           {props.workout.category} Workout
         </Typography>
-        {props.workout.videoID != null && (
+        {props.workout.youtubeID != null && (
           <iframe
-            src={'https://www.youtube.com/embed/' + props.workout.videoID}
+            src={'https://www.youtube.com/embed/' + props.workout.youtubeID}
             title="YouTube video player"
             frameBorder="0"
             className="youtubeEmbed"
