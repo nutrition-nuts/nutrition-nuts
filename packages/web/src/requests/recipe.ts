@@ -8,5 +8,5 @@ export const getRecipes = async (
 ) => {
   const res = await get('/recipes', { query, allergies, page })
   const recipes: RecipeModel[] = JSON.parse(JSON.stringify(res.data[0]))
-  return { recipes: recipes, found_stuff: Boolean(res.data[1]) }
+  return { recipes: recipes, foundStuff: Boolean(res.data[1]), hasMorePages: Boolean(res.data[2]) }
 }

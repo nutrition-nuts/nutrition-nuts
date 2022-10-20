@@ -29,36 +29,47 @@ router.get('/', async(req, res, next) => {
       })
     }
   }
-  let hits = await elasticSearchClient
-    .search({
-      index: 'recipes',
-      from: (page - 1) * PAGE_SIZE,
-      size: PAGE_SIZE,
-      query: {
-        bool: {
-          must: [
-            {
-              bool: {
-                should: [
-                  { match: { category: 'breakfast-and-brunch' } },
-                  { match: { category: 'main-dish' } }
-                ]
+    debugger; //
+  var foundStuff, hits, hasMorePages
+  try {
+    hits = await elasticSearchClient
+      .search({
+        index: 'recipes',
+        from: (page - 1) * PAGE_SIZE,
+        size: PAGE_SIZE + 1,
+        query: {
+          bool: {
+            must: [
+              {
+                bool: {
+                  should: [
+                    { match: { category: 'breakfast-and-brunch' } },
+                    { match: { category: 'main-dish' } }
+                  ]
+                }
+              },
+              {
+                query_string: {
+                  query: String(req.query.query),
+                  fields: ['name^2.0', 'ingredients']
+                }
               }
-            },
-            {
-              query_string: {
-                query: String(req.query.query),
-                fields: ['name^2.0', 'ingredients']
-              }
-            }
-          ],
-          must_not: filters
+            ],
+            must_not: filters
+          }
         }
-      }
-    })
-    .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
+      })
+      .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
-  const foundStuff = hits.length > 0
+      foundStuff = hits.length > 0
+      if (hits.length == PAGE_SIZE + 1) {
+        hasMorePages = true
+        hits.pop()
+      }
+  } catch (err) {
+    foundStuff = false
+  }
+
   // default case, give at least something back
   if (!foundStuff) {
     hits = await elasticSearchClient
@@ -81,18 +92,17 @@ router.get('/', async(req, res, next) => {
                     match: { category: 'main-dish' }
                   }
                 ],
-                must_not: [
-                  { match: { ingredients: String(req.query.allergies) } }
-                ]
+                must_not: filters
               }
             }
           }
         }
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
-  }
 
-  res.send([hits, foundStuff])
+      hasMorePages = true
+  }
+  res.send([hits, foundStuff, hasMorePages])
 })
 
 export default router
