@@ -66,7 +66,7 @@ export default async function fetchWorkouts(
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
 
-  const hits_2d = [];
-  while(hits.length) hits_2d.push(hits.splice(0,4));
-  return hits_2d;
+  const hits2D = []
+  while (hits.length) hits2D.push(hits.splice(0, 4))
+  return hits2D
 }
