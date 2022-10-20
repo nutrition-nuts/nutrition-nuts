@@ -23,7 +23,7 @@ function App() {
             Profile
           </Button>
           <Button
-            href="/profile"
+            href="/nutrition"
             variant="contained"
             style={{ margin: '1rem' }}
           >
