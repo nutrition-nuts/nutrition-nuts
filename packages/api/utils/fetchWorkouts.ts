@@ -5,9 +5,9 @@ export default async function fetchWorkouts(
   equip: string
 ) {
   const filterEquip =
-    equip === 'off'
-      ? 'body only'
-      : 'barbell dumbell machine other bar cable bands'
+        equip === 'off'
+          ? 'body only'
+          : 'barbell dumbell machine other bar cable bands'
   // console.log(filterEquip)
   let hits = await elasticSearchClient
     .search({
@@ -67,6 +67,6 @@ export default async function fetchWorkouts(
   }
 
   const hits2D = []
-  while (hits.length) hits2D.push(hits.splice(0, 4))
+  while (hits.length > 0) hits2D.push(hits.splice(0, 4))
   return hits2D
 }
