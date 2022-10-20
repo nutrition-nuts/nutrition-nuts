@@ -15,13 +15,14 @@ interface Props {
   meal: Meal
   recipes: RecipeModel[]
   foundStuff: Boolean
+  page: number
+  handleChangePage: (page: number) => void
   getMoreRecipesCallback: (page: number, meal: Meal) => void
   getAllRecipesButtonLastClicked: number
 }
 
 export default function RecipeSummary(props: Props) {
   const [open, setOpen] = useState(false)
-  const [page, setPage] = useState(1)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const [expand, setExpand] = useState(true)
@@ -35,12 +36,12 @@ export default function RecipeSummary(props: Props) {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    setPage(value)
+    props.handleChangePage(value)
   }
 
   useEffect(() => setRequestPage(1), [props.getAllRecipesButtonLastClicked])
 
-  useEffect(() => setPage(1), [props.recipes])
+  useEffect(() => props.handleChangePage(1), [props.recipes])
 
   const handleMoreRecipesButtonClicked = () => {
     props.getMoreRecipesCallback(requestPage + 1, props.meal)
@@ -52,7 +53,7 @@ export default function RecipeSummary(props: Props) {
 
   return (
     <>
-      {props.recipes.length !== 0 && props.recipes.length >= page && (
+      {props.recipes.length !== 0 && props.recipes.length >= props.page && (
         <>
           <hr />
           <Accordion expanded={expand} onChange={toggleAccordion}>
@@ -79,14 +80,14 @@ export default function RecipeSummary(props: Props) {
               }}
             >
               <h3 onClick={handleOpen} className="header-link">
-                {mealName}: {props.recipes[page - 1].name}
+                {mealName}: {props.recipes[props.page - 1].name}
               </h3>
               <div>
                 <div>
-                  Calories: {props.recipes[page - 1].calories} | Fat:{' '}
-                  {props.recipes[page - 1].fat_g}g | Carbs:{' '}
-                  {props.recipes[page - 1].carbohydrates_g}g | Protein:{' '}
-                  {props.recipes[page - 1].protein_g}g
+                  Calories: {props.recipes[props.page - 1].calories} | Fat:{' '}
+                  {props.recipes[props.page - 1].fat_g}g | Carbs:{' '}
+                  {props.recipes[props.page - 1].carbohydrates_g}g | Protein:{' '}
+                  {props.recipes[props.page - 1].protein_g}g
                 </div>
               </div>
               <Grid
@@ -97,7 +98,7 @@ export default function RecipeSummary(props: Props) {
                 <Grid item>
                   <Pagination
                     count={props.recipes.length}
-                    page={page}
+                    page={props.page}
                     onChange={handleChangePage}
                     color="primary"
                     className="center"
@@ -115,7 +116,7 @@ export default function RecipeSummary(props: Props) {
               <RecipeModal
                 open={open}
                 handleClose={handleClose}
-                recipe={props.recipes[page - 1]}
+                recipe={props.recipes[props.page - 1]}
               ></RecipeModal>
             </AccordionDetails>
           </Accordion>

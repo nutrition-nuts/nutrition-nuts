@@ -27,26 +27,37 @@ export default function DailySummaryModal(props: Props) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={modalStyle}>
-        <Box sx={{ width: '100%' }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Daily Summary
-          </Typography>
-          <Card sx={{ marginTop: '1rem' }}>
-            <CardContent>
-              <Typography>
-                <ul>
-                  {props.recipes.map((recipe) => {
-                    return <li key={recipe.name}>{recipe.name}</li>
-                  })}
-                </ul>
-              </Typography>
-            </CardContent>
-          </Card>
-          <MacroProgressCards nutrientInfo={consolidatedNutrientInfo} />
-          <NutrientProgressBars nutrientInfo={consolidatedNutrientInfo} />
+      {props.recipes && (
+        <Box sx={modalStyle}>
+          <Box sx={{ width: '100%' }}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Daily Summary
+            </Typography>
+            <Card sx={{ marginTop: '1rem' }}>
+              <CardContent>
+                <Typography component={'div'}>
+                  <div>
+                    {props.recipes.map((recipe) => {
+                      if (recipe) {
+                        return (
+                          <>
+                            - {recipe.name}
+                            <br />
+                          </>
+                        )
+                      } else {
+                        return <></>
+                      }
+                    })}
+                  </div>
+                </Typography>
+              </CardContent>
+            </Card>
+            <MacroProgressCards nutrientInfo={consolidatedNutrientInfo} />
+            <NutrientProgressBars nutrientInfo={consolidatedNutrientInfo} />
+          </Box>
         </Box>
-      </Box>
+      )}
     </Modal>
   )
 }

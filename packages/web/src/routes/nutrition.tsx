@@ -25,6 +25,10 @@ export default function Nutrition() {
   const [lunchFoundStuff, setLunchFoundStuff] = useState(false)
   const [dinnerFoundStuff, setDinnerFoundStuff] = useState(false)
 
+  const [breakfastPage, setBreakfastPage] = useState(1)
+  const [lunchPage, setLunchPage] = useState(1)
+  const [dinnerPage, setDinnerPage] = useState(1)
+
   const [dailySummaryModalOpen, setDailySummaryModalOpen] = useState(false)
 
   // jank nonsense to pass down information to child recipeSummary to reset its page
@@ -157,9 +161,9 @@ export default function Nutrition() {
               <DailySummaryModal
                 open={dailySummaryModalOpen}
                 recipes={[
-                  breakfastResults[0],
-                  lunchResults[0],
-                  dinnerResults[0]
+                  breakfastResults[breakfastPage - 1],
+                  lunchResults[lunchPage - 1],
+                  dinnerResults[dinnerPage - 1]
                 ]}
                 handleClose={handleCloseDailySummaryModal}
               />
@@ -170,6 +174,8 @@ export default function Nutrition() {
               foundStuff={breakfastFoundStuff}
               getMoreRecipesCallback={getMoreRecipes}
               getAllRecipesButtonLastClicked={recipeButtonClickedTime}
+              page={breakfastPage}
+              handleChangePage={setBreakfastPage}
             ></RecipeSummary>
             <RecipeSummary
               meal={Meal.LUNCH}
@@ -177,6 +183,8 @@ export default function Nutrition() {
               foundStuff={lunchFoundStuff}
               getMoreRecipesCallback={getMoreRecipes}
               getAllRecipesButtonLastClicked={recipeButtonClickedTime}
+              page={lunchPage}
+              handleChangePage={setLunchPage}
             ></RecipeSummary>
             <RecipeSummary
               meal={Meal.DINNER}
@@ -184,6 +192,8 @@ export default function Nutrition() {
               foundStuff={dinnerFoundStuff}
               getMoreRecipesCallback={getMoreRecipes}
               getAllRecipesButtonLastClicked={recipeButtonClickedTime}
+              page={dinnerPage}
+              handleChangePage={setDinnerPage}
             ></RecipeSummary>
             <hr />
           </div>
