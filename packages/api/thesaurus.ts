@@ -11,16 +11,16 @@ const allergyThesaurus: thesaurus = {
     'peanut',
     'peanuts',
     'Arachis',
-    // 'Arachis oil',
-    // 'peanut oil',
+    'Arachis oil',
+    'peanut oil',
     'Ground nuts',
-    'Mandelonas'
-    // 'Peanut butter'
+    'Mandelonas',
+    'Peanut butter'
   ],
   'Tree Nuts': [
     'Almond',
     'Beechnut',
-    // 'Black walnut hull extract',
+    'Black walnut hull extract',
     'Brazil nut',
     'Butternut',
     'Cashew',
@@ -36,7 +36,7 @@ const allergyThesaurus: thesaurus = {
     'lychee',
     'Macadamia nut',
     'Marzipan',
-    // 'almond paste',
+    'almond paste',
     'Nangai nut',
     'Pecan',
     'Pesto',
@@ -45,8 +45,8 @@ const allergyThesaurus: thesaurus = {
     'Pistachio',
     'Praline',
     'Shea nut',
-    'Walnut'
-    // 'Walnut hull extract'
+    'Walnut',
+    'Walnut hull extract'
   ],
   Fish: [
     'Fish',
@@ -96,8 +96,8 @@ const allergyThesaurus: thesaurus = {
     'Natto',
     'Okara',
     'Shoyu',
-    // 'soy milk',
-    // 'soy nuts',
+    'soy milk',
+    'soy nuts',
     'Soya',
     'Soy',
     'Soybean',
