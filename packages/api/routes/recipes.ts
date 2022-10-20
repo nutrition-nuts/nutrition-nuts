@@ -29,7 +29,6 @@ router.get('/', async (req, res, next) => {
       })
     }
   }
-    debugger; //
   var foundStuff, hits, hasMorePages
   try {
     hits = await elasticSearchClient
@@ -61,11 +60,11 @@ router.get('/', async (req, res, next) => {
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
-      foundStuff = hits.length > 0
-      if (hits.length == PAGE_SIZE + 1) {
-        hasMorePages = true
-        hits.pop()
-      }
+    foundStuff = hits.length > 0
+    if (hits.length === PAGE_SIZE + 1) {
+      hasMorePages = true
+      hits.pop()
+    }
   } catch (err) {
     foundStuff = false
   }
@@ -100,7 +99,11 @@ router.get('/', async (req, res, next) => {
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
 
-      hasMorePages = true
+    hasMorePages = false
+  }
+  if (String(req.query.query) === '') {
+    foundStuff = false
+    hasMorePages = true
   }
   res.send([hits, foundStuff, hasMorePages])
 })

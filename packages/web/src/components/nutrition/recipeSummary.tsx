@@ -88,6 +88,16 @@ export default function RecipeSummary(props: Props) {
                   {props.recipes[page - 1].carbohydrates_g}g | Protein:{' '}
                   {props.recipes[page - 1].protein_g}g
                 </div>
+                {!props.foundStuff && !props.hasMorePages &&
+                  <div>
+                    We couldn&apos;t find anything based on what you typed.  Here are some random recipes!
+                  </div>
+                }
+                {!props.foundStuff && props.hasMorePages &&
+                  <div>
+                    Since you didn&apos;t enter anything, here are some random recipes!
+                  </div>
+                }
               </div>
               <Grid
                 container
@@ -103,7 +113,7 @@ export default function RecipeSummary(props: Props) {
                     className="center"
                   />
                 </Grid>
-                {props.hasMorePages && (
+                {(props.hasMorePages || !props.foundStuff) && (
                   <Grid item>
                     <Button onClick={handleMoreRecipesButtonClicked}>
                       More Recipes

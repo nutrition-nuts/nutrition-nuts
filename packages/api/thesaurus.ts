@@ -14,7 +14,7 @@ const allergyThesaurus: thesaurus = {
     // 'Arachis oil',
     // 'peanut oil',
     'Ground nuts',
-    'Mandelonas',
+    'Mandelonas'
     // 'Peanut butter'
   ],
   'Tree Nuts': [
@@ -45,7 +45,7 @@ const allergyThesaurus: thesaurus = {
     'Pistachio',
     'Praline',
     'Shea nut',
-    'Walnut',
+    'Walnut'
     // 'Walnut hull extract'
   ],
   Fish: [
@@ -88,7 +88,7 @@ const allergyThesaurus: thesaurus = {
     'Eggnog',
     'Mayonnaise',
     'mayo',
-    'Meringue',
+    'Meringue'
   ],
   Soy: [
     'Edamame',
