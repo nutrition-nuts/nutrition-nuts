@@ -55,6 +55,7 @@ button:active {
 
 .recipe-content {
     text-align: center;
+    width: 40%;
 }
 
 .recipe-item h4 {
@@ -82,4 +83,5 @@ iframe.youtubeEmbed {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    row-gap: 20px;
 }
