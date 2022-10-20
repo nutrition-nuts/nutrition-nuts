@@ -25,11 +25,17 @@ router.get('/', async(req, res, next) => {
   for (let i = 0; i < allergies.length; i++) {
     for (let j = 0; j < allergies[i].length; j++) {
       filters.push({
-        match: { ingredients: { query: allergies[i][j], fuzziness: 1 } }
+        match: { ingredients: { query: allergies[i][j], operator: 'and' } }
       })
     }
   }
-  var foundStuff, hits, hasMorePages
+  var hits, foundStuff, hasMorePages
+  /*
+    Convention for foundStuff and hasMorePages is
+    00 -> no results, query defaults to random stuff
+    01 -> nothing was typed, query defaults to random stuff
+
+  */
   try {
     hits = await elasticSearchClient
       .search({
@@ -71,6 +77,7 @@ router.get('/', async(req, res, next) => {
 
   // default case, give at least something back
   if (!foundStuff) {
+    debugger;
     hits = await elasticSearchClient
       .search({
         index: 'recipes',
