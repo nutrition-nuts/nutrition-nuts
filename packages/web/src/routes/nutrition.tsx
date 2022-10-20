@@ -6,9 +6,11 @@ import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/nutrition/recipeSummary'
-import { FormControl, Box, Button } from '@mui/material'
+import { FormControl, Box, Button, IconButton, Grid, Link } from '@mui/material'
 import StyledTextField from '../components/StyledTextField'
 import { Meal } from '../utils/meal'
+import MenuBookIcon from '@mui/icons-material/MenuBook'
+import DailySummaryModal from '../components/nutrition/modal/dailySummary/dailySummaryModal'
 
 export default function Nutrition() {
   const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
@@ -22,6 +24,12 @@ export default function Nutrition() {
   const [breakfastFoundStuff, setBreakfastFoundStuff] = useState(false)
   const [lunchFoundStuff, setLunchFoundStuff] = useState(false)
   const [dinnerFoundStuff, setDinnerFoundStuff] = useState(false)
+
+  const [breakfastPage, setBreakfastPage] = useState(1)
+  const [lunchPage, setLunchPage] = useState(1)
+  const [dinnerPage, setDinnerPage] = useState(1)
+
+  const [dailySummaryModalOpen, setDailySummaryModalOpen] = useState(false)
 
   const [breakfastHasMorePages, setBreakfastHasMorePages] = useState(false)
   const [lunchHasMorePages, setLunchHasMorePages] = useState(false)
@@ -85,9 +93,36 @@ export default function Nutrition() {
     }
   }
 
+  const recipesPresent = () =>
+    breakfastResults.length > 0 ||
+    lunchResults.length > 0 ||
+    dinnerResults.length > 0
+
+  const handleOpenDailySummaryModal = () => setDailySummaryModalOpen(true)
+  const handleCloseDailySummaryModal = () => setDailySummaryModalOpen(false)
+
   return (
     <div className="App">
       <Sidebar />
+
+      {recipesPresent() && (
+        <IconButton
+          color="secondary"
+          size="large"
+          onClick={handleOpenDailySummaryModal}
+          sx={{
+            margin: '1rem',
+            padding: '1rem',
+            top: 'auto',
+            right: '0',
+            bottom: '0',
+            left: 'auto',
+            position: 'fixed'
+          }}
+        >
+          <MenuBookIcon fontSize="large" />
+        </IconButton>
+      )}
 
       <div className="recipe-container">
         <div className="recipe-search">
@@ -136,43 +171,61 @@ export default function Nutrition() {
               <Button
                 variant="contained"
                 onClick={async () => await onFindRecipesButtonClick()}
-                style={{
-                  background: '#506f8c'
-                }}
               >
                 Find me recipes!
               </Button>
             </FormControl>
           </Box>
         </div>
-        <div className="recipe-item">
-          <h2>Meal Plan for the day</h2>
-          <RecipeSummary
-            meal={Meal.BREAKFAST}
-            recipes={breakfastResults}
-            foundStuff={breakfastFoundStuff}
-            hasMorePages={breakfastHasMorePages}
-            getMoreRecipesCallback={getMoreRecipes}
-            getAllRecipesButtonLastClicked={recipeButtonClickedTime}
-          ></RecipeSummary>
-          <RecipeSummary
-            meal={Meal.LUNCH}
-            recipes={lunchResults}
-            foundStuff={lunchFoundStuff}
-            hasMorePages={lunchHasMorePages}
-            getMoreRecipesCallback={getMoreRecipes}
-            getAllRecipesButtonLastClicked={recipeButtonClickedTime}
-          ></RecipeSummary>
-          <RecipeSummary
-            meal={Meal.DINNER}
-            recipes={dinnerResults}
-            foundStuff={dinnerFoundStuff}
-            hasMorePages={dinnerHasMorePages}
-            getMoreRecipesCallback={getMoreRecipes}
-            getAllRecipesButtonLastClicked={recipeButtonClickedTime}
-          ></RecipeSummary>
-          <hr />
-        </div>
+        {recipesPresent() && (
+          <div className="recipe-item">
+            <Grid container justifyContent="center">
+              <Link underline="hover" onClick={handleOpenDailySummaryModal}>
+                <h2 className="header-link">Meal Plan for the day</h2>
+              </Link>
+              <DailySummaryModal
+                open={dailySummaryModalOpen}
+                recipes={[
+                  breakfastResults[breakfastPage - 1],
+                  lunchResults[lunchPage - 1],
+                  dinnerResults[dinnerPage - 1]
+                ]}
+                handleClose={handleCloseDailySummaryModal}
+              />
+            </Grid>
+            <RecipeSummary
+              meal={Meal.BREAKFAST}
+              recipes={breakfastResults}
+              hasMorePages={breakfastHasMorePages}
+              foundStuff={breakfastFoundStuff}
+              getMoreRecipesCallback={getMoreRecipes}
+              getAllRecipesButtonLastClicked={recipeButtonClickedTime}
+              page={breakfastPage}
+              handleChangePage={setBreakfastPage}
+            ></RecipeSummary>
+            <RecipeSummary
+              meal={Meal.LUNCH}
+              recipes={lunchResults}
+              foundStuff={lunchFoundStuff}
+              hasMorePages={lunchHasMorePages}
+              getMoreRecipesCallback={getMoreRecipes}
+              getAllRecipesButtonLastClicked={recipeButtonClickedTime}
+              page={lunchPage}
+              handleChangePage={setLunchPage}
+            ></RecipeSummary>
+            <RecipeSummary
+              meal={Meal.DINNER}
+              recipes={dinnerResults}
+              foundStuff={dinnerFoundStuff}
+              hasMorePages={dinnerHasMorePages}
+              getMoreRecipesCallback={getMoreRecipes}
+              getAllRecipesButtonLastClicked={recipeButtonClickedTime}
+              page={dinnerPage}
+              handleChangePage={setDinnerPage}
+            ></RecipeSummary>
+            <hr />
+          </div>
+        )}
       </div>
     </div>
   )

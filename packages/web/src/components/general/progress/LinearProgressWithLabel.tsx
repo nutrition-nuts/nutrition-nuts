@@ -7,7 +7,7 @@ import {
 } from '@mui/material'
 
 export default function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number, label: string }
+  props: LinearProgressProps & { value: number; label: string }
 ) {
   return (
     <>
@@ -21,7 +21,11 @@ export default function LinearProgressWithLabel(
           </Grid>
         </Grid>
         <Typography></Typography>
-        <LinearProgress variant="determinate" {...props} />
+        <LinearProgress
+          variant="determinate"
+          color={props.value > 100 ? 'error' : 'primary'}
+          {...props}
+        />
       </Box>
     </>
   )

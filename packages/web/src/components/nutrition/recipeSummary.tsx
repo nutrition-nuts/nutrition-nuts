@@ -1,6 +1,6 @@
 import { RecipeModel } from '../../models/recipeModels'
 import { useEffect, useState } from 'react'
-import RecipeModal from './modal/recipeModal'
+import RecipeModal from './modal/recipe/recipeModal'
 import Pagination from '@mui/material/Pagination'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -8,13 +8,16 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import '../../App.css'
-import { Button, Grid } from '@mui/material'
+import { Button, Grid, IconButton, Tooltip, Zoom } from '@mui/material'
 import { Meal } from '../../utils/meal'
+import InfoIcon from '@mui/icons-material/Info'
 
 interface Props {
   meal: Meal
   recipes: RecipeModel[]
   foundStuff: Boolean
+  page: number
+  handleChangePage: (page: number) => void
   hasMorePages: Boolean
   getMoreRecipesCallback: (page: number, meal: Meal) => void
   getAllRecipesButtonLastClicked: number
@@ -22,7 +25,6 @@ interface Props {
 
 export default function RecipeSummary(props: Props) {
   const [open, setOpen] = useState(false)
-  const [page, setPage] = useState(1)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const [expand, setExpand] = useState(true)
@@ -36,12 +38,12 @@ export default function RecipeSummary(props: Props) {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    setPage(value)
+    props.handleChangePage(value)
   }
 
   useEffect(() => setRequestPage(1), [props.getAllRecipesButtonLastClicked])
 
-  useEffect(() => setPage(1), [props.recipes])
+  useEffect(() => props.handleChangePage(1), [props.recipes])
 
   const handleMoreRecipesButtonClicked = () => {
     props.getMoreRecipesCallback(requestPage + 1, props.meal)
@@ -51,9 +53,20 @@ export default function RecipeSummary(props: Props) {
   const mealName =
     Meal[props.meal].charAt(0) + Meal[props.meal].slice(1).toLowerCase()
 
+  const resultsRandomlyGeneratedMessage = () => {
+    let res: string
+    if (!props.foundStuff && !props.hasMorePages) {
+      res =
+        "We couldn't find anything based on what you typed. Here are some random recipes!"
+    } else {
+      res = "Since you didn't enter anything, here are some random recipes!"
+    }
+    return res
+  }
+
   return (
     <>
-      {props.recipes.length !== 0 && props.recipes.length >= page && (
+      {props.recipes.length !== 0 && props.recipes.length >= props.page && (
         <>
           <hr />
           <Accordion expanded={expand} onChange={toggleAccordion}>
@@ -78,26 +91,31 @@ export default function RecipeSummary(props: Props) {
                 borderColor: '#506f8c'
               }}
             >
-              <h3 onClick={handleOpen} className="header-link">
-                {mealName}: {props.recipes[page - 1].name}
-              </h3>
+              <Grid container justifyContent="center">
+                <h3 onClick={handleOpen} className="header-link">
+                  {mealName}: {props.recipes[props.page - 1].name}
+                </h3>
+                {!props.foundStuff && (
+                  <Tooltip
+                    arrow
+                    disableFocusListener
+                    disableTouchListener
+                    title={resultsRandomlyGeneratedMessage()}
+                    TransitionComponent={Zoom}
+                  >
+                    <IconButton>
+                      <InfoIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </Grid>
               <div>
                 <div>
-                  Calories: {props.recipes[page - 1].calories} | Fat:{' '}
-                  {props.recipes[page - 1].fat_g}g | Carbs:{' '}
-                  {props.recipes[page - 1].carbohydrates_g}g | Protein:{' '}
-                  {props.recipes[page - 1].protein_g}g
+                  Calories: {props.recipes[props.page - 1].calories} | Fat:{' '}
+                  {props.recipes[props.page - 1].fat_g}g | Carbs:{' '}
+                  {props.recipes[props.page - 1].carbohydrates_g}g | Protein:{' '}
+                  {props.recipes[props.page - 1].protein_g}g
                 </div>
-                {!props.foundStuff && !props.hasMorePages &&
-                  <div>
-                    We couldn&apos;t find anything based on what you typed.  Here are some random recipes!
-                  </div>
-                }
-                {!props.foundStuff && props.hasMorePages &&
-                  <div>
-                    Since you didn&apos;t enter anything, here are some random recipes!
-                  </div>
-                }
               </div>
               <Grid
                 container
@@ -107,13 +125,13 @@ export default function RecipeSummary(props: Props) {
                 <Grid item>
                   <Pagination
                     count={props.recipes.length}
-                    page={page}
+                    page={props.page}
                     onChange={handleChangePage}
                     color="primary"
                     className="center"
                   />
                 </Grid>
-                {(props.hasMorePages || !props.foundStuff) && (
+                {props.hasMorePages && props.foundStuff && (
                   <Grid item>
                     <Button onClick={handleMoreRecipesButtonClicked}>
                       More Recipes
@@ -125,7 +143,7 @@ export default function RecipeSummary(props: Props) {
               <RecipeModal
                 open={open}
                 handleClose={handleClose}
-                recipe={props.recipes[page - 1]}
+                recipe={props.recipes[props.page - 1]}
               ></RecipeModal>
             </AccordionDetails>
           </Accordion>
