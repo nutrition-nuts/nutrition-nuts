@@ -25,6 +25,7 @@ export default function LinearProgressWithLabel(
           variant="determinate"
           color={props.value > 100 ? 'error' : 'primary'}
           {...props}
+          value={Math.min(100, props.value)}
         />
       </Box>
     </>
