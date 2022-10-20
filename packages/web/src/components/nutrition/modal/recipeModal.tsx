@@ -24,7 +24,7 @@ export default function RecipeModal(props: Props) {
     transform: 'translate(-50%, -50%)',
     width: '90%',
     bgcolor: 'background.paper',
-    overflow: 'scroll',
+    overflow: 'auto',
     height: '85%',
     p: 4
   }
