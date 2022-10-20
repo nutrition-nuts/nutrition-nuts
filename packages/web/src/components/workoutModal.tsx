@@ -18,7 +18,7 @@ export default function WorkoutModal(props: Props) {
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    overflow: 'scroll',
+    overflow: 'auto',
     height: '80%',
     boxShadow: 24,
     p: 4

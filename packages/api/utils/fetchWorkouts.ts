@@ -12,35 +12,45 @@ export default async function fetchWorkouts(
   let hits = await elasticSearchClient
     .search({
       index: 'workouts',
-      size: 5,
+      size: 12,
       query: {
-        bool: {
-          should: [
+        function_score: {
+          boost: 1.5,
+          functions: [
             {
-              match: {
-                category: {
-                  query: type
-                }
-              }
-            },
-            {
-              match: {
-                primaryMuscles: {
-                  query: group,
-                  fuzziness: 'AUTO'
-                }
-              }
+              random_score: {}
             }
           ],
-          filter: [
-            {
-              match: {
-                equipment: {
-                  query: filterEquip
+          boost_mode: 'sum',
+          query: {
+            bool: {
+              should: [
+                {
+                  match: {
+                    category: {
+                      query: type
+                    }
+                  }
+                },
+                {
+                  match: {
+                    primaryMuscles: {
+                      query: group
+                    }
+                  }
                 }
-              }
+              ],
+              filter: [
+                {
+                  match: {
+                    equipment: {
+                      query: filterEquip
+                    }
+                  }
+                }
+              ]
             }
-          ]
+          }
         }
       }
     })
@@ -51,9 +61,12 @@ export default async function fetchWorkouts(
     hits = await elasticSearchClient
       .search({
         index: 'workouts',
-        size: 1
+        size: 12
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }
-  return hits
+
+  const hits2D = []
+  while (hits.length > 0) hits2D.push(hits.splice(0, 4))
+  return hits2D
 }
