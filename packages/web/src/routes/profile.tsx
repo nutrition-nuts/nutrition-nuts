@@ -12,6 +12,14 @@ import { Button } from '@mui/material'
 import { MultiSelectCheckMarks } from '../components/general/MultiSelectCheckmarks'
 import { possibleAllergies } from '../utils/allergy'
 
+function getAllergiesFromLocalStorage() {
+  try {
+    return (JSON.parse(localStorage.getItem('allergies') ?? ''))
+  } catch (error) {
+    return []
+  }
+}
+
 class Form extends Component {
   state = {
     name: localStorage.getItem('name') ?? '',
@@ -21,22 +29,12 @@ class Form extends Component {
     carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES).toString(),
     fat: getNutrientDailyRecommendation(Nutrient.FAT).toString(),
     dr: localStorage.getItem('dr') ?? '',
-    allergies: JSON.parse(
-      localStorage.getItem('allergies') ?? '[]'
-    ) as string[],
+    allergies: getAllergiesFromLocalStorage() as string[],
     saveProfile: false,
     showForm: true,
     count: 0,
     possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy']
   }
-
-  // getAllergiesFromLocalStorage = () => {
-  //   try {
-  //     return (JSON.parse(localStorage.getItem('allergies') ?? ''))
-  //   } catch (error) {
-  //     return ''
-  //   }
-  // }
 
   handleChange = (event: { target: { name: any; value: any } }) => {
     this.setState({

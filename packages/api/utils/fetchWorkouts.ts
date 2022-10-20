@@ -26,7 +26,8 @@ export default async function fetchWorkouts(
             {
               match: {
                 primaryMuscles: {
-                  query: group
+                  query: group,
+                  fuzziness: 'AUTO'
                 }
               }
             }
