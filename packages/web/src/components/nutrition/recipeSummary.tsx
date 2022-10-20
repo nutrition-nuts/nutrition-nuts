@@ -15,6 +15,7 @@ interface Props {
   meal: Meal
   recipes: RecipeModel[]
   foundStuff: Boolean
+  hasMorePages: Boolean
   getMoreRecipesCallback: (page: number, meal: Meal) => void
   getAllRecipesButtonLastClicked: number
 }
@@ -70,7 +71,6 @@ export default function RecipeSummary(props: Props) {
                 {mealName}
               </Typography>
             </AccordionSummary>
-
             <AccordionDetails
               sx={{
                 backgroundColor: '#7ea1a8',
@@ -103,7 +103,7 @@ export default function RecipeSummary(props: Props) {
                     className="center"
                   />
                 </Grid>
-                {props.foundStuff && (
+                {props.hasMorePages && (
                   <Grid item>
                     <Button onClick={handleMoreRecipesButtonClicked}>
                       More Recipes
