@@ -6,7 +6,7 @@ import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/nutrition/recipeSummary'
-import { FormControl, Box, Button, IconButton, Grid } from '@mui/material'
+import { FormControl, Box, Button, IconButton, Grid, Link } from '@mui/material'
 import StyledTextField from '../components/StyledTextField'
 import { Meal } from '../utils/meal'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
@@ -94,6 +94,25 @@ export default function Nutrition() {
     <div className="App">
       <Sidebar />
 
+      {recipesPresent() && (
+        <IconButton
+          color="secondary"
+          size="large"
+          onClick={handleOpenDailySummaryModal}
+          sx={{
+            margin: '1rem',
+            padding: '1rem',
+            top: 'auto',
+            right: '0',
+            bottom: '0',
+            left: 'auto',
+            position: 'fixed'
+          }}
+        >
+          <MenuBookIcon fontSize="large" />
+        </IconButton>
+      )}
+
       <div className="recipe-container">
         <div className="recipe-search">
           <h2 id="search-header">Search Meals</h2>
@@ -150,14 +169,9 @@ export default function Nutrition() {
         {recipesPresent() && (
           <div className="recipe-item">
             <Grid container justifyContent="center">
-              <h2>Meal Plan for the day</h2>
-              <IconButton
-                color="primary"
-                size="large"
-                onClick={handleOpenDailySummaryModal}
-              >
-                <MenuBookIcon fontSize="large" />
-              </IconButton>
+              <Link underline="hover" onClick={handleOpenDailySummaryModal}>
+                <h2 className="header-link">Meal Plan for the day</h2>
+              </Link>
               <DailySummaryModal
                 open={dailySummaryModalOpen}
                 recipes={[

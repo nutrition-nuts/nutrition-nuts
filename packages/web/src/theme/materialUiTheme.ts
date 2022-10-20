@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material'
-import { green } from '@mui/material/colors'
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -21,7 +20,7 @@ export const theme = createTheme({
       main: '#506f8c'
     },
     secondary: {
-      main: green[500]
+      main: '#ffffff'
     }
   }
 })
