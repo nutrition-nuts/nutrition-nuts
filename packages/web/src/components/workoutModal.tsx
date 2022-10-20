@@ -48,6 +48,7 @@ export default function WorkoutModal(props: Props) {
             frameBorder="0"
             className="youtubeEmbed"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           ></iframe>
         )}
         <h4>Instructions:</h4>
