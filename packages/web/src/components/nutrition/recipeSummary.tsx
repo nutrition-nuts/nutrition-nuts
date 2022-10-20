@@ -18,6 +18,7 @@ interface Props {
   foundStuff: Boolean
   page: number
   handleChangePage: (page: number) => void
+  hasMorePages: Boolean
   getMoreRecipesCallback: (page: number, meal: Meal) => void
   getAllRecipesButtonLastClicked: number
 }
@@ -52,8 +53,16 @@ export default function RecipeSummary(props: Props) {
   const mealName =
     Meal[props.meal].charAt(0) + Meal[props.meal].slice(1).toLowerCase()
 
-  const resultsRandomlyGeneratedMessage =
-    'These recipe results were randomly generated. Either you have left the input box empty, or there are no (more) results that match your query.'
+  const resultsRandomlyGeneratedMessage = () => {
+    let res: string
+    if (!props.foundStuff && !props.hasMorePages) {
+      res =
+        "We couldn't find anything based on what you typed. Here are some random recipes!"
+    } else {
+      res = "Since you didn't enter anything, here are some random recipes!"
+    }
+    return res
+  }
 
   return (
     <>
@@ -75,7 +84,6 @@ export default function RecipeSummary(props: Props) {
                 {mealName}
               </Typography>
             </AccordionSummary>
-
             <AccordionDetails
               sx={{
                 backgroundColor: '#7ea1a8',
@@ -92,7 +100,7 @@ export default function RecipeSummary(props: Props) {
                     arrow
                     disableFocusListener
                     disableTouchListener
-                    title={resultsRandomlyGeneratedMessage}
+                    title={resultsRandomlyGeneratedMessage()}
                     TransitionComponent={Zoom}
                   >
                     <IconButton>
@@ -123,7 +131,7 @@ export default function RecipeSummary(props: Props) {
                     className="center"
                   />
                 </Grid>
-                {props.foundStuff && (
+                {props.hasMorePages && props.foundStuff && (
                   <Grid item>
                     <Button onClick={handleMoreRecipesButtonClicked}>
                       More Recipes

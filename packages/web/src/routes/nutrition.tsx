@@ -31,6 +31,10 @@ export default function Nutrition() {
 
   const [dailySummaryModalOpen, setDailySummaryModalOpen] = useState(false)
 
+  const [breakfastHasMorePages, setBreakfastHasMorePages] = useState(false)
+  const [lunchHasMorePages, setLunchHasMorePages] = useState(false)
+  const [dinnerHasMorePages, setDinnerHasMorePages] = useState(false)
+
   // jank nonsense to pass down information to child recipeSummary to reset its page
   const [recipeButtonClickedTime, setRecipeButtonClickedTime] = useState(
     Date.now()
@@ -39,7 +43,7 @@ export default function Nutrition() {
   const makeGetRecipeRequest = async (query: string, page: number) => {
     return await getRecipes(
       query,
-      localStorage.getItem('allergies') ?? '',
+      localStorage.getItem('allergies') ?? '[]',
       page.toString()
     )
   }
@@ -49,35 +53,42 @@ export default function Nutrition() {
     const breakfast = await makeGetRecipeRequest(breakfastInput, 1)
     // console.log(breakfast)
     setBreakfastResults(breakfast.recipes)
-    setBreakfastFoundStuff(breakfast.found_stuff)
+    setBreakfastFoundStuff(breakfast.foundStuff)
+    setBreakfastHasMorePages(breakfast.hasMorePages)
     const lunch = await makeGetRecipeRequest(lunchInput, 1)
     setLunchResults(lunch.recipes)
-    setLunchFoundStuff(lunch.found_stuff)
+    setLunchFoundStuff(lunch.foundStuff)
+    setLunchHasMorePages(lunch.hasMorePages)
     const dinner = await makeGetRecipeRequest(dinnerInput, 1)
     setDinnerResults(dinner.recipes)
-    setDinnerFoundStuff(dinner.found_stuff)
+    setDinnerFoundStuff(dinner.foundStuff)
+    setDinnerHasMorePages(dinner.hasMorePages)
   }
 
   const getMoreRecipes = async (page: number, meal: Meal) => {
     let mealResults: {
       recipes: RecipeModel[]
-      found_stuff: boolean
+      foundStuff: boolean
+      hasMorePages: boolean
     }
     switch (meal) {
       case Meal.BREAKFAST:
         mealResults = await makeGetRecipeRequest(breakfastInput, page)
         setBreakfastResults(mealResults.recipes)
-        setBreakfastFoundStuff(mealResults.found_stuff)
+        setBreakfastFoundStuff(mealResults.foundStuff)
+        setBreakfastHasMorePages(mealResults.hasMorePages)
         break
       case Meal.LUNCH:
         mealResults = await makeGetRecipeRequest(lunchInput, page)
         setLunchResults(mealResults.recipes)
-        setLunchFoundStuff(mealResults.found_stuff)
+        setLunchFoundStuff(mealResults.foundStuff)
+        setLunchHasMorePages(mealResults.hasMorePages)
         break
       case Meal.DINNER:
         mealResults = await makeGetRecipeRequest(dinnerInput, page)
         setDinnerResults(mealResults.recipes)
-        setDinnerFoundStuff(mealResults.found_stuff)
+        setDinnerFoundStuff(mealResults.foundStuff)
+        setDinnerHasMorePages(mealResults.hasMorePages)
         break
     }
   }
@@ -185,6 +196,7 @@ export default function Nutrition() {
             <RecipeSummary
               meal={Meal.BREAKFAST}
               recipes={breakfastResults}
+              hasMorePages={breakfastHasMorePages}
               foundStuff={breakfastFoundStuff}
               getMoreRecipesCallback={getMoreRecipes}
               getAllRecipesButtonLastClicked={recipeButtonClickedTime}
@@ -195,6 +207,7 @@ export default function Nutrition() {
               meal={Meal.LUNCH}
               recipes={lunchResults}
               foundStuff={lunchFoundStuff}
+              hasMorePages={lunchHasMorePages}
               getMoreRecipesCallback={getMoreRecipes}
               getAllRecipesButtonLastClicked={recipeButtonClickedTime}
               page={lunchPage}
@@ -204,6 +217,7 @@ export default function Nutrition() {
               meal={Meal.DINNER}
               recipes={dinnerResults}
               foundStuff={dinnerFoundStuff}
+              hasMorePages={dinnerHasMorePages}
               getMoreRecipesCallback={getMoreRecipes}
               getAllRecipesButtonLastClicked={recipeButtonClickedTime}
               page={dinnerPage}
