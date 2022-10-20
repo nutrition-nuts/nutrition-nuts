@@ -54,6 +54,8 @@ export default function DailySummaryModal(props: Props) {
               </CardContent>
             </Card>
             <MacroProgressCards nutrientInfo={consolidatedNutrientInfo} />
+            <br />
+            <br />
             <NutrientProgressBars nutrientInfo={consolidatedNutrientInfo} />
           </Box>
         </Box>
