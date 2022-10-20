@@ -8,8 +8,9 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import '../../App.css'
-import { Button, Grid } from '@mui/material'
+import { Button, Grid, IconButton, Tooltip, Zoom } from '@mui/material'
 import { Meal } from '../../utils/meal'
+import InfoIcon from '@mui/icons-material/Info'
 
 interface Props {
   meal: Meal
@@ -51,6 +52,9 @@ export default function RecipeSummary(props: Props) {
   const mealName =
     Meal[props.meal].charAt(0) + Meal[props.meal].slice(1).toLowerCase()
 
+  const resultsRandomlyGeneratedMessage =
+    'These recipe results were randomly generated. Either you have left the input box empty, or there are no (more) results that match your query.'
+
   return (
     <>
       {props.recipes.length !== 0 && props.recipes.length >= props.page && (
@@ -79,9 +83,24 @@ export default function RecipeSummary(props: Props) {
                 borderColor: '#506f8c'
               }}
             >
-              <h3 onClick={handleOpen} className="header-link">
-                {mealName}: {props.recipes[props.page - 1].name}
-              </h3>
+              <Grid container justifyContent="center">
+                <h3 onClick={handleOpen} className="header-link">
+                  {mealName}: {props.recipes[props.page - 1].name}
+                </h3>
+                {!props.foundStuff && (
+                  <Tooltip
+                    arrow
+                    disableFocusListener
+                    disableTouchListener
+                    title={resultsRandomlyGeneratedMessage}
+                    TransitionComponent={Zoom}
+                  >
+                    <IconButton>
+                      <InfoIcon />
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </Grid>
               <div>
                 <div>
                   Calories: {props.recipes[props.page - 1].calories} | Fat:{' '}
