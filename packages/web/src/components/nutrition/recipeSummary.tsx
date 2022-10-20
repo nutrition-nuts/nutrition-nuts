@@ -131,7 +131,7 @@ export default function RecipeSummary(props: Props) {
                     className="center"
                   />
                 </Grid>
-                {props.hasMorePages && props.foundStuff && (
+                {(props.hasMorePages || !props.foundStuff) && (
                   <Grid item>
                     <Button onClick={handleMoreRecipesButtonClicked}>
                       More Recipes
