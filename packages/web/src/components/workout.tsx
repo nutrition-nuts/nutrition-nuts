@@ -24,11 +24,13 @@ export default function Workout(props: Props) {
     <>
       {props.workouts.length !== 0 && props.workouts.length >= page && (
         <>
+          <div className="workout-flex-container">
             {props.workouts[page - 1].map((workout) => {
               return (
                   <WorkoutSummary workout={workout} key={workout.name} />
               )
             })}
+          </div>
           <Pagination
             count={props.workouts.length}
             page={page}
