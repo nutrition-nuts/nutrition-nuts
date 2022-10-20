@@ -1,11 +1,9 @@
-import { RecipeModel } from '../../../models/recipeModels'
+import { RecipeModel } from '../../../../models/recipeModels'
 import Typography from '@mui/material/Typography'
-import NutritionPercentageCard from '../nutritionPercentageCard'
-import { getNutrientDailyRecommendation } from '../../../utils/nutritionRecommendations'
 import Card from '@mui/material/Card'
 import { CardContent, Grid, Link } from '@mui/material'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { Nutrient } from '../../../utils/nutrient'
+import MacroProgressCards from '../general/macroProgressCards'
 
 interface Props {
   recipe: RecipeModel
@@ -37,36 +35,7 @@ export default function RecipeModalOverview(props: Props) {
         </CardContent>
       </Card>
       <div style={{ display: 'inline' }}>
-        <Card sx={{ marginTop: '2rem' }}>
-          <CardContent>
-            <Grid container spacing={2}>
-              <NutritionPercentageCard
-                name="Calories"
-                goal={getNutrientDailyRecommendation(Nutrient.CALORIES)}
-                progress={props.recipe.calories}
-                unit=""
-              />
-              <NutritionPercentageCard
-                name="Protein"
-                goal={getNutrientDailyRecommendation(Nutrient.PROTEIN)}
-                progress={props.recipe.protein_g}
-                unit="grams"
-              />
-              <NutritionPercentageCard
-                name="Carbohydrates"
-                goal={getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES)}
-                progress={props.recipe.carbohydrates_g}
-                unit="grams"
-              />
-              <NutritionPercentageCard
-                name="Fat"
-                goal={getNutrientDailyRecommendation(Nutrient.FAT)}
-                progress={props.recipe.fat_g}
-                unit="grams"
-              />
-            </Grid>
-          </CardContent>
-        </Card>
+        <MacroProgressCards nutrientInfo={props.recipe} />
         <Link href={props.recipe.url} underline="hover" target={'_blank'}>
           <Card sx={{ marginTop: '2rem', width: 'fit' }}>
             <CardContent sx={{ color: 'primary' }}>

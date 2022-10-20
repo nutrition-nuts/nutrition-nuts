@@ -1,14 +1,15 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
-import { RecipeModel } from '../../../models/recipeModels'
+import { RecipeModel } from '../../../../models/recipeModels'
 import { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import TabPanel from '../../TabPanel'
+import TabPanel from '../../../TabPanel'
 import RecipeModalOverview from './recipeModalOverview'
 import RecipeModalDirections from './recipeModalDirections'
 import RecipeModalNutritionDetails from './recipeModalNutritionDetails'
+import { modalStyle } from '../modalStyle'
 
 interface Props {
   open: boolean
@@ -17,18 +18,6 @@ interface Props {
 }
 
 export default function RecipeModal(props: Props) {
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '90%',
-    bgcolor: 'background.paper',
-    overflow: 'auto',
-    height: '85%',
-    p: 4
-  }
-
   function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
@@ -49,7 +38,7 @@ export default function RecipeModal(props: Props) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={modalStyle}>
         <Box sx={{ width: '100%' }}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {props.recipe.name}
@@ -65,7 +54,7 @@ export default function RecipeModal(props: Props) {
             <RecipeModalOverview recipe={props.recipe} />
           </TabPanel>
           <TabPanel value={tab} index={1}>
-            <RecipeModalNutritionDetails recipe={props.recipe} />
+            <RecipeModalNutritionDetails nutrients={props.recipe} />
           </TabPanel>
           <TabPanel value={tab} index={2}>
             <RecipeModalDirections recipe={props.recipe} />

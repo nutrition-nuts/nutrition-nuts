@@ -1,14 +1,14 @@
-import { RecipeModel } from '../../../models/recipeModels'
+import { NutrientInfoModel } from '../../../models/recipeModels'
 import { Nutrient } from '../../../utils/nutrient'
 import { getPercentageOfDailyRecommendation } from '../../../utils/nutritionRecommendations'
 import './nutritionFacts.css'
 
 interface Props {
-  recipe: RecipeModel
+  nutrients: NutrientInfoModel
 }
 
 export default function NutritionFacts(props: Props) {
-  const recipe = props.recipe
+  const recipe = props.nutrients
   return (
     <div>
       <section className="performance-facts">

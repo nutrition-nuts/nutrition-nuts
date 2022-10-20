@@ -1,6 +1,6 @@
 import { RecipeModel } from '../../models/recipeModels'
 import { useEffect, useState } from 'react'
-import RecipeModal from './modal/recipeModal'
+import RecipeModal from './modal/recipe/recipeModal'
 import Pagination from '@mui/material/Pagination'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
