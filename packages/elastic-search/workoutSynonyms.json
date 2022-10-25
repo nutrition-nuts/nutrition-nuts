@@ -14,9 +14,9 @@
           "ignore_case": "true",
           "type": "synonym",
           "synonyms": [
-            "arms => biceps, triceps, forearms",
-            "legs => calves, hamstrings, glutes, adductors, quadriceps",
-            "shoulders => traps",
+            "arms,arm => biceps, triceps, forearms",
+            "legs,leg => calves, hamstrings, glutes, adductors, quadriceps",
+            "shoulders,shoulder => traps",
             "abs => abdominals",
             "back => lats"
           ]
