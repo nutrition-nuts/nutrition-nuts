@@ -9,7 +9,6 @@ const PAGE_SIZE = 5
 
 // POST /recipes
 router.post('/', async (req, res, next) => {
-  console.log(req.body)
   const { query, page, allergies } = req.body
 
   if (page && (!Number(page) || Number(page) < 1)) {
