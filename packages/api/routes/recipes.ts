@@ -7,17 +7,14 @@ const router = express.Router()
 
 const PAGE_SIZE = 5
 
-// GET /recipes
-router.get('/', async(req, res, next) => {
-  if (
-    req.query.page &&
-    (!Number(req.query.page) || Number(req.query.page) < 1)
-  ) {
+// POST /recipes
+router.post('/', async (req, res, next) => {
+  const { query, page, allergies } = req.body
+
+  if (page && (!Number(page) || Number(page) < 1)) {
     return res.status(400).send()
   }
-  const page = Number(req.query.page ?? 0)
 
-  const allergies = JSON.parse(String(req.query.allergies))
   for (let i = 0; i < allergies.length; i++) {
     allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
   }
@@ -56,7 +53,7 @@ router.get('/', async(req, res, next) => {
               },
               {
                 query_string: {
-                  query: String(req.query.query),
+                  query: String(query),
                   fields: ['name^2.0', 'ingredients']
                 }
               }
