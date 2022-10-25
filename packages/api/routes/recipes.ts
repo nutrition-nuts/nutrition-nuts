@@ -22,11 +22,18 @@ router.post('/', async (req, res, next) => {
   for (let i = 0; i < allergies.length; i++) {
     for (let j = 0; j < allergies[i].length; j++) {
       filters.push({
-        match: { ingredients: { query: allergies[i][j], fuzziness: 1 } }
+        match: { ingredients: { query: allergies[i][j], operator: 'and' } }
       })
     }
   }
-  let foundStuff, hits, hasMorePages
+  var hits, foundStuff, hasMorePages
+  /*
+    Convention for foundStuff and hasMorePages is
+    00 -> no results, query defaults to random stuff
+    01 -> nothing was typed, query defaults to random stuff
+    10 -> results found, nothing more to display
+    11 -> results found, more to display
+  */
   try {
     hits = await elasticSearchClient
       .search({
