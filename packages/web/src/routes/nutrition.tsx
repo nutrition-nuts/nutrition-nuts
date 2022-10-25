@@ -11,6 +11,7 @@ import StyledTextField from '../components/StyledTextField'
 import { Meal } from '../utils/meal'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import DailySummaryModal from '../components/nutrition/modal/dailySummary/dailySummaryModal'
+import { getListFromLocalStorage } from '../utils/genericUtils'
 
 export default function Nutrition() {
   const [breakfastResults, setBreakfastResults] = useState<RecipeModel[]>([])
@@ -41,11 +42,8 @@ export default function Nutrition() {
   )
 
   const makeGetRecipeRequest = async (query: string, page: number) => {
-    return await getRecipes(
-      query,
-      localStorage.getItem('allergies') ?? '[]',
-      page.toString()
-    )
+    const allergies = getListFromLocalStorage<string>('allergies')
+    return await getRecipes(query, allergies, page)
   }
 
   const onFindRecipesButtonClick = async () => {
