@@ -41,12 +41,12 @@ export default function Nutrition() {
     Date.now()
   )
 
-  const makeGetRecipeRequest = async (query: string, page: number) => {
+  const makeGetRecipeRequest = async(query: string, page: number) => {
     const allergies = getListFromLocalStorage<string>('allergies')
     return await getRecipes(query, allergies, page)
   }
 
-  const onFindRecipesButtonClick = async () => {
+  const onFindRecipesButtonClick = async() => {
     setRecipeButtonClickedTime(Date.now())
     const breakfast = await makeGetRecipeRequest(breakfastInput, 1)
     // console.log(breakfast)
@@ -63,7 +63,7 @@ export default function Nutrition() {
     setDinnerHasMorePages(dinner.hasMorePages)
   }
 
-  const getMoreRecipes = async (page: number, meal: Meal) => {
+  const getMoreRecipes = async(page: number, meal: Meal) => {
     let mealResults: {
       recipes: RecipeModel[]
       foundStuff: boolean
@@ -168,7 +168,7 @@ export default function Nutrition() {
             <FormControl sx={{ m: 1 }}>
               <Button
                 variant="contained"
-                onClick={async () => await onFindRecipesButtonClick()}
+                onClick={async() => await onFindRecipesButtonClick()}
               >
                 Find me recipes!
               </Button>

@@ -36,13 +36,13 @@ class Form extends Component {
     possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy']
   }
 
-  handleChange = (event: { target: { name: any; value: any } }) => {
+  handleChange = (event: { target: { name: any, value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value.replace(/[^0-9]/gi, '')
     })
   }
 
-  handleChangeS = (event: { target: { name: any; value: any } }) => {
+  handleChangeS = (event: { target: { name: any, value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value.replace(/[^a-z -]/gi, '')
     })

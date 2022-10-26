@@ -31,7 +31,7 @@ export default function Workouts() {
     'Olympic Weightlifting'
   ]
 
-  const makeGetWorkoutRequest = async (
+  const makeGetWorkoutRequest = async(
     type: string,
     group: string,
     equip: string
@@ -39,7 +39,7 @@ export default function Workouts() {
     return await getWorkout(type, group, equip)
   }
 
-  const onFindWorkoutsButtonClick = async () => {
+  const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
     // console.log(res)
     setWorkouts(res)
@@ -111,7 +111,7 @@ export default function Workouts() {
             <FormControl sx={{ m: 1 }}>
               <Button
                 variant="contained"
-                onClick={async () => await onFindWorkoutsButtonClick()}
+                onClick={async() => await onFindWorkoutsButtonClick()}
                 style={{
                   background: '#506f8c'
                 }}
