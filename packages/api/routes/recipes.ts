@@ -2,6 +2,7 @@ import { QueryDslQueryContainer } from '@elastic/elasticsearch/lib/api/types'
 import express from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
 import { allergyThesaurus } from '../thesaurus'
+import getRecipesRequestSchema from '../schemas/requests/getRecipesRequest'
 
 const router = express.Router()
 
@@ -9,23 +10,23 @@ const PAGE_SIZE = 5
 
 // POST /recipes
 router.post('/', async (req, res, next) => {
-  const { query, page, allergies } = req.body
-
-  if (page && (!Number(page) || Number(page) < 1)) {
+  if (!getRecipesRequestSchema.validate(req.body)) {
     return res.status(400).send()
   }
 
-  for (let i = 0; i < allergies.length; i++) {
-    allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
-  }
+  const { query, page, allergies } = req.body
+
   const filters: QueryDslQueryContainer[] = []
-  for (let i = 0; i < allergies.length; i++) {
-    for (let j = 0; j < allergies[i].length; j++) {
+  allergies.forEach((allergy) => {
+    allergyThesaurus[allergy]?.forEach((synonym) => {
       filters.push({
-        match: { ingredients: { query: allergies[i][j], operator: 'and' } }
+        match: {
+          ingredients: { query: synonym, operator: 'and' }
+        }
       })
-    }
-  }
+    })
+  })
+
   var hits, foundStuff, hasMorePages
   /*
     Convention for foundStuff and hasMorePages is
