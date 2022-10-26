@@ -9,7 +9,7 @@ const router = express.Router()
 const PAGE_SIZE = 5
 
 // POST /recipes
-router.post('/', async (req, res, next) => {
+router.post('/', async(req, res, next) => {
   if (!getRecipesRequestSchema.validate(req.body)) {
     return res.status(400).send()
   }
@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
     })
   })
 
-  var hits, foundStuff, hasMorePages
+  let hits, foundStuff, hasMorePages
   /*
     Convention for foundStuff and hasMorePages is
     00 -> no results, query defaults to random stuff
