@@ -311,11 +311,12 @@ class Form extends Component {
                     </label>
                   </div>
 
-                  <div className="profile-item">
+                  {/* <div className="profile-item">
                     <label htmlFor="dr">
                       Dietary Restrictions: {this.state.dr}
                     </label>
-                  </div>
+                  </div> */}
+
                   <div className="profile-item">
                     <label htmlFor="allergies">
                       Allergies: {this.state.allergies.join(', ')}
