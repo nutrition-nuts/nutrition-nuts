@@ -1,7 +1,7 @@
 import { post } from './requests'
 import { WorkoutModel } from '../models/workoutModels'
 
-export const getWorkout = async (
+export const getWorkout = async(
   type: string,
   group: string,
   equip: string
