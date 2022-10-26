@@ -139,7 +139,7 @@ export default function Nutrition() {
               variant="outlined"
               sx={{ m: 1 }}
               onChange={(e) => {
-                setBreakfastInput(e.target.value)
+                setBreakfastInput(e.target.value.replace(/[^a-z ]/gi, ''))
               }}
             ></StyledTextField>
 
@@ -150,7 +150,7 @@ export default function Nutrition() {
               variant="outlined"
               sx={{ m: 1 }}
               onChange={(e) => {
-                setLunchInput(e.target.value)
+                setLunchInput(e.target.value.replace(/[^a-z ]/gi, ''))
               }}
             ></StyledTextField>
 
@@ -161,7 +161,7 @@ export default function Nutrition() {
               variant="outlined"
               sx={{ m: 1 }}
               onChange={(e) => {
-                setDinnerInput(e.target.value)
+                setDinnerInput(e.target.value.replace(/[^a-z ]/gi, ''))
               }}
             ></StyledTextField>
 

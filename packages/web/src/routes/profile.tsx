@@ -14,7 +14,7 @@ import { possibleAllergies } from '../utils/allergy'
 
 function getAllergiesFromLocalStorage() {
   try {
-    return (JSON.parse(localStorage.getItem('allergies') ?? ''))
+    return JSON.parse(localStorage.getItem('allergies') ?? '')
   } catch (error) {
     return []
   }
@@ -38,7 +38,13 @@ class Form extends Component {
 
   handleChange = (event: { target: { name: any; value: any } }) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value.replace(/[^0-9]/gi, '')
+    })
+  }
+
+  handleChangeS = (event: { target: { name: any; value: any } }) => {
+    this.setState({
+      [event.target.name]: event.target.value.replace(/[^a-z -]/gi, '')
     })
   }
 
@@ -109,7 +115,7 @@ class Form extends Component {
                       type="text"
                       name="name"
                       value={this.state.name}
-                      onChange={this.handleChange}
+                      onChange={this.handleChangeS}
                     />
                   </div>
 

@@ -5,7 +5,14 @@ import { getWorkout } from '../requests/workout'
 import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
-import { Button, FormControl, MenuItem, Checkbox, FormControlLabel, Box } from '@mui/material'
+import {
+  Button,
+  FormControl,
+  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  Box
+} from '@mui/material'
 import StyledTextField from '../components/StyledTextField'
 
 export default function Workouts() {
@@ -14,13 +21,25 @@ export default function Workouts() {
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
 
-  const workoutTypes = ['Strength', 'Stretching', 'Cardio', 'Plyometrics', 'Powerlifting', 'Strongman', 'Olympic Weightlifting']
+  const workoutTypes = [
+    'Strength',
+    'Stretching',
+    'Cardio',
+    'Plyometrics',
+    'Powerlifting',
+    'Strongman',
+    'Olympic Weightlifting'
+  ]
 
-  const makeGetWorkoutRequest = async(type: string, group: string, equip: string) => {
+  const makeGetWorkoutRequest = async (
+    type: string,
+    group: string,
+    equip: string
+  ) => {
     return await getWorkout(type, group, equip)
   }
 
-  const onFindWorkoutsButtonClick = async() => {
+  const onFindWorkoutsButtonClick = async () => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
     // console.log(res)
     setWorkouts(res)
@@ -33,37 +52,44 @@ export default function Workouts() {
       <div className="recipe-container">
         <div className="recipe-search">
           <h2 id="search-header">Workout Info</h2>
-          <Box display="flex" style={{
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
+          <Box
+            display="flex"
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
             <StyledTextField
-                id="workout-type"
-                label="Workout Type"
-                sx={{ m: 1, minWidth: 200 }}
-                value={workoutType}
-                onChange={(e) => {
-                  setWorkoutType(e.target.value)
-                }}
-                select
+              id="workout-type"
+              label="Workout Type"
+              sx={{ m: 1, minWidth: 200 }}
+              value={workoutType}
+              onChange={(e) => {
+                setWorkoutType(e.target.value)
+              }}
+              select
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
               {workoutTypes.map((type) => {
-                return <MenuItem value={type.toLowerCase()} key={type}>{type}</MenuItem>
+                return (
+                  <MenuItem value={type.toLowerCase()} key={type}>
+                    {type}
+                  </MenuItem>
+                )
               })}
             </StyledTextField>
 
             <StyledTextField
-                id="muscle-group"
-                value={muscleInput}
-                label="Muscle Group"
-                variant="outlined"
-                sx={{ m: 1 }}
-                onChange={(e) => {
-                  setMuscleInput(e.target.value)
-                }}
+              id="muscle-group"
+              value={muscleInput}
+              label="Muscle Group"
+              variant="outlined"
+              sx={{ m: 1 }}
+              onChange={(e) => {
+                setMuscleInput(e.target.value.replace(/[^a-z ]/gi, ''))
+              }}
             ></StyledTextField>
 
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -85,7 +111,7 @@ export default function Workouts() {
             <FormControl sx={{ m: 1 }}>
               <Button
                 variant="contained"
-                onClick={async() => await onFindWorkoutsButtonClick()}
+                onClick={async () => await onFindWorkoutsButtonClick()}
                 style={{
                   background: '#506f8c'
                 }}
