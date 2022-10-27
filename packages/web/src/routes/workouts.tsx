@@ -43,7 +43,7 @@ export default function Workouts() {
       <div className="recipe-container">
         <div className = "recipe-search">
         <h2 id="search-header">Workout Info</h2>
-        <Grid container >
+        <Grid container direction ="row" alignItems="stretch" justifyContent="space-around">
               <Grid item xs={12} md={3}>
                 <StyledTextField
                     id="workout-type"
