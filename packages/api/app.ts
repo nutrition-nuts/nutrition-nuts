@@ -5,7 +5,6 @@ import path from 'path'
 import errors from './routes/errors'
 import cors from 'cors'
 
-import testRouter from './routes/test'
 import workoutRouter from './routes/workouts'
 import recipeRouter from './routes/recipes'
 
@@ -29,7 +28,6 @@ app.use(
 app.use(express.static(path.join(__dirname, 'public')))
 
 // register endpoint route controllers
-app.use('/test', testRouter)
 app.use('/workouts', workoutRouter)
 app.use('/recipes', recipeRouter)
 // 404 handling
