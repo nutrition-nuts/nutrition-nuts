@@ -63,7 +63,7 @@ export default function Workouts() {
                       }}
                   ></StyledTextField>
               </Grid>
-              <Grid item xs={12} md={3} >
+              <Grid item xs={12} md={2} >
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                   <FormControlLabel
                     control={
