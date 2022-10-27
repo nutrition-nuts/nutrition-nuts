@@ -48,7 +48,7 @@ export default function Workouts() {
                 <StyledTextField
                     id="workout-type"
                     label="Workout Type"
-                    sx={{ m: 1, minWidth: 200 }}
+                    sx={{ m: 1, minWidth: 210 }}
                     value={workoutType}
                     onChange={(e) => {
                       setWorkoutType(e.target.value)
@@ -69,7 +69,7 @@ export default function Workouts() {
                       value={muscleInput}
                       label="Muscle Group"
                       variant="outlined"
-                      sx={{ m: 1 }}
+                      sx={{ m: 1, minWidth: 210 }}
                       onChange={(e) => {
                         setMuscleInput(e.target.value.replace(/[^a-z ]/gi, ''))
                       }}
