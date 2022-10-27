@@ -13,9 +13,21 @@ export default function Workouts() {
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
 
-  const workoutTypes = ['Strength', 'Stretching', 'Cardio', 'Plyometrics', 'Powerlifting', 'Strongman', 'Olympic Weightlifting']
+  const workoutTypes = [
+    'Strength',
+    'Stretching',
+    'Cardio',
+    'Plyometrics',
+    'Powerlifting',
+    'Strongman',
+    'Olympic Weightlifting'
+  ]
 
-  const makeGetWorkoutRequest = async(type: string, group: string, equip: string) => {
+  const makeGetWorkoutRequest = async(
+    type: string,
+    group: string,
+    equip: string
+  ) => {
     return await getWorkout(type, group, equip)
   }
 
@@ -59,7 +71,7 @@ export default function Workouts() {
                       variant="outlined"
                       sx={{ m: 1 }}
                       onChange={(e) => {
-                        setMuscleInput(e.target.value)
+                        setMuscleInput(e.target.value.replace(/[^a-z ]/gi, ''))
                       }}
                   ></StyledTextField>
               </Grid>

@@ -1,12 +1,18 @@
 import express from 'express'
 import fetchWorkouts from '../utils/fetchWorkouts.js'
+import getWorkoutsRequest from '../schemas/requests/getWorkoutsRequest.js'
+
 const router = express.Router()
 
-// GET /workouts
-router.get('/', async(req, res) => {
-  const { type, group, equip } = req.query
+// POST /workouts
+router.post('/', async(req, res) => {
+  if (!getWorkoutsRequest.validate(req.body)) {
+    return res.status(400).send()
+  }
 
-  const hits = await fetchWorkouts(String(type), String(group), String(equip))
+  const { type, group, equip } = req.body
+
+  const hits = await fetchWorkouts(type, group, equip)
 
   const workout = JSON.parse(JSON.stringify(hits))
   res.send(workout)

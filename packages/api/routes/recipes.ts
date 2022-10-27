@@ -2,34 +2,39 @@ import { QueryDslQueryContainer } from '@elastic/elasticsearch/lib/api/types'
 import express from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
 import { allergyThesaurus } from '../thesaurus'
+import getRecipesRequestSchema from '../schemas/requests/getRecipesRequest'
 
 const router = express.Router()
 
 const PAGE_SIZE = 5
 
-// GET /recipes
-router.get('/', async(req, res, next) => {
-  if (
-    req.query.page &&
-    (!Number(req.query.page) || Number(req.query.page) < 1)
-  ) {
+// POST /recipes
+router.post('/', async(req, res, next) => {
+  if (!getRecipesRequestSchema.validate(req.body)) {
     return res.status(400).send()
   }
-  const page = Number(req.query.page ?? 0)
 
-  const allergies = JSON.parse(String(req.query.allergies))
-  for (let i = 0; i < allergies.length; i++) {
-    allergies[i] = allergyThesaurus[allergies[i] as keyof typeof String]
-  }
+  const { query, page, allergies } = req.body
+
   const filters: QueryDslQueryContainer[] = []
-  for (let i = 0; i < allergies.length; i++) {
-    for (let j = 0; j < allergies[i].length; j++) {
+  allergies.forEach((allergy) => {
+    allergyThesaurus[allergy]?.forEach((synonym) => {
       filters.push({
-        match: { ingredients: { query: allergies[i][j], fuzziness: 1 } }
+        match: {
+          ingredients: { query: synonym, operator: 'and' }
+        }
       })
-    }
-  }
-  var foundStuff, hits, hasMorePages
+    })
+  })
+
+  let hits, foundStuff, hasMorePages
+  /*
+    Convention for foundStuff and hasMorePages is
+    00 -> no results, query defaults to random stuff
+    01 -> nothing was typed, query defaults to random stuff
+    10 -> results found, nothing more to display
+    11 -> results found, more to display
+  */
   try {
     hits = await elasticSearchClient
       .search({
@@ -49,7 +54,7 @@ router.get('/', async(req, res, next) => {
               },
               {
                 query_string: {
-                  query: String(req.query.query),
+                  query: String(query),
                   fields: ['name^2.0', 'ingredients']
                 }
               }
