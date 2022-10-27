@@ -1,11 +1,11 @@
-import express from 'express'
-import fetchWorkouts from '../utils/fetchWorkouts.js'
-import getWorkoutsRequest from '../schemas/requests/getWorkoutsRequest.js'
+import express, { RequestHandler } from 'express'
+import fetchWorkouts from '../utils/fetchWorkouts'
+import getWorkoutsRequest from '../schemas/requests/getWorkoutsRequest'
 
 const router = express.Router()
 
 // POST /workouts
-router.post('/', async(req, res) => {
+export const handleWorkoutsPost: RequestHandler = async (req, res, next) => {
   if (!getWorkoutsRequest.validate(req.body)) {
     return res.status(400).send()
   }
@@ -16,5 +16,7 @@ router.post('/', async(req, res) => {
 
   const workout = JSON.parse(JSON.stringify(hits))
   res.send(workout)
-})
+}
+router.post('/', handleWorkoutsPost)
+
 export default router

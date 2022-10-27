@@ -3,13 +3,14 @@ import express from 'express'
 import elasticSearchClient from '../elastic/elastic-client'
 import { allergyThesaurus } from '../thesaurus'
 import getRecipesRequestSchema from '../schemas/requests/getRecipesRequest'
+import { RequestHandler } from 'express-serve-static-core'
 
 const router = express.Router()
 
 const PAGE_SIZE = 5
 
 // POST /recipes
-router.post('/', async(req, res, next) => {
+export const handleRecipesPost: RequestHandler = async (req, res, next) => {
   if (!getRecipesRequestSchema.validate(req.body)) {
     return res.status(400).send()
   }
@@ -111,6 +112,8 @@ router.post('/', async(req, res, next) => {
     hasMorePages = true
   }
   res.send([hits, foundStuff, hasMorePages])
-})
+}
+
+router.post('/', handleRecipesPost)
 
 export default router
