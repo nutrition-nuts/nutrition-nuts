@@ -19,7 +19,7 @@ export default function Nutrition() {
   const [lunchInput, setLunchInput] = useState('')
   const [dinnerInput, setDinnerInput] = useState('')
 
-  const makeGetRecipeRequest = async (query: string) => {
+  const makeGetRecipeRequest = async(query: string) => {
     return await getRecipes(query, localStorage.getItem('allergies') ?? '')
     // const allergies = localStorage.getItem('allergies') ?? ''
     // return await getRecipes(query, Array(JSON.parse(allergies)))
@@ -54,9 +54,14 @@ export default function Nutrition() {
                   value={ breakfastInput }
                   label="Breakfast"
                   variant="outlined"
-                  sx={{ m: 1, backgroundColor: 'white' }}
+                  sx={{ m: 1 }}
                   onChange={(e) => {
                     setBreakfastInput(e.target.value)
+                  }}
+                  InputProps={{
+                    style: {
+                      color: 'white'
+                    }
                   }}
               ></StyledTextField>
 
@@ -65,9 +70,14 @@ export default function Nutrition() {
                   value={ lunchInput }
                   label="Lunch"
                   variant="outlined"
-                  sx={{ m: 1, backgroundColor: 'white' }}
+                  sx={{ m: 1 }}
                   onChange={(e) => {
                     setLunchInput(e.target.value)
+                  }}
+                  InputProps={{
+                    style: {
+                      color: 'white'
+                    }
                   }}
               ></StyledTextField>
 
@@ -76,9 +86,14 @@ export default function Nutrition() {
                   value={ dinnerInput }
                   label="Dinner"
                   variant="outlined"
-                  sx={{ m: 1, backgroundColor: 'white' }}
+                  sx={{ m: 1 }}
                   onChange={(e) => {
                     setDinnerInput(e.target.value)
+                  }}
+                  InputProps={{
+                    style: {
+                      color: 'white'
+                    }
                   }}
               ></StyledTextField>
 
@@ -87,7 +102,7 @@ export default function Nutrition() {
                 variant="contained"
                 onClick={async() => await onFindRecipesButtonClick()}
                 style={{
-                  background: 'black'
+                  background: '#617c93'
                 }}
               >
                 Find me recipes!

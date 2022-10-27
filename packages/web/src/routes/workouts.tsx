@@ -40,10 +40,15 @@ export default function Workouts() {
             <StyledTextField
                 id="workout-type"
                 label="Workout Type"
-                sx={{ m: 1, minWidth: 200, backgroundColor: 'white' }}
+                sx={{ m: 1, minWidth: 200 }}
                 value={workoutType}
                 onChange={(e) => {
                   setWorkoutType(e.target.value)
+                }}
+                InputProps={{
+                  style: {
+                    color: 'white'
+                  }
                 }}
                 select
             >
@@ -60,9 +65,14 @@ export default function Workouts() {
                 value={muscleInput}
                 label="Muscle Group"
                 variant="outlined"
-                sx={{ m: 1, backgroundColor: 'white' }}
+                sx={{ m: 1 }}
                 onChange={(e) => {
                   setMuscleInput(e.target.value)
+                }}
+                InputProps={{
+                  style: {
+                    color: 'white'
+                  }
                 }}
             ></StyledTextField>
 
@@ -74,7 +84,7 @@ export default function Workouts() {
                       setEquipment(e.target.checked ? 'on' : 'off')
                     }}
                     style={{
-                      color: '#506f8c'
+                      color: '#617c93'
                     }}
                   />
                 }
@@ -87,7 +97,7 @@ export default function Workouts() {
                 variant="contained"
                 onClick={async() => await onFindWorkoutsButtonClick()}
                 style={{
-                  background: 'black'
+                  background: '#617c93'
                 }}
               >
                 Find me a workout!

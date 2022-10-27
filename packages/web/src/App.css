@@ -46,8 +46,12 @@ a {
   color: white;
 }
 
+.header-link {
+  color: rgb(151 186 218);
+}
+
 .header-link:hover {
-  color: black;
+  color: rgb(80, 111, 140);
   cursor: pointer;
 }
 

@@ -1,11 +1,12 @@
 .profile-container {
   display: grid;
-  margin: 0.5rem;
+  margin: 1rem 10% 1rem 10%;
   padding: 0 0 0 0;
-  border: 3px solid black;
+  border: 3px solid #617c93;
+  border-radius: 10px;
+  background: #1b1b1b;
 }
 .profile-item {
-  background: #1b1b1b;
   color: white;
   padding: 1rem;
   font-size: 30px;

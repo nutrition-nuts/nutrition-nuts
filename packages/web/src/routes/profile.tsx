@@ -133,7 +133,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: 'black' }}
+                      sx={{ marginLeft: '1rem', background: '#617c93' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CALORIES)
@@ -158,7 +158,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: 'black' }}
+                      sx={{ marginLeft: '1rem', background: '#617c93' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.PROTEIN)
@@ -185,7 +185,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: 'black' }}
+                      sx={{ marginLeft: '1rem', background: '#617c93' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
@@ -210,7 +210,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: 'black' }}
+                      sx={{ marginLeft: '1rem', background: '#617c93' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.FAT)
@@ -254,7 +254,7 @@ class Form extends Component {
                   <div className="profile-item">
                     <Button
                       variant="contained"
-                      sx={{ background: 'black' }}
+                      sx={{ background: '#617c93' }}
                       type="submit"
                     >
                       Save
