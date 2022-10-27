@@ -10,7 +10,12 @@ export default function CircularProgressWithLabel(
 ) {
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-      <CircularProgress variant="determinate" {...props} />
+      <CircularProgress
+        variant="determinate"
+        color={props.value > 100 ? 'error' : 'primary'}
+        {...props}
+        value={Math.min(100, props.value)}
+      />
       <Box
         sx={{
           top: 0,

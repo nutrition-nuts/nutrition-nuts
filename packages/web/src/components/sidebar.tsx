@@ -94,25 +94,36 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <a href="/">Nutrion Nuts</a>
+            <a href="/">Nutrition Nuts</a>
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
         sx={{
-          width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: 'white'
+            backgroundColor: '#2a2a2b',
+            color: 'white',
+            boxShadow: '5px 0 15px 5px #1b1b1b'
+          },
+          '& .MuiDivider-root': {
+            borderColor: '#1b1b1b'
+          },
+          '& .MuiSvgIcon-root': {
+            color: 'white'
           }
         }}
         variant="persistent"
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader
+          sx={{
+            backgroundColor: 'grey'
+          }}
+        >
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>

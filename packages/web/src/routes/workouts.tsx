@@ -5,24 +5,43 @@ import { getWorkout } from '../requests/workout'
 import Sidebar from '../components/sidebar'
 import Workout from '../components/workout'
 import { WorkoutModel } from '../models/workoutModels'
-import { Button, FormControl, MenuItem, Checkbox, FormControlLabel, Box } from '@mui/material'
+import {
+  Button,
+  FormControl,
+  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  Box
+} from '@mui/material'
 import StyledTextField from '../components/StyledTextField'
 
 export default function Workouts() {
-  const [workouts, setWorkouts] = useState<WorkoutModel[]>([])
+  const [workouts, setWorkouts] = useState<WorkoutModel[][]>([])
   const [workoutType, setWorkoutType] = useState('')
   const [muscleInput, setMuscleInput] = useState('')
   const [equipment, setEquipment] = useState('off')
 
-  const workoutTypes = ['Strength', 'Stretching', 'Cardio', 'Plyometrics', 'Powerlifting', 'Strongman', 'Olympic Weightlifting']
+  const workoutTypes = [
+    'Strength',
+    'Stretching',
+    'Cardio',
+    'Plyometrics',
+    'Powerlifting',
+    'Strongman',
+    'Olympic Weightlifting'
+  ]
 
-  const makeGetWorkoutRequest = async(type: string, group: string, equip: string) => {
+  const makeGetWorkoutRequest = async(
+    type: string,
+    group: string,
+    equip: string
+  ) => {
     return await getWorkout(type, group, equip)
   }
 
   const onFindWorkoutsButtonClick = async() => {
     const res = await makeGetWorkoutRequest(workoutType, muscleInput, equipment)
-    console.log(res)
+    // console.log(res)
     setWorkouts(res)
   }
 
@@ -33,10 +52,13 @@ export default function Workouts() {
       <div className="recipe-container">
         <div className="recipe-search">
           <h2 id="search-header">Workout Info</h2>
-          <Box display="flex" style={{
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
+          <Box
+            display="flex"
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
             <StyledTextField
                 id="workout-type"
                 label="Workout Type"
@@ -56,7 +78,11 @@ export default function Workouts() {
                 <em>None</em>
               </MenuItem>
               {workoutTypes.map((type) => {
-                return <MenuItem value={type.toLowerCase()} key={type}>{type}</MenuItem>
+                return (
+                  <MenuItem value={type.toLowerCase()} key={type}>
+                    {type}
+                  </MenuItem>
+                )
               })}
             </StyledTextField>
 

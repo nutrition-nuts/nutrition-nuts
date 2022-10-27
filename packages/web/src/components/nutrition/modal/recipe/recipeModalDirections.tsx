@@ -1,4 +1,4 @@
-import { RecipeModel } from '../../../models/recipeModels'
+import { RecipeModel } from '../../../../models/recipeModels'
 
 interface Props {
   recipe: RecipeModel

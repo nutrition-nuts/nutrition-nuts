@@ -1,30 +1,46 @@
-import { useState } from 'react'
+import { Button, Grid, Typography } from '@mui/material'
 import './App.css'
-import { getTest } from './requests/test'
 import Sidebar from './components/sidebar'
+import heroImage from './images/recipe-book-hero.png'
 
 function App() {
-  const [message, setMessage] = useState('')
-
-  const testRequest = async() => {
-    const res = await getTest()
-
-    // super hacky. ideally the backend will do this nonsense and send us a format we expect. just for the test endpoint
-    setMessage(
-      JSON.stringify(res?.data?.data[0]) ??
-        'bad request. Make sure server is running!'
-    )
-  }
-
   return (
     <div className="App">
       <Sidebar />
 
-      <header className="App-header">
-        <h1>Home page that might have cool stuff on it eventually</h1>
-        <button onClick={testRequest}>Fetch from backend API</button>
-        <div className="message">{message}</div>
-      </header>
+      <Grid container>
+        <Grid item xs={2}></Grid>
+        <Grid item xs={4}>
+          <h1 id="app-hero">Nutrition Nuts 🌰</h1>
+          <Typography color={'secondary'} fontSize="2rem">
+            Recipes & Workouts for a Healthier You
+          </Typography>
+          <Button
+            href="/profile"
+            variant="contained"
+            style={{ margin: '1rem' }}
+          >
+            Profile
+          </Button>
+          <Button
+            href="/nutrition"
+            variant="contained"
+            style={{ margin: '1rem' }}
+          >
+            Recipes
+          </Button>
+          <Button
+            href="/workouts"
+            variant="contained"
+            style={{ margin: '1rem' }}
+          >
+            Workouts
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <img id="hero-image" src={heroImage} />
+        </Grid>
+      </Grid>
     </div>
   )
 }

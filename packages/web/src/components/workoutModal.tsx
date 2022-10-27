@@ -18,7 +18,7 @@ export default function WorkoutModal(props: Props) {
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    overflow: 'scroll',
+    overflow: 'auto',
     height: '80%',
     boxShadow: 24,
     p: 4
@@ -41,13 +41,14 @@ export default function WorkoutModal(props: Props) {
         >
           {props.workout.category} Workout
         </Typography>
-        {props.workout.videoID != null && (
+        {props.workout.youtubeID != null && (
           <iframe
-            src={'https://www.youtube.com/embed/' + props.workout.videoID}
+            src={'https://www.youtube.com/embed/' + props.workout.youtubeID}
             title="YouTube video player"
             frameBorder="0"
             className="youtubeEmbed"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           ></iframe>
         )}
         <h4>Instructions:</h4>

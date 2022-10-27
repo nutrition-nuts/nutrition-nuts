@@ -10,6 +10,7 @@ const allergyThesaurus: thesaurus = {
   Peanuts: [
     'peanut',
     'peanuts',
+    'Arachis',
     'Arachis oil',
     'peanut oil',
     'Ground nuts',
@@ -74,22 +75,20 @@ const allergyThesaurus: thesaurus = {
     'Tilapia',
     'Trout',
     'Tuna',
-    'Worcestershire sauce'
+    'Worcestershire'
   ],
   Eggs: [
     'Albumin',
     'albumen',
     'Egg',
     'eggs',
-    'egg white',
-    'egg whites',
+    'whites',
     'egg yolk',
     'egg yolks',
     'Eggnog',
     'Mayonnaise',
     'mayo',
-    'Meringue',
-    'meringue powder'
+    'Meringue'
   ],
   Soy: [
     'Edamame',

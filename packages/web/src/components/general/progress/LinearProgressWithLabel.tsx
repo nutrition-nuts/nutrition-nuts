@@ -21,7 +21,12 @@ export default function LinearProgressWithLabel(
           </Grid>
         </Grid>
         <Typography></Typography>
-        <LinearProgress variant="determinate" {...props} />
+        <LinearProgress
+          variant="determinate"
+          color={props.value > 100 ? 'error' : 'primary'}
+          {...props}
+          value={Math.min(100, props.value)}
+        />
       </Box>
     </>
   )
