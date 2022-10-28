@@ -139,7 +139,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#617c93' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CALORIES)
@@ -164,7 +164,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#617c93' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.PROTEIN)
@@ -191,7 +191,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#617c93' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
@@ -216,7 +216,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#617c93' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.FAT)

@@ -122,9 +122,6 @@ export default function Workouts() {
               <Button
                 variant="contained"
                 onClick={async() => await onFindWorkoutsButtonClick()}
-                style={{
-                  background: '#617c93'
-                }}
               >
                 Find me a workout!
               </Button>
