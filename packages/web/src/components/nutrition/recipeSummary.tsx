@@ -68,16 +68,18 @@ export default function RecipeSummary(props: Props) {
     <>
       {props.recipes.length !== 0 && props.recipes.length >= props.page && (
         <>
-          <hr />
           <Accordion expanded={expand} onChange={toggleAccordion}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
               sx={{
-                backgroundColor: '#7ea1a8',
+                backgroundColor: '#1b1b1b',
                 border: 2,
-                borderColor: '#506f8c'
+                borderColor: 'gray',
+                '& .MuiSvgIcon-root': {
+                  color: 'white'
+                }
               }}
             >
               <Typography sx={{ color: 'white', fontSize: '1.5rem' }}>
@@ -86,9 +88,10 @@ export default function RecipeSummary(props: Props) {
             </AccordionSummary>
             <AccordionDetails
               sx={{
-                backgroundColor: '#7ea1a8',
+                backgroundColor: '#1b1b1b',
                 border: 2,
-                borderColor: '#506f8c'
+                borderColor: 'gray',
+                color: 'white'
               }}
             >
               <Grid container justifyContent="center">
@@ -104,7 +107,11 @@ export default function RecipeSummary(props: Props) {
                     TransitionComponent={Zoom}
                   >
                     <IconButton>
-                      <InfoIcon />
+                      <InfoIcon
+                        sx={{
+                          color: 'white'
+                        }}
+                      />
                     </IconButton>
                   </Tooltip>
                 )}
@@ -129,6 +136,11 @@ export default function RecipeSummary(props: Props) {
                     onChange={handleChangePage}
                     color="primary"
                     className="center"
+                    sx={{
+                      '& .MuiPaginationItem-root': {
+                        color: 'white'
+                      }
+                    }}
                   />
                 </Grid>
                 {(props.hasMorePages || !props.foundStuff) && (
@@ -139,7 +151,6 @@ export default function RecipeSummary(props: Props) {
                   </Grid>
                 )}
               </Grid>
-
               <RecipeModal
                 open={open}
                 handleClose={handleClose}

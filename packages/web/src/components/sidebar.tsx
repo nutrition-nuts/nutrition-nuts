@@ -25,7 +25,7 @@ interface AppBarProps extends MuiAppBarProps {
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open'
 })<AppBarProps>(({ theme, open }) => ({
-  backgroundColor: '#6b9294',
+  backgroundColor: '#1b1b1b',
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
@@ -94,7 +94,7 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <a href="/">Nutrion Nuts</a>
+            <a href="/">Nutrition Nuts</a>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -104,14 +104,26 @@ export default function Sidebar() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: 'white'
+            backgroundColor: '#2a2a2b',
+            color: 'white',
+            boxShadow: '5px 0 15px 5px #1b1b1b'
+          },
+          '& .MuiDivider-root': {
+            borderColor: '#1b1b1b'
+          },
+          '& .MuiSvgIcon-root': {
+            color: 'white'
           }
         }}
         variant="persistent"
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader
+          sx={{
+            backgroundColor: 'grey'
+          }}
+        >
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>

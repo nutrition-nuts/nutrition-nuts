@@ -139,7 +139,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CALORIES)
@@ -164,7 +164,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.PROTEIN)
@@ -191,7 +191,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
@@ -216,7 +216,7 @@ class Form extends Component {
                       onChange={this.handleChange}
                     />
                     <Button
-                      sx={{ marginLeft: '1rem', background: '#506f8c' }}
+                      sx={{ marginLeft: '1rem' }}
                       variant="contained"
                       onClick={() => {
                         this.resetMacroToDefault(Nutrient.FAT)
@@ -260,7 +260,7 @@ class Form extends Component {
                   <div className="profile-item">
                     <Button
                       variant="contained"
-                      sx={{ background: '#506f8c' }}
+                      sx={{ background: '#617c93' }}
                       type="submit"
                     >
                       Save
@@ -326,7 +326,7 @@ class Form extends Component {
                     <Button
                       variant="contained"
                       type="submit"
-                      sx={{ background: '#506f8c' }}
+                      sx={{ background: 'black' }}
                       onClick={() => this.setState({ showForm: true })}
                     >
                       Edit

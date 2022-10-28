@@ -60,14 +60,19 @@ export default function Workouts() {
             }}
           >
             <StyledTextField
-              id="workout-type"
-              label="Workout Type"
-              sx={{ m: 1, minWidth: 200 }}
-              value={workoutType}
-              onChange={(e) => {
-                setWorkoutType(e.target.value)
-              }}
-              select
+                id="workout-type"
+                label="Workout Type"
+                sx={{ m: 1, minWidth: 200 }}
+                value={workoutType}
+                onChange={(e) => {
+                  setWorkoutType(e.target.value)
+                }}
+                InputProps={{
+                  style: {
+                    color: 'white'
+                  }
+                }}
+                select
             >
               <MenuItem value="">
                 <em>None</em>
@@ -82,14 +87,19 @@ export default function Workouts() {
             </StyledTextField>
 
             <StyledTextField
-              id="muscle-group"
-              value={muscleInput}
-              label="Muscle Group"
-              variant="outlined"
-              sx={{ m: 1 }}
-              onChange={(e) => {
-                setMuscleInput(e.target.value.replace(/[^a-z ]/gi, ''))
-              }}
+                id="muscle-group"
+                value={muscleInput}
+                label="Muscle Group"
+                variant="outlined"
+                sx={{ m: 1 }}
+                onChange={(e) => {
+                  setMuscleInput(e.target.value)
+                }}
+                InputProps={{
+                  style: {
+                    color: 'white'
+                  }
+                }}
             ></StyledTextField>
 
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -100,7 +110,7 @@ export default function Workouts() {
                       setEquipment(e.target.checked ? 'on' : 'off')
                     }}
                     style={{
-                      color: '#506f8c'
+                      color: '#617c93'
                     }}
                   />
                 }
@@ -112,9 +122,6 @@ export default function Workouts() {
               <Button
                 variant="contained"
                 onClick={async() => await onFindWorkoutsButtonClick()}
-                style={{
-                  background: '#506f8c'
-                }}
               >
                 Find me a workout!
               </Button>
