@@ -1,12 +1,18 @@
 import { styled, TextField } from '@mui/material'
 
 export default styled(TextField)({
+  '& label': {
+    color: 'white'
+  },
   '& label.Mui-focused': {
-    color: '#506f8c'
+    color: 'white'
   },
   '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
-      borderColor: '#506f8c'
+    '& fieldset': {
+      borderColor: '#617c93 !important'
+    },
+    '&:hover fieldset': {
+      borderColor: '#617c93 !important'
     }
   }
 })

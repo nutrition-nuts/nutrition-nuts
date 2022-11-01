@@ -141,6 +141,11 @@ export default function Nutrition() {
               onChange={(e) => {
                 setBreakfastInput(e.target.value.replace(/[^a-z ]/gi, ''))
               }}
+              InputProps={{
+                style: {
+                  color: 'white'
+                }
+              }}
             ></StyledTextField>
 
             <StyledTextField
@@ -151,6 +156,11 @@ export default function Nutrition() {
               sx={{ m: 1 }}
               onChange={(e) => {
                 setLunchInput(e.target.value.replace(/[^a-z ]/gi, ''))
+              }}
+              InputProps={{
+                style: {
+                  color: 'white'
+                }
               }}
             ></StyledTextField>
 
@@ -163,8 +173,12 @@ export default function Nutrition() {
               onChange={(e) => {
                 setDinnerInput(e.target.value.replace(/[^a-z ]/gi, ''))
               }}
+              InputProps={{
+                style: {
+                  color: 'white'
+                }
+              }}
             ></StyledTextField>
-
             <FormControl sx={{ m: 1 }}>
               <Button
                 variant="contained"
@@ -221,7 +235,6 @@ export default function Nutrition() {
               page={dinnerPage}
               handleChangePage={setDinnerPage}
             ></RecipeSummary>
-            <hr />
           </div>
         )}
       </div>

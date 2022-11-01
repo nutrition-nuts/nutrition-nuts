@@ -9,6 +9,6 @@ test('renders the landing page', () => {
       <App />
     </MemoryRouter>
   )
-  const linkElement = getByText(/Nutrition Nuts/i)
+  const linkElement = getByText(/Nutrition Nuts 🌰/i)
   expect(linkElement).toBeInTheDocument()
 })

@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #2b2a2a;
   min-height: 50vh;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@
 }
 
 body {
-  background: #282c34;
+  background: #2a2a2b;
 }
 
 a {
@@ -56,8 +56,12 @@ a {
   color: white;
 }
 
+.header-link {
+  color: rgb(151 186 218);
+}
+
 .header-link:hover {
-  color: white;
+  color: rgb(80, 111, 140);
   cursor: pointer;
 }
 

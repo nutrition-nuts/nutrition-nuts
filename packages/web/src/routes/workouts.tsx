@@ -53,6 +53,11 @@ export default function Workouts() {
                     onChange={(e) => {
                       setWorkoutType(e.target.value)
                     }}
+                    InputProps={{
+                      style: {
+                        color: 'white'
+                      }
+                    }}
                     select
                 >
                   <MenuItem value="">
@@ -73,6 +78,11 @@ export default function Workouts() {
                       onChange={(e) => {
                         setMuscleInput(e.target.value.replace(/[^a-z ]/gi, ''))
                       }}
+                      InputProps={{
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                   ></StyledTextField>
               </Grid>
               <Grid item xs={12} md={2} >
@@ -84,7 +94,7 @@ export default function Workouts() {
                           setEquipment(e.target.checked ? 'on' : 'off')
                         }}
                         style={{
-                          color: '#506f8c'
+                          color: '#617c93'
                         }}
                       />
                     }
@@ -97,9 +107,6 @@ export default function Workouts() {
                 <Button
                   variant="contained"
                   onClick={async() => await onFindWorkoutsButtonClick()}
-                  style={{
-                    background: '#506f8c'
-                  }}
                 >
                   Find me a workout!
                 </Button>
