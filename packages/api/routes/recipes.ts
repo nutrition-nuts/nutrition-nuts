@@ -19,13 +19,15 @@ export const handleRecipesPost: RequestHandler = async (req, res, next) => {
 
   const filters: QueryDslQueryContainer[] = []
   allergies.forEach((allergy) => {
-    allergyThesaurus[allergy]?.forEach((synonym) => {
-      filters.push({
-        match: {
-          ingredients: { query: synonym, operator: 'and' }
-        }
+    if (typeof allergyThesaurus[allergy] != 'function') {
+      allergyThesaurus[allergy]?.forEach((synonym) => {
+        filters.push({
+          match: {
+            ingredients: { query: synonym, operator: 'and' }
+          }
+        })
       })
-    })
+    }
   })
 
   let hits, foundStuff, hasMorePages
