@@ -10,7 +10,7 @@ const router = express.Router()
 const PAGE_SIZE = 5
 
 // POST /recipes
-export const handleRecipesPost: RequestHandler = async (req, res, next) => {
+export const handleRecipesPost: RequestHandler = async(req, res, next) => {
   if (!getRecipesRequestSchema.validate(req.body)) {
     return res.status(400).send()
   }
@@ -19,7 +19,7 @@ export const handleRecipesPost: RequestHandler = async (req, res, next) => {
 
   const filters: QueryDslQueryContainer[] = []
   allergies.forEach((allergy) => {
-    if (typeof allergyThesaurus[allergy] != 'function') {
+    if (typeof allergyThesaurus[allergy] !== 'function') {
       allergyThesaurus[allergy]?.forEach((synonym) => {
         filters.push({
           match: {

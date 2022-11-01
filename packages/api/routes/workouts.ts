@@ -5,7 +5,7 @@ import getWorkoutsRequest from '../schemas/requests/getWorkoutsRequest'
 const router = express.Router()
 
 // POST /workouts
-export const handleWorkoutsPost: RequestHandler = async (req, res, next) => {
+export const handleWorkoutsPost: RequestHandler = async(req, res, next) => {
   if (!getWorkoutsRequest.validate(req.body)) {
     return res.status(400).send()
   }

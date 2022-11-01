@@ -19,13 +19,13 @@ describe('Validate Get Recipes Request', () => {
 
 describe('E2E Server Tests for Valid and Invalid Workouts Requests', () => {
   validJson.forEach((json) => {
-    test('Valid Request', async () => {
+    test('Valid Request', async() => {
       const res = await request(app).post('/workouts').send(json)
       expect(res.statusCode).toEqual(200)
     })
   })
   invalidJson.forEach((json) => {
-    test('Invalid Request', async () => {
+    test('Invalid Request', async() => {
       const res = await request(app).post('/workouts').send(json)
       expect(res.statusCode).toEqual(400)
     })

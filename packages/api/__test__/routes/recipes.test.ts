@@ -4,7 +4,7 @@ import app from '../../app'
 
 describe('Hit recipes endpoint with naughty strings', () => {
   naughtyStrings.forEach((naughtyString) => {
-    test(`Scary String ${naughtyString}`, async () => {
+    test('Scary String', async() => {
       const body = {
         query: naughtyString,
         allergies: [naughtyString, 'eggs'],
