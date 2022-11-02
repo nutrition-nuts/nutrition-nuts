@@ -29,7 +29,7 @@ export default function DailySummaryModal(props: Props) {
     >
       {props.recipes && (
         <Box sx={modalStyle}>
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%', '& .MuiCard-root': { background: '#1b1b1b', color: 'white' } }}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Daily Summary
             </Typography>
