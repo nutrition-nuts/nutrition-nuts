@@ -8,25 +8,25 @@ import http from 'http'
 import { PORT } from '../config/constants'
 
 /**
-  * Get port from environment and store in Express.
-  */
+ * Get port from environment and store in Express.
+ */
 app.set('port', PORT)
 
 /**
-  * Create HTTP server.
-  */
+ * Create HTTP server.
+ */
 const server = http.createServer(app)
 
 /**
-  * Listen on provided port, on all network interfaces.
-  */
+ * Listen on provided port, on all network interfaces.
+ */
 server.listen(PORT)
 server.on('error', onError)
 server.on('listening', onListening)
 
 /**
-  * Event listener for HTTP server "error" event.
-  */
+ * Event listener for HTTP server "error" event.
+ */
 function onError(error: Error & { syscall?: string, code?: string }) {
   if (error.syscall !== 'listen') {
     throw error
@@ -50,11 +50,11 @@ function onError(error: Error & { syscall?: string, code?: string }) {
 }
 
 /**
-  * Event listener for HTTP server "listening" event.
-  */
+ * Event listener for HTTP server "listening" event.
+ */
 function onListening() {
   const addr = server.address()
   const bind =
-     typeof addr === 'string' ? 'pipe ' + addr : 'port ' + (addr?.port ?? '?')
+    typeof addr === 'string' ? 'pipe ' + addr : 'port ' + (addr?.port ?? '?')
   console.log('Listening on ' + bind)
 }
