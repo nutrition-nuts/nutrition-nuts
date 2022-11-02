@@ -31,7 +31,7 @@ export default function CircularProgressWithLabel(
         <Typography
           variant="caption"
           component="div"
-          color="text.secondary"
+          color="white"
           fontSize={props.fontSize}
         >{`${Math.round(props.value)}%`}</Typography>
       </Box>
