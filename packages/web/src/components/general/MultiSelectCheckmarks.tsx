@@ -50,10 +50,16 @@ export function MultiSelectCheckMarks(props: Props) {
         input={<OutlinedInput label={props.label} />}
         renderValue={(selected) => selected.join(', ')}
         MenuProps={MenuProps}
+        inputProps={{
+          style: {
+            color: 'white'
+          }
+        }}
         sx={{
           width: '30%',
           color: 'white',
-          backgroundColor: 'white'
+          backgroundColor: '#1b1b1b',
+          border: '1px solid #617c93'
         }}
       >
         {props.options.map((option) => (

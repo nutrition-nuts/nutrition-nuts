@@ -39,12 +39,17 @@ export default function RecipeModal(props: Props) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', '& .MuiCard-root': { background: '#1b1b1b', color: 'white' } }}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {props.recipe.name}
+            <Box sx={{ fontWeight: 'bold' }}>{props.recipe.name}</Box>
           </Typography>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={tab} onChange={handleChange} aria-label="Tabs">
+            <Tabs
+              value={tab}
+              onChange={handleChange}
+              aria-label="Tabs"
+              sx={{ '& .MuiButtonBase-root:not(.Mui-selected)': { color: 'white' } }}
+            >
               <Tab label="Overview" {...a11yProps(0)} />
               <Tab label="Nutrition Details" {...a11yProps(1)} />
               <Tab label="Cook It" {...a11yProps(2)} />

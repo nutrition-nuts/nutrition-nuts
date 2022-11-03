@@ -15,9 +15,11 @@ export default function WorkoutModal(props: Props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '60%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    width: '70%',
+    background: '#2a2a2b',
+    color: 'white',
+    border: '2px solid #506f8c',
+    borderRadius: '10px',
     overflow: 'auto',
     height: '80%',
     boxShadow: 24,
@@ -33,7 +35,7 @@ export default function WorkoutModal(props: Props) {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          {props.workout.name}
+          <Box sx={{ fontWeight: 'bold' }}>{props.workout.name}</Box>
         </Typography>
         <Typography
           id="modal-modal-description"

@@ -11,6 +11,7 @@ import { Nutrient } from '../utils/nutrient'
 import { Button } from '@mui/material'
 import { MultiSelectCheckMarks } from '../components/general/MultiSelectCheckmarks'
 import { possibleAllergies } from '../utils/allergy'
+import StyledTextField from '../components/StyledTextField'
 
 function getAllergiesFromLocalStorage() {
   try {
@@ -111,8 +112,14 @@ class Form extends Component {
                   <div className="profile-item">
                     <h2>Profile Info</h2>
                     <label htmlFor="name">Name: </label>
-                    <input
+                    <StyledTextField
                       type="text"
+                      label="Name"
+                      InputProps={{
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                       name="name"
                       value={this.state.name}
                       onChange={this.handleChangeS}
@@ -121,9 +128,15 @@ class Form extends Component {
 
                   <div className="profile-item">
                     <label htmlFor="age">Age: </label>
-                    <input
+                    <StyledTextField
                       type="text"
                       name="age"
+                      label="Age"
+                      InputProps={{
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                       value={this.state.age}
                       onChange={this.handleChange}
                     />
@@ -131,10 +144,16 @@ class Form extends Component {
 
                   <div className="profile-item">
                     <label htmlFor="calories">Calories/Day: </label>
-                    <input
+                    <StyledTextField
                       type="number"
-                      min="1000"
+                      inputProps={{
+                        min: '1000',
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                       name="calories"
+                      label="Calories"
                       value={this.state.calories}
                       onChange={this.handleChange}
                     />
@@ -156,10 +175,16 @@ class Form extends Component {
 
                   <div className="profile-item">
                     <label htmlFor="protein">Daily Protein Intake (g): </label>
-                    <input
+                    <StyledTextField
                       type="number"
-                      min="0"
+                      inputProps={{
+                        min: '0',
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                       name="protein"
+                      label="Protein"
                       value={this.state.protein}
                       onChange={this.handleChange}
                     />
@@ -183,10 +208,16 @@ class Form extends Component {
                     <label htmlFor="carbs">
                       Daily Carbohydrate Intake (g):{' '}
                     </label>
-                    <input
+                    <StyledTextField
                       type="number"
-                      min="0"
+                      inputProps={{
+                        min: '0',
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                       name="carbs"
+                      label="Carbs"
                       value={this.state.carbs}
                       onChange={this.handleChange}
                     />
@@ -208,10 +239,16 @@ class Form extends Component {
 
                   <div className="profile-item">
                     <label htmlFor="fat">Daily Fat Intake (g): </label>
-                    <input
+                    <StyledTextField
                       type="number"
-                      min="0"
+                      inputProps={{
+                        min: '0',
+                        style: {
+                          color: 'white'
+                        }
+                      }}
                       name="fat"
+                      label="Fat"
                       value={this.state.fat}
                       onChange={this.handleChange}
                     />
