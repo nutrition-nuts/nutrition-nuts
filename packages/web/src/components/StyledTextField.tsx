@@ -14,5 +14,8 @@ export default styled(TextField)({
     '&:hover fieldset': {
       borderColor: '#617c93 !important'
     }
+  },
+  '& .MuiSvgIcon-root': {
+    color: 'white'
   }
 })
