@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import path from 'path'
 import errors from './routes/errors'
 import cors from 'cors'
+import { verifyElasticRunning } from './routes/middleware/middleware'
 
 import workoutRouter from './routes/workouts'
 import recipeRouter from './routes/recipes'
@@ -26,6 +27,8 @@ app.use(
   })
 )
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(verifyElasticRunning)
 
 // register endpoint route controllers
 app.use('/workouts', workoutRouter)
