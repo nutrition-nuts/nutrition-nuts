@@ -178,7 +178,7 @@ class Form extends Component {
                     <StyledTextField
                       type="number"
                       inputProps={{
-                        min: '1000',
+                        min: '0',
                         style: {
                           color: 'white'
                         }
@@ -211,7 +211,7 @@ class Form extends Component {
                     <StyledTextField
                       type="number"
                       inputProps={{
-                        min: '1000',
+                        min: '0',
                         style: {
                           color: 'white'
                         }
@@ -242,7 +242,7 @@ class Form extends Component {
                     <StyledTextField
                       type="number"
                       inputProps={{
-                        min: '1000',
+                        min: '0',
                         style: {
                           color: 'white'
                         }
