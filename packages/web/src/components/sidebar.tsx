@@ -81,7 +81,7 @@ export default function Sidebar() {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', position: 'sticky', top: '0', zIndex: '1000' }}>
       <AppBar position="sticky" open={open}>
         <Toolbar>
           <IconButton

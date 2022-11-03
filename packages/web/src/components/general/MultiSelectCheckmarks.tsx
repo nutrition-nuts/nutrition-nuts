@@ -54,7 +54,10 @@ export function MultiSelectCheckMarks(props: Props) {
           width: '30%',
           color: 'white',
           backgroundColor: '#1b1b1b',
-          border: '1px solid #617c93'
+          border: '1px solid #617c93',
+          '& .MuiSvgIcon-root': {
+            color: 'white'
+          }
         }}
       >
         {props.options.map((option) => (
