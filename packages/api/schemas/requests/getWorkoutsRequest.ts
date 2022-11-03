@@ -1,4 +1,5 @@
 import Ajv, { JSONSchemaType } from 'ajv'
+import { alphaNumericPattern } from '../constants'
 const ajv = new Ajv()
 
 interface GetWorkoutsRequest {
@@ -10,8 +11,8 @@ interface GetWorkoutsRequest {
 const schema: JSONSchemaType<GetWorkoutsRequest> = {
   type: 'object',
   properties: {
-    type: { type: 'string', nullable: false },
-    group: { type: 'string', nullable: false },
+    type: { type: 'string', nullable: false, pattern: alphaNumericPattern },
+    group: { type: 'string', nullable: false, pattern: alphaNumericPattern },
     equip: { type: 'string', nullable: false, pattern: '^off$|^on$' }
   },
 

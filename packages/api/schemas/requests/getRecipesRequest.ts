@@ -1,4 +1,5 @@
 import Ajv, { JSONSchemaType } from 'ajv'
+import { alphaNumericPattern } from '../constants'
 const ajv = new Ajv()
 
 interface GetRecipesRequest {
@@ -10,8 +11,11 @@ interface GetRecipesRequest {
 const schema: JSONSchemaType<GetRecipesRequest> = {
   type: 'object',
   properties: {
-    query: { type: 'string', nullable: false },
-    allergies: { type: 'array', items: { type: 'string' } },
+    query: { type: 'string', nullable: false, pattern: alphaNumericPattern },
+    allergies: {
+      type: 'array',
+      items: { type: 'string', pattern: alphaNumericPattern }
+    },
     page: { type: 'integer', minimum: 1 }
   },
 
