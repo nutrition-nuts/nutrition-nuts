@@ -2,7 +2,6 @@ import { WorkoutModel } from '../models/workoutModels'
 import WorkoutModal from './workoutModal'
 import React, { useState } from 'react'
 import '../App.css'
-
 interface Props {
   workout: WorkoutModel
 }

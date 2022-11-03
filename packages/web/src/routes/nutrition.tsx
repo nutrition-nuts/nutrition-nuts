@@ -6,7 +6,7 @@ import '../App.css'
 import './nutrition.css'
 import { RecipeModel } from '../models/recipeModels'
 import RecipeSummary from '../components/nutrition/recipeSummary'
-import { FormControl, Box, Button, IconButton, Grid, Link } from '@mui/material'
+import { FormControl, Button, IconButton, Grid, Link } from '@mui/material'
 import StyledTextField from '../components/StyledTextField'
 import { Meal } from '../utils/meal'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
@@ -100,6 +100,7 @@ export default function Nutrition() {
   const handleCloseDailySummaryModal = () => setDailySummaryModalOpen(false)
 
   return (
+    <Grid alignItems="center">
     <div className="App">
       <Sidebar />
 
@@ -125,13 +126,8 @@ export default function Nutrition() {
       <div className="recipe-container">
         <div className="recipe-search">
           <h2 id="search-header">Search Meals</h2>
-          <Box
-            display="flex"
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
+          <Grid container direction ="row" alignItems="stretch" justifyContent="flex-start">
+            <Grid item xs={12} md = {3}>
             <StyledTextField
               id="recipe-breakfast"
               value={breakfastInput}
@@ -147,7 +143,8 @@ export default function Nutrition() {
                 }
               }}
             ></StyledTextField>
-
+            </Grid>
+            <Grid item xs={12} md = {3}>
             <StyledTextField
               id="recipe-lunch"
               value={lunchInput}
@@ -163,7 +160,8 @@ export default function Nutrition() {
                 }
               }}
             ></StyledTextField>
-
+            </Grid>
+            <Grid item xs={12} md = {3}>
             <StyledTextField
               id="recipe-dinner"
               value={dinnerInput}
@@ -179,6 +177,8 @@ export default function Nutrition() {
                 }
               }}
             ></StyledTextField>
+            </Grid>
+            <Grid item xs={12} md = {3}>
             <FormControl sx={{ m: 1 }}>
               <Button
                 variant="contained"
@@ -187,7 +187,8 @@ export default function Nutrition() {
                 Find me recipes!
               </Button>
             </FormControl>
-          </Box>
+            </Grid>
+          </Grid>
         </div>
         {recipesPresent() && (
           <div className="recipe-item">
@@ -239,5 +240,6 @@ export default function Nutrition() {
         )}
       </div>
     </div>
+    </Grid>
   )
 }

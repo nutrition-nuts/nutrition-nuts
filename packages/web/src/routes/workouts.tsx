@@ -38,6 +38,7 @@ export default function Workouts() {
   }
 
   return (
+    <Grid alignItems="center">
     <div className="App">
       <Sidebar />
       <div className="recipe-container">
@@ -120,5 +121,6 @@ export default function Workouts() {
         </div>
       </div>
     </div>
+    </Grid>
   )
 }
