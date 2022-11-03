@@ -8,7 +8,7 @@ import {
   resetDailyRecommendationToDefault
 } from '../utils/nutritionRecommendations'
 import { Nutrient } from '../utils/nutrient'
-import { Button } from '@mui/material'
+import { Button, Tooltip, Zoom } from '@mui/material'
 import { MultiSelectCheckMarks } from '../components/general/MultiSelectCheckmarks'
 import { possibleAllergies } from '../utils/allergy'
 import StyledTextField from '../components/StyledTextField'
@@ -163,37 +163,53 @@ class Form extends Component {
                     </div>
 
                     <div className="column right">
-                      <div className="profile-item">
-                        {/* <label htmlFor="calories">Calories/Day: </label> */}
-                        <StyledTextField
-                          sx={{ m: 1, maxWidth: 200 }}
-                          type="number"
-                          inputProps={{
-                            min: '1000',
-                            style: {
-                              color: 'white'
-                            }
-                          }}
-                          name="calories"
-                          label="Daily Calories"
-                          value={this.state.calories}
-                          onChange={this.handleChange}
-                        />
-                        <Button
-                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
-                          variant="contained"
-                          onClick={() => {
-                            this.resetMacroToDefault(Nutrient.CALORIES)
-                            this.setState({
-                              calories: getNutrientDailyRecommendation(
-                                Nutrient.CALORIES
-                              )
-                            })
-                          }}
-                        >
-                          Reset to default
-                        </Button>
-                      </div>
+                  <div className="profile-item">
+                    {/* <label htmlFor="calories">Calories/Day: </label> */}
+                      <Tooltip
+                      arrow
+                      disableFocusListener
+                      disableTouchListener
+                      title={
+                        <div>
+                          How should I set this?
+                          <br></br>
+                          <br></br>
+                          Although the common baseline for caloric intake is 2000, this number was chosen as minimum for adults. Individual needs
+                          vary greatly, based on factors like physcial activity, muscle mass, gender, pregnancy, and thyroid function.
+                          We recommend using the Harris-Benedict equation and adjusting based on your needs.
+                        </div>
+                      }
+                      TransitionComponent={Zoom}
+                      >
+                      <StyledTextField
+                      type="number"
+                      inputProps={{
+                        min: '1000',
+                        style: {
+                          color: 'white'
+                        }
+                      }}
+                      name="calories"
+                      label="Calories"
+                      value={this.state.calories}
+                      onChange={this.handleChange}
+                    />
+                    </Tooltip>
+                    <Button
+                      sx={{ marginLeft: '1rem' }}
+                      variant="contained"
+                      onClick={() => {
+                        this.resetMacroToDefault(Nutrient.CALORIES)
+                        this.setState({
+                          calories: getNutrientDailyRecommendation(
+                            Nutrient.CALORIES
+                          )
+                        })
+                      }}
+                    >
+                      Reset to default
+                    </Button>
+                  </div>
 
                       <div className="profile-item">
                         {/* <label htmlFor="protein">
