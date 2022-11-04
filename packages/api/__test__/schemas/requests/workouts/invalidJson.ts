@@ -21,5 +21,20 @@ export const invalidJson = [
     group: 'bicep',
     equip: 'on',
     foo: 'bar'
+  },
+  {
+    type: '💩stretching',
+    group: 'bicep',
+    equip: 'on'
+  },
+  {
+    type: 'stretching',
+    group: '🚀bicep',
+    equip: 'on'
+  },
+  {
+    type: "<<< %s(un='%s') = %u",
+    group: 'bicep',
+    equip: 'on'
   }
 ]
