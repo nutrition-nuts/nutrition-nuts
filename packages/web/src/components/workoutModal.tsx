@@ -15,7 +15,7 @@ export default function WorkoutModal(props: Props) {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: '70%',
     background: '#2a2a2b',
     color: 'white',
     border: '2px solid #506f8c',
