@@ -1,6 +1,6 @@
 .profile-container {
   display: grid;
-  margin: 1rem 10% 1rem 10%;
+  margin: 1rem 5% 1rem 5%;
   padding: 0 0 0 0;
   border: 3px solid #617c93;
   border-radius: 10px;
@@ -9,7 +9,15 @@
 .profile-item {
   color: white;
   padding: 1rem;
-  font-size: 30px;
+  font-size: 25px;
+}
+
+.allergies-item{
+  color: white;
+  font-size: 18px;
+  text-align: left;
+  padding-left: 230px;
+  padding-top: 10px;
 }
 
 input:not(.MuiInputBase-input),
@@ -47,4 +55,21 @@ button:active {
 .profile-content img {
   width: 80%;
   border-radius: 20px;
+}
+
+.row:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+}
+
+.left{
+  width: 50%;
+}
+.right{
+  width: 50%;
 }
