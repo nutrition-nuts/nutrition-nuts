@@ -68,8 +68,12 @@ button:active {
 }
 
 .left{
-  width: 50%;
+  width: 30%;
 }
 .right{
-  width: 50%;
+  width: 70%;
+}
+
+.MuiSlider-root {
+  padding-top: 4%;
 }

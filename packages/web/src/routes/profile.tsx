@@ -160,38 +160,6 @@ class Form extends Component {
                       </div>
 
                       <div className="profile-item">
-                        {/* <label htmlFor="age">Age: </label> */}
-                        <StyledTextField
-                          sx={{ m: 1, maxWidth: 200 }}
-                          type="text"
-                          name="age"
-                          label="Age"
-                          InputProps={{
-                            style: {
-                              color: 'white'
-                            }
-                          }}
-                          value={this.state.age}
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                      <div className="allergies-item">
-                        <label htmlFor="llergies">Food Allergies</label>
-                      </div>
-                      <div className="profile-item">
-                        <MultiSelectCheckMarks
-                          selected={this.state.allergies}
-                          label="Allergies"
-                          options={possibleAllergies}
-                          onChangeCallback={
-                            this.onAllergyMultiSelectChangeCallback
-                          }
-                        />
-                      </div>
-                    </div>
-
-                    <div className="column right">
-                      <div className="profile-item">
                         {/* <label htmlFor="calories">Calories/Day: </label> */}
                         <Tooltip
                           arrow
@@ -223,7 +191,7 @@ class Form extends Component {
                             onChange={this.handleChange}
                           />
                         </Tooltip>
-                        <Button
+                        {/* <Button
                           sx={{ marginLeft: '1rem' }}
                           variant="contained"
                           onClick={() => {
@@ -236,8 +204,41 @@ class Form extends Component {
                           }}
                         >
                           Reset to default
-                        </Button>
+                        </Button> */}
                       </div>
+
+                      <div className="profile-item">
+                        {/* <label htmlFor="age">Age: </label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="text"
+                          name="age"
+                          label="Age"
+                          InputProps={{
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          value={this.state.age}
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="allergies-item">
+                        <label htmlFor="llergies">Food Allergies</label>
+                      </div>
+                      <div className="profile-item">
+                        <MultiSelectCheckMarks
+                          selected={this.state.allergies}
+                          label="Allergies"
+                          options={possibleAllergies}
+                          onChangeCallback={
+                            this.onAllergyMultiSelectChangeCallback
+                          }
+                        />
+                      </div>
+                    </div>
+
+                    <div className="column right">
                       <div className="profile-item">
                         <label htmlFor="protein">Daily Protein Intake
                           <Tooltip
