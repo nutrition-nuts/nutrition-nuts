@@ -180,7 +180,7 @@ class Form extends Component {
                           onChange={this.handleChange}
                         />
                         <Button
-                          sx={{ marginLeft: '1rem' }}
+                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
                           variant="contained"
                           onClick={() => {
                             this.resetMacroToDefault(Nutrient.CALORIES)
@@ -214,7 +214,7 @@ class Form extends Component {
                           onChange={this.handleChange}
                         />
                         <Button
-                          sx={{ marginLeft: '1rem' }}
+                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
                           variant="contained"
                           onClick={() => {
                             this.resetMacroToDefault(Nutrient.PROTEIN)
@@ -248,7 +248,7 @@ class Form extends Component {
                           onChange={this.handleChange}
                         />
                         <Button
-                          sx={{ marginLeft: '1rem' }}
+                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
                           variant="contained"
                           onClick={() => {
                             this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
@@ -280,7 +280,10 @@ class Form extends Component {
                           onChange={this.handleChange}
                         />
                         <Button
-                          sx={{ marginLeft: '1rem', marginBottom: '3 rem' }}
+                          sx={{
+                            marginLeft: '1rem',
+                            marginTop: '1rem'
+                          }}
                           variant="contained"
                           onClick={() => {
                             this.resetMacroToDefault(Nutrient.FAT)
@@ -336,6 +339,7 @@ class Form extends Component {
                       <div className="profile-item">
                         <label htmlFor="name">Name: {this.state.name}</label>
                       </div>
+
                       <div className="profile-item">
                         <label htmlFor="age">Age: {this.state.age}</label>
                       </div>
