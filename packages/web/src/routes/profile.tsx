@@ -37,13 +37,13 @@ class Form extends Component {
     possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy']
   }
 
-  handleChange = (event: { target: { name: any, value: any } }) => {
+  handleChange = (event: { target: { name: any; value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value.replace(/[^0-9]/gi, '')
     })
   }
 
-  handleChangeS = (event: { target: { name: any, value: any } }) => {
+  handleChangeS = (event: { target: { name: any; value: any } }) => {
     this.setState({
       [event.target.name]: event.target.value.replace(/[^a-z -]/gi, '')
     })
@@ -111,162 +111,193 @@ class Form extends Component {
                 <form onSubmit={this.handleSubmit}>
                   <div className="profile-item">
                     <h2>Profile Info</h2>
-                    <label htmlFor="name">Name: </label>
-                    <StyledTextField
-                      type="text"
-                      label="Name"
-                      InputProps={{
-                        style: {
-                          color: 'white'
-                        }
-                      }}
-                      name="name"
-                      value={this.state.name}
-                      onChange={this.handleChangeS}
-                    />
                   </div>
+                  <div className="row">
+                    <div className="column left">
+                      <div className="profile-item">
+                        {/* <label htmlFor="name">Name: </label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="text"
+                          label="Name"
+                          InputProps={{
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          name="name"
+                          value={this.state.name}
+                          onChange={this.handleChangeS}
+                        />
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="age">Age: </label>
-                    <StyledTextField
-                      type="text"
-                      name="age"
-                      label="Age"
-                      InputProps={{
-                        style: {
-                          color: 'white'
-                        }
-                      }}
-                      value={this.state.age}
-                      onChange={this.handleChange}
-                    />
-                  </div>
+                      <div className="profile-item">
+                        {/* <label htmlFor="age">Age: </label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="text"
+                          name="age"
+                          label="Age"
+                          InputProps={{
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          value={this.state.age}
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      <div className="allergies-item">
+                        <label htmlFor="llergies">Food Allergies</label>
+                      </div>
+                      <div className="profile-item">
+                        <MultiSelectCheckMarks
+                          selected={this.state.allergies}
+                          label="Allergies"
+                          options={possibleAllergies}
+                          onChangeCallback={
+                            this.onAllergyMultiSelectChangeCallback
+                          }
+                        />
+                      </div>
+                    </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="calories">Calories/Day: </label>
-                    <StyledTextField
-                      type="number"
-                      inputProps={{
-                        min: '1000',
-                        style: {
-                          color: 'white'
-                        }
-                      }}
-                      name="calories"
-                      label="Calories"
-                      value={this.state.calories}
-                      onChange={this.handleChange}
-                    />
-                    <Button
-                      sx={{ marginLeft: '1rem' }}
-                      variant="contained"
-                      onClick={() => {
-                        this.resetMacroToDefault(Nutrient.CALORIES)
-                        this.setState({
-                          calories: getNutrientDailyRecommendation(
-                            Nutrient.CALORIES
-                          )
-                        })
-                      }}
-                    >
-                      Reset to default
-                    </Button>
-                  </div>
+                    <div className="column right">
+                      <div className="profile-item">
+                        {/* <label htmlFor="calories">Calories/Day: </label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="number"
+                          inputProps={{
+                            min: '1000',
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          name="calories"
+                          label="Daily Calories"
+                          value={this.state.calories}
+                          onChange={this.handleChange}
+                        />
+                        <Button
+                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
+                          variant="contained"
+                          onClick={() => {
+                            this.resetMacroToDefault(Nutrient.CALORIES)
+                            this.setState({
+                              calories: getNutrientDailyRecommendation(
+                                Nutrient.CALORIES
+                              )
+                            })
+                          }}
+                        >
+                          Reset to default
+                        </Button>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="protein">Daily Protein Intake (g): </label>
-                    <StyledTextField
-                      type="number"
-                      inputProps={{
-                        min: '0',
-                        style: {
-                          color: 'white'
-                        }
-                      }}
-                      name="protein"
-                      label="Protein"
-                      value={this.state.protein}
-                      onChange={this.handleChange}
-                    />
-                    <Button
-                      sx={{ marginLeft: '1rem' }}
-                      variant="contained"
-                      onClick={() => {
-                        this.resetMacroToDefault(Nutrient.PROTEIN)
-                        this.setState({
-                          protein: getNutrientDailyRecommendation(
-                            Nutrient.PROTEIN
-                          )
-                        })
-                      }}
-                    >
-                      Reset to default
-                    </Button>
-                  </div>
+                      <div className="profile-item">
+                        {/* <label htmlFor="protein">
+                          Daily Protein Intake (g):{' '}
+                        </label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="number"
+                          inputProps={{
+                            min: '0',
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          name="protein"
+                          label="Protein"
+                          value={this.state.protein}
+                          onChange={this.handleChange}
+                        />
+                        <Button
+                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
+                          variant="contained"
+                          onClick={() => {
+                            this.resetMacroToDefault(Nutrient.PROTEIN)
+                            this.setState({
+                              protein: getNutrientDailyRecommendation(
+                                Nutrient.PROTEIN
+                              )
+                            })
+                          }}
+                        >
+                          Reset to default
+                        </Button>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="carbs">
-                      Daily Carbohydrate Intake (g):{' '}
-                    </label>
-                    <StyledTextField
-                      type="number"
-                      inputProps={{
-                        min: '0',
-                        style: {
-                          color: 'white'
-                        }
-                      }}
-                      name="carbs"
-                      label="Carbs"
-                      value={this.state.carbs}
-                      onChange={this.handleChange}
-                    />
-                    <Button
-                      sx={{ marginLeft: '1rem' }}
-                      variant="contained"
-                      onClick={() => {
-                        this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
-                        this.setState({
-                          carbs: getNutrientDailyRecommendation(
-                            Nutrient.CARBOHYDRATES
-                          )
-                        })
-                      }}
-                    >
-                      Reset to default
-                    </Button>
-                  </div>
+                      <div className="profile-item">
+                        {/* <label htmlFor="carbs">
+                          Daily Carbohydrate Intake (g):{' '}
+                        </label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="number"
+                          inputProps={{
+                            min: '0',
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          name="carbs"
+                          label="Carbs"
+                          value={this.state.carbs}
+                          onChange={this.handleChange}
+                        />
+                        <Button
+                          sx={{ marginLeft: '1rem', marginTop: '1rem' }}
+                          variant="contained"
+                          onClick={() => {
+                            this.resetMacroToDefault(Nutrient.CARBOHYDRATES)
+                            this.setState({
+                              carbs: getNutrientDailyRecommendation(
+                                Nutrient.CARBOHYDRATES
+                              )
+                            })
+                          }}
+                        >
+                          Reset to default
+                        </Button>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="fat">Daily Fat Intake (g): </label>
-                    <StyledTextField
-                      type="number"
-                      inputProps={{
-                        min: '0',
-                        style: {
-                          color: 'white'
-                        }
-                      }}
-                      name="fat"
-                      label="Fat"
-                      value={this.state.fat}
-                      onChange={this.handleChange}
-                    />
-                    <Button
-                      sx={{ marginLeft: '1rem' }}
-                      variant="contained"
-                      onClick={() => {
-                        this.resetMacroToDefault(Nutrient.FAT)
-                        this.setState({
-                          fat: getNutrientDailyRecommendation(Nutrient.FAT)
-                        })
-                      }}
-                    >
-                      Reset to default
-                    </Button>
-                  </div>
+                      <div className="profile-item">
+                        {/* <label htmlFor="fat">Daily FatIntake (g):</label> */}
+                        <StyledTextField
+                          sx={{ m: 1, maxWidth: 200 }}
+                          type="number"
+                          inputProps={{
+                            min: '0',
+                            style: {
+                              color: 'white'
+                            }
+                          }}
+                          name="fat"
+                          label="Fat"
+                          value={this.state.fat}
+                          onChange={this.handleChange}
+                        />
+                        <Button
+                          sx={{
+                            marginLeft: '1rem',
+                            marginTop: '1rem'
+                          }}
+                          variant="contained"
+                          onClick={() => {
+                            this.resetMacroToDefault(Nutrient.FAT)
+                            this.setState({
+                              fat: getNutrientDailyRecommendation(Nutrient.FAT)
+                            })
+                          }}
+                        >
+                          Reset to default
+                        </Button>
+                      </div>
+                    </div>
 
-                  {/* <div className="profile-item">
+                    {/* <div className="profile-item">
                     <label htmlFor="dr">Dietary Restrictions: </label>
                     <select
                       name="dr"
@@ -283,15 +314,6 @@ class Form extends Component {
                       <option value="gluten-free">Gluten Free</option>
                     </select>
                   </div> */}
-
-                  <div className="profile-item">
-                    <label htmlFor="allergies">Allergies: </label>
-                    <MultiSelectCheckMarks
-                      selected={this.state.allergies}
-                      label="Allergies"
-                      options={possibleAllergies}
-                      onChangeCallback={this.onAllergyMultiSelectChangeCallback}
-                    />
                   </div>
 
                   <div className="profile-item">
@@ -311,59 +333,67 @@ class Form extends Component {
                 <article>
                   <div className="profile-item">
                     <h2>Profile Info</h2>
-                    <label htmlFor="name">Name: {this.state.name}</label>
                   </div>
-                  <div className="profile-item">
-                    <label htmlFor="age">Age: {this.state.age}</label>
-                  </div>
+                  <div className="row">
+                    <div className="column left">
+                      <div className="profile-item">
+                        <label htmlFor="name">Name: {this.state.name}</label>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="calories">
-                      Calories/Day:{' '}
-                      {getNutrientDailyRecommendation(Nutrient.CALORIES)}{' '}
-                    </label>
-                  </div>
+                      <div className="profile-item">
+                        <label htmlFor="age">Age: {this.state.age}</label>
+                      </div>
+                      <div className="profile-item">
+                        <label htmlFor="allergies">
+                          Allergies: {this.state.allergies.join(', ')}
+                        </label>
+                      </div>
+                    </div>
+                    <div className="column right">
+                      <div className="profile-item">
+                        <label htmlFor="calories">
+                          Calories/Day:{' '}
+                          {getNutrientDailyRecommendation(Nutrient.CALORIES)}{' '}
+                        </label>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="protein">
-                      Daily Protein Intake:{' '}
-                      {getNutrientDailyRecommendation(Nutrient.PROTEIN)}
-                      {'g '}
-                    </label>
-                  </div>
+                      <div className="profile-item">
+                        <label htmlFor="protein">
+                          Daily Protein Intake:{' '}
+                          {getNutrientDailyRecommendation(Nutrient.PROTEIN)}
+                          {'g '}
+                        </label>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="carbs">
-                      Daily Carbohydrate Intake:{' '}
-                      {getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES)}
-                      {'g '}
-                    </label>
-                  </div>
+                      <div className="profile-item">
+                        <label htmlFor="carbs">
+                          Daily Carbohydrate Intake:{' '}
+                          {getNutrientDailyRecommendation(
+                            Nutrient.CARBOHYDRATES
+                          )}
+                          {'g '}
+                        </label>
+                      </div>
 
-                  <div className="profile-item">
-                    <label htmlFor="fat">
-                      Daily Fat Intake:{' '}
-                      {getNutrientDailyRecommendation(Nutrient.FAT)}
-                      {'g '}
-                    </label>
-                  </div>
-
-                  {/* <div className="profile-item">
+                      <div className="profile-item">
+                        <label htmlFor="fat">
+                          Daily Fat Intake:{' '}
+                          {getNutrientDailyRecommendation(Nutrient.FAT)}
+                          {'g '}
+                        </label>
+                      </div>
+                    </div>
+                    {/* <div className="profile-item">
                     <label htmlFor="dr">
                       Dietary Restrictions: {this.state.dr}
                     </label>
                   </div> */}
-
-                  <div className="profile-item">
-                    <label htmlFor="allergies">
-                      Allergies: {this.state.allergies.join(', ')}
-                    </label>
                   </div>
                   <div className="profile-item">
                     <Button
                       variant="contained"
                       type="submit"
-                      sx={{ background: 'black' }}
+                      sx={{ background: '#617c93' }}
                       onClick={() => this.setState({ showForm: true })}
                     >
                       Edit
