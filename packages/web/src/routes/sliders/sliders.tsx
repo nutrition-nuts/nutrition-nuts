@@ -1,5 +1,5 @@
 import { Slider } from '@mui/material'
-import { useState } from 'react'
+import { useState, SyntheticEvent } from 'react'
 
 interface NutritionSliderProps {
   name: string
@@ -22,7 +22,7 @@ export default function NutritionSlider(props: NutritionSliderProps) {
   const defaultVal = sliderValue
 
   const handleChange = (
-    event: Event,
+    event: Event | SyntheticEvent<Element, Event>,
     value: number | number[]
     // activeThumb: number
   ) => {
@@ -64,6 +64,7 @@ export default function NutritionSlider(props: NutritionSliderProps) {
             max={max}
             name={name}
             onChange={handleChange}
+            onChangeCommitted={handleChange}
             orientation='horizontal'
             valueLabelFormat={(x) => String(x).concat('%')}
             // slot={<div></div>}
