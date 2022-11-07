@@ -25,7 +25,12 @@ function getAllergiesFromLocalStorage() {
 
 function getRatiosFromLocalStorage() {
   try {
-    return JSON.parse(localStorage.getItem('macroRatios') ?? '')
+    const localRatios = Object(JSON.parse(localStorage.getItem('macroRatios') ?? '{ }'))
+    return {
+      protein: localRatios.valueOf('protein').replace(/[^0-9]/gi, ''),
+      carbs: localRatios.valueOf('carbs').replace(/[^0-9]/gi, ''),
+      fat: localRatios.valueOf('fat').replace(/[^0-9]/gi, '')
+    }
   } catch (error) {
     return {
       protein: 25,
