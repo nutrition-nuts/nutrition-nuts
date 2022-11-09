@@ -116,7 +116,8 @@ export default function Nutrition() {
             right: '0',
             bottom: '0',
             left: 'auto',
-            position: 'fixed'
+            position: 'fixed',
+            zIndex: 12
           }}
         >
           <MenuBookIcon fontSize="large" />

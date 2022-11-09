@@ -2,7 +2,7 @@
 // TODO: make this more robust with sex, age, desired calories, weight, etc. elections
 
 import { Nutrient } from './nutrient'
-import store from './store'
+import store from './store/store'
 
 // initialize to defaults
 const dailyRecommendations: { [key in Nutrient]: number } = {
