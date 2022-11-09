@@ -2,7 +2,6 @@ import {
   Checkbox,
   ListItemText,
   MenuItem,
-  OutlinedInput,
   Select,
   SelectChangeEvent
 } from '@mui/material'
@@ -10,6 +9,7 @@ import { useState } from 'react'
 
 interface Props {
   label: string
+  labelId: string
   options: string[]
   selected: string[]
   onChangeCallback: (res: string[]) => void
@@ -47,7 +47,8 @@ export function MultiSelectCheckMarks(props: Props) {
         multiple
         value={selectedValues}
         onChange={handleChange}
-        input={<OutlinedInput label={props.label} />}
+        label={props.label}
+        labelId={props.labelId}
         renderValue={(selected) => selected.join(', ')}
         MenuProps={MenuProps}
         inputProps={{
@@ -56,7 +57,7 @@ export function MultiSelectCheckMarks(props: Props) {
           }
         }}
         sx={{
-          width: '30%',
+          width: '100%',
           color: 'white',
           backgroundColor: '#1b1b1b',
           border: '1px solid #617c93',

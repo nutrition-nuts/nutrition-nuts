@@ -8,7 +8,7 @@ import {
   resetDailyRecommendationToDefault
 } from '../utils/nutritionRecommendations'
 import { Nutrient } from '../utils/nutrient'
-import { Button, Tooltip, Zoom, IconButton } from '@mui/material'
+import { Button, Tooltip, Zoom, IconButton, FormControl, InputLabel } from '@mui/material'
 import { MultiSelectCheckMarks } from '../components/general/MultiSelectCheckmarks'
 import { possibleAllergies } from '../utils/allergy'
 import StyledTextField from '../components/StyledTextField'
@@ -249,18 +249,33 @@ class Form extends Component {
                           onChange={this.handleChange}
                         />
                       </div>
-                      <div className="allergies-item">
-                        <label htmlFor="llergies">Food Allergies</label>
-                      </div>
                       <div className="profile-item">
-                        <MultiSelectCheckMarks
-                          selected={this.state.allergies}
-                          label="Allergies"
-                          options={possibleAllergies}
-                          onChangeCallback={
-                            this.onAllergyMultiSelectChangeCallback
-                          }
-                        />
+                        <FormControl
+                          fullWidth
+                          sx={{
+                            minWidth: 200
+                          }}
+                        >
+                          <InputLabel
+                            id="allergies-input-label"
+                            sx={{
+                              color: 'white !important',
+                              background: '#1b1b1b',
+                              padding: '0 10px 0 10px'
+                            }}
+                          >
+                            Food Allergies
+                          </InputLabel>
+                          <MultiSelectCheckMarks
+                            selected={this.state.allergies}
+                            label="Food Allergies"
+                            labelId="allergies-input-label"
+                            options={possibleAllergies}
+                            onChangeCallback={
+                              this.onAllergyMultiSelectChangeCallback
+                            }
+                          />
+                        </FormControl>
                       </div>
                     </div>
 
