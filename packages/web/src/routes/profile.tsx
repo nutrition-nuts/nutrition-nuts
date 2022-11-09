@@ -15,6 +15,7 @@ import StyledTextField from '../components/StyledTextField'
 import NutritionSlider from './sliders/sliders'
 import InfoIcon from '@mui/icons-material/Info'
 import store from '../utils/store/store'
+import { TotalBox } from './sliders/totalBox'
 
 function getAllergiesFromLocalStorage() {
   try {
@@ -28,9 +29,9 @@ function getRatiosFromLocalStorage() {
   try {
     const localRatios = Object(JSON.parse(store.getMacroRatios() ?? '{ }'))
     return {
-      protein: localRatios.valueOf('protein').replace(/[^0-9]/gi, ''),
-      carbs: localRatios.valueOf('carbs').replace(/[^0-9]/gi, ''),
-      fat: localRatios.valueOf('fat').replace(/[^0-9]/gi, '')
+      protein: Number(String(localRatios.protein).replace(/[^0-9]/gi, '')),
+      carbs: Number(String(localRatios.carbs).replace(/[^0-9]/gi, '')),
+      fat: Number(String(localRatios.fat).replace(/[^0-9]/gi, ''))
     }
   } catch (error) {
     return {
@@ -39,6 +40,13 @@ function getRatiosFromLocalStorage() {
       fat: 25
     }
   }
+}
+
+function sumMacroPercents(obj: Object) {
+  return Number(Object.values(obj).reduce(
+    (acc, x) => Number(acc) + Number(x),
+    0
+  ))
 }
 
 class Form extends Component {
@@ -54,7 +62,8 @@ class Form extends Component {
     showForm: true,
     count: 0,
     possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy'],
-    macroRatios: getRatiosFromLocalStorage()
+    macroRatios: getRatiosFromLocalStorage(),
+    macroPercentageTotal: sumMacroPercents(getRatiosFromLocalStorage())
   }
 
   handleChange = (event: { target: { name: any; value: any } }) => {
@@ -94,17 +103,14 @@ class Form extends Component {
 
   updateMacroGoals = () => {
     // normalize inputs so they don't have to add up to 100%
-    const total = Object.values(this.state.macroRatios).reduce(
-      (acc, x) => Number(acc) + Number(x),
-      0
-    )
+    const total = this.state.macroPercentageTotal
 
     if (+this.state.calories >= 1000) {
       setNutrientDailyRecommendation(Nutrient.CALORIES, +this.state.calories)
     }
 
     const cals =
-      getNutrientDailyRecommendation(Nutrient.CALORIES) / Number(total)
+      getNutrientDailyRecommendation(Nutrient.CALORIES) / total
     setNutrientDailyRecommendation(
       Nutrient.PROTEIN,
       +Math.floor((cals * this.state.macroRatios.protein) / 4)
@@ -141,6 +147,7 @@ class Form extends Component {
       temp[name] = value
       return { macroRatios: temp }
     })
+    this.setState({ macroPercentageTotal: sumMacroPercents(this.state.macroRatios) })
   }
 
   render() {
@@ -402,6 +409,12 @@ class Form extends Component {
                           lowerMark={5}
                           upperMark={50}
                           onChangeCallback={this.onSliderChangeCallback}
+                        />
+                      </div>
+
+                      <div className="profile-item">
+                        <TotalBox
+                        total={this.state.macroPercentageTotal}
                         />
                       </div>
                     </div>
