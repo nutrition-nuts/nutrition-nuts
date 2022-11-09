@@ -63,7 +63,7 @@ class Form extends Component {
     count: 0,
     possibleAllergies: ['Peanuts', 'Tree Nuts', 'Fish', 'Eggs', 'Soy'],
     macroRatios: getRatiosFromLocalStorage(),
-    macroPercentageTotal: sumMacroPercents(getRatiosFromLocalStorage()) // kinda jank to call this twice
+    macroPercentageTotal: sumMacroPercents(getRatiosFromLocalStorage())
   }
 
   handleChange = (event: { target: { name: any; value: any } }) => {
