@@ -98,9 +98,13 @@ class Form extends Component {
       (acc, x) => Number(acc) + Number(x),
       0
     )
-    const cals = this.state.calories / Number(total)
 
-    setNutrientDailyRecommendation(Nutrient.CALORIES, +this.state.calories)
+    if (+this.state.calories >= 1000) {
+      setNutrientDailyRecommendation(Nutrient.CALORIES, +this.state.calories)
+    }
+
+    const cals =
+      getNutrientDailyRecommendation(Nutrient.CALORIES) / Number(total)
     setNutrientDailyRecommendation(
       Nutrient.PROTEIN,
       +Math.floor((cals * this.state.macroRatios.protein) / 4)
