@@ -14,10 +14,11 @@ import { possibleAllergies } from '../utils/allergy'
 import StyledTextField from '../components/StyledTextField'
 import NutritionSlider from './sliders/sliders'
 import InfoIcon from '@mui/icons-material/Info'
+import store from '../utils/store/store'
 
 function getAllergiesFromLocalStorage() {
   try {
-    return JSON.parse(localStorage.getItem('allergies') ?? '')
+    return JSON.parse(store.getAllergies() ?? '')
   } catch (error) {
     return []
   }
@@ -25,7 +26,7 @@ function getAllergiesFromLocalStorage() {
 
 function getRatiosFromLocalStorage() {
   try {
-    const localRatios = Object(JSON.parse(localStorage.getItem('macroRatios') ?? '{ }'))
+    const localRatios = Object(JSON.parse(store.getMacroRatios() ?? '{ }'))
     return {
       protein: localRatios.valueOf('protein').replace(/[^0-9]/gi, ''),
       carbs: localRatios.valueOf('carbs').replace(/[^0-9]/gi, ''),
@@ -42,13 +43,12 @@ function getRatiosFromLocalStorage() {
 
 class Form extends Component {
   state = {
-    name: localStorage.getItem('name') ?? '',
-    age: localStorage.getItem('age') ?? '',
+    name: store.getName() ?? '',
+    age: store.getAge() ?? '',
     calories: getNutrientDailyRecommendation(Nutrient.CALORIES),
     protein: getNutrientDailyRecommendation(Nutrient.PROTEIN),
     carbs: getNutrientDailyRecommendation(Nutrient.CARBOHYDRATES),
     fat: getNutrientDailyRecommendation(Nutrient.FAT),
-    dr: localStorage.getItem('dr') ?? '',
     allergies: getAllergiesFromLocalStorage() as string[],
     saveProfile: false,
     showForm: true,
@@ -71,18 +71,15 @@ class Form extends Component {
 
   handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault()
-    localStorage.setItem('name', this.state.name)
-    localStorage.setItem('age', this.state.age)
-    localStorage.setItem('dr', this.state.dr)
-    // localStorage.setItem('allergies', this.state.allergies)
-    localStorage.setItem('macroRatios', JSON.stringify(this.state.macroRatios))
+    store.setName(this.state.name)
+    store.setAge(this.state.age)
+    store.setMacroRatios(JSON.stringify(this.state.macroRatios))
     this.updateMacroGoals()
-    localStorage.setItem('allergies', JSON.stringify(this.state.allergies))
+    store.setAllergies(JSON.stringify(this.state.allergies))
     this.setState({
       name: `${this.state.name}`,
       age: `${this.state.age}`,
       calories: `${this.state.calories}`,
-      dr: `${this.state.dr}`,
       allergies: this.state.allergies,
       showForm: false
     })
@@ -90,23 +87,32 @@ class Form extends Component {
   }
 
   componentDidMount(): void {
-    if (
-      localStorage.getItem('name') !== null &&
-      localStorage.getItem('name') !== ''
-    ) {
+    if (store.profileExists()) {
       this.setState({ showForm: false })
     }
   }
 
   updateMacroGoals = () => {
     // normalize inputs so they don't have to add up to 100%
-    const total = Object.values(this.state.macroRatios).reduce((acc, x) => Number(acc) + Number(x), 0)
+    const total = Object.values(this.state.macroRatios).reduce(
+      (acc, x) => Number(acc) + Number(x),
+      0
+    )
     const cals = this.state.calories / Number(total)
 
     setNutrientDailyRecommendation(Nutrient.CALORIES, +this.state.calories)
-    setNutrientDailyRecommendation(Nutrient.PROTEIN, +Math.floor(cals * this.state.macroRatios.protein / 4))
-    setNutrientDailyRecommendation(Nutrient.CARBOHYDRATES, +Math.floor(cals * this.state.macroRatios.carbs / 4))
-    setNutrientDailyRecommendation(Nutrient.FAT, +Math.floor(cals * this.state.macroRatios.fat / 9))
+    setNutrientDailyRecommendation(
+      Nutrient.PROTEIN,
+      +Math.floor((cals * this.state.macroRatios.protein) / 4)
+    )
+    setNutrientDailyRecommendation(
+      Nutrient.CARBOHYDRATES,
+      +Math.floor((cals * this.state.macroRatios.carbs) / 4)
+    )
+    setNutrientDailyRecommendation(
+      Nutrient.FAT,
+      +Math.floor((cals * this.state.macroRatios.fat) / 9)
+    )
   }
 
   resetMacroToDefault = (nutrient: Nutrient) => {
@@ -175,9 +181,13 @@ class Form extends Component {
                               How should I set this?
                               <br></br>
                               <br></br>
-                              Although the common baseline for caloric intake is 2000, this number was chosen as minimum for adults. Individual needs
-                              vary greatly, based on factors like physcial activity, muscle mass, gender, pregnancy, and thyroid function.
-                              We recommend using the Harris-Benedict equation and adjusting based on your needs.
+                              Although the common baseline for caloric intake is
+                              2000, this number was chosen as minimum for
+                              adults. Individual needs vary greatly, based on
+                              factors like physcial activity, muscle mass,
+                              gender, pregnancy, and thyroid function. We
+                              recommend using the Harris-Benedict equation and
+                              adjusting based on your needs.
                             </div>
                           }
                           TransitionComponent={Zoom}
@@ -245,21 +255,25 @@ class Form extends Component {
 
                     <div className="column right">
                       <div className="profile-item">
-                        <label htmlFor="protein">Daily Protein Intake
+                        <label htmlFor="protein">
+                          Daily Protein Intake
                           <Tooltip
                             arrow
                             disableFocusListener
                             disableTouchListener
                             title={
                               <div>
-                                Protein, made of amino acids, is used to build tissue in your body.
+                                Protein, made of amino acids, is used to build
+                                tissue in your body.
                                 <br></br>
                                 <br></br>
-                                Below 20% of the diet, you may not have enough to maintain and build muscle.
+                                Below 20% of the diet, you may not have enough
+                                to maintain and build muscle.
                                 <br></br>
                                 <br></br>
-                                Extra protein above 30% gets mostly wasted in the urine,
-                                and can cause ammonia buildup if kidney or liver function is impaired.
+                                Extra protein above 30% gets mostly wasted in
+                                the urine, and can cause ammonia buildup if
+                                kidney or liver function is impaired.
                               </div>
                             }
                             TransitionComponent={Zoom}
@@ -274,7 +288,7 @@ class Form extends Component {
                           </Tooltip>
                         </label>
                         <NutritionSlider
-                          name='protein'
+                          name="protein"
                           min={10}
                           max={40}
                           sliderValue={this.state.macroRatios.protein ?? 25}
@@ -287,61 +301,30 @@ class Form extends Component {
                       <div className="profile-item">
                         <label htmlFor="carbs">
                           Daily Carbohydrate Intake
-                            <Tooltip
-                              arrow
-                              disableFocusListener
-                              disableTouchListener
-                              title={
-                                <div>
-                                  Carbohydrates—sugars and starches—are quick sources of energy thanks to their high solubility in water.  They are the preferred fuel source
-                                  for the brain, the liver, and the muscles during high-intensity exercise.
-                                  <br></br>
-                                  <br></br>
-                                  The body can create enough carbohydrates endogenously (from protein) to survive.  However, doing so raises stress hormones such as prolactin and cortisol.
-                                  Since the brain uses almost exclusively carbohydrates, and accounts for 20% of the body&apos;s energy needs, we suggest setting this to at least 20%.
-                                  <br></br>
-                                  <br></br>
-                                  High carbohydrate diets are generally well tolerated except by diabetics.
-                                </div>
-                              }
-                              TransitionComponent={Zoom}
-                            >
-                              <IconButton>
-                                <InfoIcon
-                                  sx={{
-                                    color: 'white'
-                                  }}
-                                />
-                              </IconButton>
-                            </Tooltip>
-                        </label>
-                        <NutritionSlider
-                          name='carbs'
-                          min={0}
-                          max={70}
-                          sliderValue={this.state.macroRatios.carbs ?? 50}
-                          lowerMark={20}
-                          upperMark={60}
-                          onChangeCallback={this.onSliderChangeCallback}
-                        />
-                      </div>
-
-                      <div className="profile-item">
-                        <label htmlFor="fat">Daily Fat Intake
                           <Tooltip
                             arrow
                             disableFocusListener
                             disableTouchListener
                             title={
                               <div>
-                                Fats are a denser source of energy, and are the muscles&apos; preferred fuel source at rest.  They are also used throughout the body for structural purposes.
+                                Carbohydrates—sugars and starches—are quick
+                                sources of energy thanks to their high
+                                solubility in water. They are the preferred fuel
+                                source for the brain, the liver, and the muscles
+                                during high-intensity exercise.
                                 <br></br>
                                 <br></br>
-                                The body can create enough fat endogenously to survive on a very low-fat diet; however, this may not be optimal due to fat&apos;s role in steroid hormone synthesis.
+                                The body can create enough carbohydrates
+                                endogenously (from protein) to survive. However,
+                                doing so raises stress hormones such as
+                                prolactin and cortisol. Since the brain uses
+                                almost exclusively carbohydrates, and accounts
+                                for 20% of the body&apos;s energy needs, we
+                                suggest setting this to at least 20%.
                                 <br></br>
                                 <br></br>
-                                High-fat diets are generally well tolerated, assuming other nutrients are not restricted.  However, fat metabolism produces less carbon dioxide
-                                than carbohydrate metabolism, which causes lower tissue oxygenation.  So, high-fat diets may exacerbate symptoms of poor red blood cell or lung function.
+                                High carbohydrate diets are generally well
+                                tolerated except by diabetics.
                               </div>
                             }
                             TransitionComponent={Zoom}
@@ -356,7 +339,59 @@ class Form extends Component {
                           </Tooltip>
                         </label>
                         <NutritionSlider
-                          name='fat'
+                          name="carbs"
+                          min={0}
+                          max={70}
+                          sliderValue={this.state.macroRatios.carbs ?? 50}
+                          lowerMark={20}
+                          upperMark={60}
+                          onChangeCallback={this.onSliderChangeCallback}
+                        />
+                      </div>
+
+                      <div className="profile-item">
+                        <label htmlFor="fat">
+                          Daily Fat Intake
+                          <Tooltip
+                            arrow
+                            disableFocusListener
+                            disableTouchListener
+                            title={
+                              <div>
+                                Fats are a denser source of energy, and are the
+                                muscles&apos; preferred fuel source at rest.
+                                They are also used throughout the body for
+                                structural purposes.
+                                <br></br>
+                                <br></br>
+                                The body can create enough fat endogenously to
+                                survive on a very low-fat diet; however, this
+                                may not be optimal due to fat&apos;s role in
+                                steroid hormone synthesis.
+                                <br></br>
+                                <br></br>
+                                High-fat diets are generally well tolerated,
+                                assuming other nutrients are not restricted.
+                                However, fat metabolism produces less carbon
+                                dioxide than carbohydrate metabolism, which
+                                causes lower tissue oxygenation. So, high-fat
+                                diets may exacerbate symptoms of poor red blood
+                                cell or lung function.
+                              </div>
+                            }
+                            TransitionComponent={Zoom}
+                          >
+                            <IconButton>
+                              <InfoIcon
+                                sx={{
+                                  color: 'white'
+                                }}
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </label>
+                        <NutritionSlider
+                          name="fat"
                           min={0}
                           max={70}
                           sliderValue={this.state.macroRatios.fat ?? 25}
