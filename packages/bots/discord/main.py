@@ -1,8 +1,9 @@
-import discord
-from dotenv import load_dotenv
 import os
-import requests
 import re
+
+import discord
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -32,7 +33,8 @@ async def on_message(message):
     msg = message.content
     if regex.match(msg):
         first = get_recipe(msg.split("Give me a")[1].split("recipe")[0].strip())
-        await message.reply(first['name'] + ' ' + first['url'])
+        await message.reply('**' + first['name'] + '**\n<' + first['url'] + '>\n\nIngredients:\n```' + '\n'.join(
+            first['ingredients']) + '```\nRecipe:\n```' + '\n'.join(first['directions']) + '```')
 
 
 client.run(os.getenv('DISCORD_BOT_TOKEN'))
