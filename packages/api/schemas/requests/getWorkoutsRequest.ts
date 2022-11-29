@@ -3,20 +3,16 @@ import { alphaNumericPattern } from '../constants'
 const ajv = new Ajv()
 
 interface GetWorkoutsRequest {
-  type: string
-  group: string
-  equip: string
+  query: string
 }
 
 const schema: JSONSchemaType<GetWorkoutsRequest> = {
   type: 'object',
   properties: {
-    type: { type: 'string', nullable: false, pattern: alphaNumericPattern },
-    group: { type: 'string', nullable: false, pattern: alphaNumericPattern },
-    equip: { type: 'string', nullable: false, pattern: '^off$|^on$' }
+    query: { type: 'string', nullable: false, pattern: alphaNumericPattern },
   },
 
-  required: ['type', 'group', 'equip'],
+  required: ['query'],
   additionalProperties: false
 }
 
