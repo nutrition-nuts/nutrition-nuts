@@ -89,7 +89,7 @@ async function getWorkouts(
                 query: String(query)
               }
             }
-          ],
+          ]
         }
       }
     })
@@ -99,7 +99,7 @@ async function getWorkouts(
   if (hits.length === 0) {
     hits = await elasticSearchClient
       .search({
-        index: 'workouts',
+        index: 'workouts'
       })
       .then((value) => value.hits.hits.map((hit) => hit._source) ?? [])
   }

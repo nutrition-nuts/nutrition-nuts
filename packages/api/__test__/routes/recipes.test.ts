@@ -5,7 +5,7 @@ import getRecipesRequest from '../../schemas/requests/getRecipesRequest'
 
 describe('Hit recipes endpoint with naughty strings', () => {
   naughtyStrings.forEach((naughtyString) => {
-    test('Scary String', async () => {
+    test('Scary String', async() => {
       const body = {
         query: naughtyString,
         allergies: [naughtyString, 'eggs'],

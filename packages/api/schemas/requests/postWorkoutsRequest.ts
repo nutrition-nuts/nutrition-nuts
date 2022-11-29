@@ -9,15 +9,14 @@ interface PostWorkoutsRequest {
 }
 
 const schema: JSONSchemaType<PostWorkoutsRequest> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', nullable: false, pattern: alphaNumericPattern },
-      group: { type: 'string', nullable: false, pattern: alphaNumericPattern },
-      equip: { type: 'string', nullable: false, pattern: '^off$|^on$' }
-    },
-  
-    required: ['type', 'group', 'equip'],
-    additionalProperties: false
+  type: 'object',
+  properties: {
+    type: { type: 'string', nullable: false, pattern: alphaNumericPattern },
+    group: { type: 'string', nullable: false, pattern: alphaNumericPattern },
+    equip: { type: 'string', nullable: false, pattern: '^off$|^on$' }
+  },
+  required: ['type', 'group', 'equip'],
+  additionalProperties: false
 }
 
 const validate = ajv.compile(schema)

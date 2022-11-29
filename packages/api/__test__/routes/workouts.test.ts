@@ -5,7 +5,7 @@ import naughtyStrings from '../naughty_strings.json'
 
 describe('Hit workouts endpoint with naughty strings', () => {
   naughtyStrings.forEach((naughtyString) => {
-    test('Scary String', async () => {
+    test('Scary String', async() => {
       const body = {
         type: naughtyString,
         group: naughtyString,

@@ -22,7 +22,6 @@ router.post('/', handleWorkoutsPost)
 
 // GET /workouts
 export const handleWorkoutsGet: RequestHandler = async(req, res, next) => {
-  debugger
   if (!getWorkoutsRequest.validate(req.body)) {
     return res.status(400).send()
   }

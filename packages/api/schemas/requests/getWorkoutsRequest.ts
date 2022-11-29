@@ -9,7 +9,7 @@ interface GetWorkoutsRequest {
 const schema: JSONSchemaType<GetWorkoutsRequest> = {
   type: 'object',
   properties: {
-    query: { type: 'string', nullable: false, pattern: alphaNumericPattern },
+    query: { type: 'string', nullable: false, pattern: alphaNumericPattern }
   },
 
   required: ['query'],
