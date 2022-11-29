@@ -1,8 +1,9 @@
-import discord
-from dotenv import load_dotenv
 import os
-import requests
 import re
+
+import discord
+import requests
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -11,13 +12,26 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
-regex = re.compile('Give me a.* recipe')
+recipe_regex = re.compile('Give me a.* recipe')
+exercise_regex = re.compile('Give me a.* exercise')
+stretch_regex = re.compile('Give me a.* stretch')
 
 
 def get_recipe(query):
     r = requests.post('http://localhost:7001/recipes', json={'query': query, 'allergies': [], 'page': 1})
     return r.json()[0][0]
 
+def get_exercise(query):
+    r = requests.post('http://localhost:7001/workouts', json={'type': '', 'group': query, 'equip': 'on'})
+    return r.json()[0][0]
+
+def get_stretch(query):
+    r = requests.post('http://localhost:7001/workouts', json={'type': 'stretch', 'group': query, 'equip': 'on'})
+    return r.json()[0][0]
+
+# def get_exercise(query):
+#     r = requests.get('http://localhost:7001/workouts', json={'query': query})
+#     return r.json()[0][0]
 
 @client.event
 async def on_ready():
@@ -30,9 +44,22 @@ async def on_message(message):
         return
 
     msg = message.content
-    if regex.match(msg):
+    if recipe_regex.match(msg):
         first = get_recipe(msg.split("Give me a")[1].split("recipe")[0].strip())
-        await message.reply(first['name'] + ' ' + first['url'])
-
+        print(first)
+        await message.reply('**' + first['name'] + '**\n<' + first['url'] + '>\n\nIngredients:\n```' + '\n'.join(
+            first['ingredients']) + '```\nRecipe:\n```' + '\n'.join(first['directions']) + '```')
+    elif exercise_regex.match(msg):
+        first = get_exercise(msg.split("Give me a")[1].split("exercise")[0].strip())
+        first['primaryMuscles'] += (first['secondaryMuscles'])
+        print(first)
+        await message.reply('**' + first['name'] + '**\nhttps://youtube.com/watch?v=' + first['youtubeID'] + '\n\nMuscles Worked:\n```'  + 
+            '\n'.join(first['primaryMuscles']) + '```\nInstructions:\n```' + '\n'.join(first['instructions']) + '```\n')
+    elif stretch_regex.match(msg):
+        first = get_stretch(msg.split("Give me a")[1].split("stretch")[0].strip())
+        first['primaryMuscles'] += (first['secondaryMuscles'])
+        print(first)
+        await message.reply('**' + first['name'] + '**\nhttps://youtube.com/watch?v=' + first['youtubeID'] + '\n\nMuscles Stretched:\n```'  + 
+            '\n'.join(first['primaryMuscles']) + '```\nInstructions:\n```' + '\n'.join(first['instructions']) + '```\n')
 
 client.run(os.getenv('DISCORD_BOT_TOKEN'))
