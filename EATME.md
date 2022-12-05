@@ -1,32 +1,30 @@
 
-# Beans, Beans, and Beans
+# Corn Cob Puppies (Corn Dogs)
 
-## This is a very hearty dish made up of baked beans, kidney beans, and lima beans. If you like beans, you'll love this recipe.
+## This is my own tried and true original corn dog recipe that I have tweaked and modified to my own personal taste. If you like fair dogs, you will love these! After cooking, place corn dog on a towel on a paper plate or wrap in a towel, top with mustard or ketchup, and enjoy!
 
-by Tommy H.: https://www.allrecipes.com/recipe/214561/beans-beans-and-beans/
+by Lewis Miller: https://www.allrecipes.com/recipe/222353/corn-cob-puppies-corn-dogs/
 
 ## Ingredients:
-- ¾ pound bacon- 1 pound ground beef
-- 2 large onions, chopped
-- 1 (18 ounce) bottle honey barbecue sauce
-- 4 (15 ounce) cans pork and beans
-- 1 (15 ounce) can kidney beans, rinsed and drained
-- 1 (15 ounce) can lima beans, rinsed and drained
-- 1 (15 ounce) can black beans, rinsed and drained
-- ½ cup packed brown sugar
-- 3 tablespoons cider vinegar
-- 1 tablespoon liquid smoke flavoring  (Optional)
-- 1 teaspoon salt
-- ½ teaspoon ground black pepper
+- 8  bun-length hot dogs (such as Gwaltney® Bun Sized Jumbo Franks)- 1 quart vegetable oil for frying
+- 2 cups all-purpose flour
+- 1 cup corn meal
+- 1 cup buttermilk
+- 2  large eggs
+- 2 tablespoons white sugar
+- 2 tablespoons bacon drippings
+- 2 teaspoons salt
+- 2 teaspoons baking powder
+- 1 pinch garlic powder
+- 8  sturdy bamboo skewers
 
 
 ## Directions:
-- Preheat oven to 350 degrees F (175 degrees C)- Place the bacon in a large, deep skillet, and cook over medium-high heat, turning occasionally, until evenly browned, about 10 minutes
-- Drain the bacon slices on a paper towel-lined plate
-- Let cool, and crumble
-- Place the ground beef and onions into a large skillet over medium heat, and cook and stir until the meat is no longer pink, breaking the meat apart as it cooks, about 10 minutes
-- Drain excess grease
-- Transfer the beef and onion mixture into a large Dutch oven
-- Stir in the crumbled bacon, honey barbecue sauce, pork and beans, kidney beans, lima beans, black beans, brown sugar, cider vinegar, liquid smoke, salt, and pepper
-- Cover, and bake in the preheated oven until bubbling, about 1 hour
+- Place hot dogs into a large pot of simmering water and keep hot- Heat vegetable oil in a deep-fryer or large saucepan to 375 degrees F (190 degrees C)
+- Whisk flour, corn meal, buttermilk, eggs, sugar, bacon drippings, salt, baking powder, and garlic powder in a large bowl until moistened; beat batter until smooth, 2 to 3 minutes
+- Remove a hot dog from the water and blot completely dry with paper towels; skewer the hot dog lengthwise with a bamboo skewer
+- Using the skewer end as a handle, roll the hot dog in the batter to thoroughly coat
+- Roll the corn dog in the hot oil with the same continuous rolling motion, setting the batter; continue to roll the corn dog in the hot oil until deep golden brown, 2 to 3 minutes
+- Alternately, lay corn dog into hot oil after initial rolling to finish cooking the batter, about 1 minute per side
+- Drain corn dogs on paper towels to blot excess oil
 
