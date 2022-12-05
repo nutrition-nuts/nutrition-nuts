@@ -44,6 +44,16 @@ def add_user(user):
         json.dump(users, file)
     return "Thanks for subscribing! You will now receive daily meal recipes straight to your DMs!"
 
+def remove_user(user):
+    with open(fname) as file:
+        users = json.load(file)
+    if user not in users:
+        return "Hmmmm... it doesn't look like you're currently subscribed"
+    users.remove(user)
+    with open(fname, 'w+') as file:
+        json.dump(users, file)
+    return ":cry::broken_heart:"
+
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
@@ -75,5 +85,8 @@ async def on_message(message):
     elif msg.lower() == 'subscribe':
         await message.reply(add_user(message.author.id))
         print('Subscribed user ' + message.author.name)
+    elif msg.lower() == 'unsubscribe':
+        await message.reply(remove_user(message.author.id))
+        print('Unsubscribed user ' + message.author.name)
 
 client.run(os.getenv('DISCORD_BOT_TOKEN'))
