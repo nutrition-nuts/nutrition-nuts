@@ -9,6 +9,7 @@ baseUrl = 'https://api.github.com'
 
 token = os.getenv('GITHUB_ACCESS_TOKEN')
 header = {'Authorization': 'Bearer ' + token}
+username = 'nutritionnutbot'
 
 
 def githubPost(route: str, body: object):
@@ -127,10 +128,28 @@ def createPR(upstreamOwner, upstreamRepo, localOwner, localRepo, title, body, br
 
     result = githubPost(f"/repos/{upstreamOwner}/{upstreamRepo}/pulls", body)
     print(f"Make PR: {result.status_code}")
+    if (result.status_code >= 400):
+        print(json.dumps(result.json()))
     return result
 
+def updateMarkdown(markdown: str):
+    return f"""
+# Hungry?
 
-def createEatMeGithubPR(ownerOfRepo, repoName, username, markdown):
+You devs are working hard and look very hungry. Here is a selected recipe for you!
+
+We have also added a `EATME.md` file to your repo to permanently document the recipe. Super useful! Your boss will love it! Enjoy!
+
+***
+
+{markdown}
+
+***
+### *© 2022 Nutrition Nuts*
+"""
+
+
+def createEatMeGithubPR(ownerOfRepo, repoName, markdown):
     makeFork(ownerOfRepo, repoName, username)
 
     refHead = getRefHead(username, repoName)
@@ -143,17 +162,16 @@ def createEatMeGithubPR(ownerOfRepo, repoName, username, markdown):
         username, repoName, headCommitTree, "EATME.md", fileBlobSha)
 
     commitSha = createCommitWithTree(
-        username, repoName, "TESTTESTTEST", refHead, newTreeWithFileSha)
+        username, repoName, "Heard Someone was Hungry! 🌮", refHead, newTreeWithFileSha)
 
     updatedHead = updateHead(username, repoName, "main", commitSha)
 
     createdPR = createPR(ownerOfRepo, repoName, username,
-                         repoName, "TEST TEST TEST", "BODY", "main")
+                         repoName, "Heard Someone was Hungry! 🌮", updateMarkdown(markdown), "main")
 
 
 if (__name__ == "__main__"):
     owner = 'nutrition-nuts'
     repo = 'nutrition-nuts'
-    username = 'nutritionnutbot'
 
-    createEatMeGithubPR(owner, repo, username, "# TEST")
+    createEatMeGithubPR(owner, repo, "# TEST")
