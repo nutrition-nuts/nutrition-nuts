@@ -5,6 +5,7 @@ from typing_extensions import TypedDict
 import functools
 import sys
 import getopt
+from delete import deleteRepo
 
 class Recipe(TypedDict):
     name: str
@@ -42,7 +43,7 @@ by {recipe['author']}: {recipe['url']}
 """
 
 cliOptions = "ho:r:q:d"
-cliOptionsLong = ["help", "owner", "repo", "query"]
+cliOptionsLong = ["help", "owner", "repo", "query", "delete"]
 
 if (__name__ == "__main__"):
     argumentList = sys.argv[1:]
@@ -54,6 +55,7 @@ if (__name__ == "__main__"):
     owner = ""
     repo = ""
     query = ""
+    delete = False
 
     try: 
         arguments, values = getopt.getopt(argumentList, cliOptions, cliOptionsLong)
@@ -65,10 +67,15 @@ Usage: python3 bot.py -o repoOwner -r repo -q query
 
 e.g. > python3 bot.py -o nutrition-nuts -r nutrition-nuts -q beans
 
--o: the owner of the repo you want to PR against
--r: the repo name
--q: the recipe query we should pull from
+or 
+python3 bot.py -d -r repoToDelete
+
+-o, --owner: the owner of the repo you want to PR against
+-r, --repo: the repo name
+-q, --query: the recipe query we should pull from
+-d, --delete: if included, will delete the repo with the name specified in the repo argument 
                       """)
+                quit()
             
             elif currentArgument in ("-o", "--owner"):
                 owner = currentValue
@@ -79,17 +86,25 @@ e.g. > python3 bot.py -o nutrition-nuts -r nutrition-nuts -q beans
             elif currentArgument in ("-q", "--query"):
                 query = currentValue
 
+            elif currentArgument in ("-d", "--delete"):
+                delete = True
+
     except getopt.error as err:
         print (str(err)) 
 
+    if (delete):
+        if (not repo):
+            print("error. Need a repo. aborting")
+            quit()
+        deleteRepo(repo)
+    else:
+        if (not owner or not repo):
+            owner = defaultOwner
+            repo  = defaultRepo
 
-    if (not owner or not repo):
-        owner = defaultOwner
-        repo  = defaultRepo
+        if (not query):
+            query = defaultQuery
 
-    if (not query):
-        query = defaultQuery
-
-    createRecipePr(query, owner, repo)
+        createRecipePr(query, owner, repo)
 
     
